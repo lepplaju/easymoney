@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         // Removes the debug banner in debug mode
         debugShowCheckedModeBanner: false,
-        title: 'Change me',
         theme: MyTheme.light,
-        home: const HomePage(),
+        routes: {
+          '/': (context) => const HomePage(),
+        },
       ),
     );
   }
