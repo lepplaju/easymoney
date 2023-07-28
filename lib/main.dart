@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './providers/provider_receipts.dart';
+
 import './theme.dart';
+import './home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,16 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: const [
-        // TODO Add providers here
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProviderReceipts()),
       ],
       child: MaterialApp(
         // Removes the debug banner in debug mode
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Change me',
         theme: MyTheme.light,
-        // TODO Add home
-        //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const HomePage(),
       ),
     );
   }
