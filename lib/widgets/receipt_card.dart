@@ -41,7 +41,7 @@ class ReceiptCard extends StatelessWidget {
                 )
               ],
             ),
-            Text(receipt.description)
+            //Text(receipt.description)
           ],
         ),
       ),

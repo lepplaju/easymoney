@@ -30,9 +30,44 @@ class _ReceiptTabState extends State<ReceiptTab> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: providerReceipts.receipts.length,
-      itemBuilder: receiptBuilder,
+    return Stack(
+      children: [
+        ListView.builder(
+          itemCount: providerReceipts.receipts.length,
+          itemBuilder: receiptBuilder,
+        ),
+        Positioned(
+          bottom: 30,
+          right: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: FloatingActionButton.small(
+                  shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: const Icon(Icons.picture_as_pdf_rounded),
+                  onPressed: () {
+                    // TODO Compose the invoice
+                  },
+                ),
+              ),
+              FloatingActionButton.extended(
+                shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                onPressed: () {
+                  // TODO Add receipt
+                },
+                // FIXME Localization
+                label: const Text('Add Receipt'),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
