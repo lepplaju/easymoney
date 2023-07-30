@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import './providers/provider_receipts.dart';
 
 import './widgets/receipt_card.dart';
+import './add_receipt_route.dart';
+import '../receipt_route.dart';
 
 class ReceiptTab extends StatefulWidget {
   const ReceiptTab({super.key});
@@ -15,9 +17,14 @@ class ReceiptTab extends StatefulWidget {
 class _ReceiptTabState extends State<ReceiptTab> {
   late final ProviderReceipts providerReceipts;
 
+  var isInitialized = false;
+
   @override
   void didChangeDependencies() {
-    providerReceipts = Provider.of<ProviderReceipts>(context);
+    if (!isInitialized) {
+      providerReceipts = Provider.of<ProviderReceipts>(context);
+      isInitialized = true;
+    }
     super.didChangeDependencies();
   }
 
@@ -25,6 +32,28 @@ class _ReceiptTabState extends State<ReceiptTab> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ReceiptCard(receipt: providerReceipts.receipts[index]),
+    );
+  }
+
+  PageRouteBuilder _createRoute(Widget route) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => route,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        final tween = Tween(begin: begin, end: end);
+        final curvedAnimation = CurvedAnimation(
+          parent: animation,
+          curve: curve,
+        );
+
+        return SlideTransition(
+          position: tween.animate(curvedAnimation),
+          child: child,
+        );
+      },
     );
   }
 
@@ -45,6 +74,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: FloatingActionButton.small(
+                  heroTag: 'composeInvoice',
                   shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -55,11 +85,22 @@ class _ReceiptTabState extends State<ReceiptTab> {
                 ),
               ),
               FloatingActionButton.extended(
+                heroTag: 'addReceipt',
                 shape: ContinuousRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () {
-                  // TODO Add receipt
+                  Navigator.of(context)
+                      .push(_createRoute(const AddReceiptRoute()))
+                      .then((receipt) {
+                    if (receipt != null) {
+                      Navigator.of(context).push(_createRoute(
+                        ReceiptRoute(
+                          receipt: receipt,
+                        ),
+                      ));
+                    }
+                  });
                 },
                 // FIXME Localization
                 label: const Text('Add Receipt'),
