@@ -9,8 +9,9 @@ class Receipt {
 
   /// Creates Receipt
   ///
-  /// Takes [date] of the receipt, [amount] of the receipt, [store] from
-  /// which the receipt is from and [description] about the receipt
+  /// Takes unique [id], [date] of the receipt, [amount] of the receipt,
+  /// [store] from which the receipt is from, [description] about
+  /// the receipt and [fileName] of the attached receipt file.
   Receipt({
     required this.id,
     required this.date,
@@ -20,6 +21,7 @@ class Receipt {
     required this.fileName,
   });
 
+  /// Returns the date of the receipt as dd.mm.yyyy string
   String get dateOnly {
     return '${date.day}.${date.month}.${date.year}';
   }

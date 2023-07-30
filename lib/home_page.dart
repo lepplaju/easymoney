@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './receipt_tab.dart';
 
+/// Route for the home screen
 class HomePage extends StatefulWidget {
   static const routeName = '/';
 
@@ -10,6 +11,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+/// State for [HomePage]
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {

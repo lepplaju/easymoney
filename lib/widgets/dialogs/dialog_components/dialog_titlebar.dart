@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 ///
 /// Takes [title] and it is displayed in the center of the title bar.
 /// If no [title] is given, there will be only x button on the right side
-/// of the bar
+/// of the bar. Visibility of the x button can be chosen with [showX].
+/// [backgroundColor] will be used to override default color.
 class DialogTitleBar extends StatelessWidget {
   const DialogTitleBar({
     Key? key,

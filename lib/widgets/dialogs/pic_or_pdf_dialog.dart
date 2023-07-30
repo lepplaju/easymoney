@@ -4,6 +4,7 @@ import './dialog_components/dialog_titlebar.dart';
 
 enum UploadType { camera, picture, pdf }
 
+/// Dialog for choosing which type of file user is adding.
 class PicOrPdfDialog extends StatelessWidget {
   const PicOrPdfDialog({super.key});
 

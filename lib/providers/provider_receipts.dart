@@ -52,6 +52,10 @@ class ProviderReceipts with ChangeNotifier {
     return _receipts;
   }
 
+  /// Adds a new Receipt
+  ///
+  /// Takes the [date] of the receipt, [store], optional [description],
+  /// [amount] and a receipt [file].
   Future<Receipt> addReceipt({
     required DateTime date,
     required String store,
@@ -74,6 +78,7 @@ class ProviderReceipts with ChangeNotifier {
     return receipt;
   }
 
+  /// Returns a path where the receipt files will be saved.
   Future<String> _getPath() async {
     const String receiptPath = '/receipts';
     final path =
@@ -84,6 +89,10 @@ class ProviderReceipts with ChangeNotifier {
     return path;
   }
 
+  /// Saves a receipt file of a Receipt
+  ///
+  /// Takes the [file] to be saved and the id of the receipt for which it
+  /// belongs to.
   Future<String> saveReceiptFile(XFile file, String id) async {
     final path = await _getPath();
     if (!Directory(path).existsSync()) {
@@ -94,6 +103,7 @@ class ProviderReceipts with ChangeNotifier {
     return '$id$fileType';
   }
 
+  /// Returns the receipt file of a [receipt]
   Future<dynamic> getReceiptFile(Receipt receipt) async {
     final path = await _getPath();
     final file = XFile('$path/${receipt.fileName}');

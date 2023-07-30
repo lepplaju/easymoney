@@ -10,6 +10,7 @@ import './widgets/dialogs/pic_or_pdf_dialog.dart';
 import './objects/receipt.dart';
 
 // TODO Add preview for file
+/// Route for adding a new receipt
 class AddReceiptRoute extends StatefulWidget {
   const AddReceiptRoute({super.key});
 
@@ -17,6 +18,7 @@ class AddReceiptRoute extends StatefulWidget {
   State<AddReceiptRoute> createState() => _AddReceiptRouteState();
 }
 
+/// State for [AddReceiptRoute]
 class _AddReceiptRouteState extends State<AddReceiptRoute> {
   late final ProviderReceipts providerReceipts;
   final storeTextController = TextEditingController();
@@ -52,6 +54,9 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
     super.dispose();
   }
 
+  /// Creates a new Receipt
+  ///
+  /// Returns a [Receipt] as a future
   Future<Receipt> _createReceipt() async {
     return await providerReceipts.addReceipt(
       date: selectedDate ?? currentDate,

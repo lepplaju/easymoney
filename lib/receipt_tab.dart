@@ -7,6 +7,7 @@ import './widgets/receipt_card.dart';
 import './add_receipt_route.dart';
 import '../receipt_route.dart';
 
+/// Tab for Receipts in the HomePage
 class ReceiptTab extends StatefulWidget {
   const ReceiptTab({super.key});
 
@@ -14,6 +15,7 @@ class ReceiptTab extends StatefulWidget {
   State<ReceiptTab> createState() => _ReceiptTabState();
 }
 
+/// State for [ReceiptTab]
 class _ReceiptTabState extends State<ReceiptTab> {
   late final ProviderReceipts providerReceipts;
 
@@ -28,6 +30,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
     super.didChangeDependencies();
   }
 
+  /// Builds a list item from list of receipts
   Widget receiptBuilder(BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -35,6 +38,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
     );
   }
 
+  /// Creates a Widget [route] to be pushed
   PageRouteBuilder _createRoute(Widget route) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => route,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import './dialog_components/dialog_titlebar.dart';
 
+/// Dialog for viewing .jpg file
+///
+/// Takes [title] for the dialog and [image] to be shown.
 class ShowJpgDialog extends StatelessWidget {
   const ShowJpgDialog({
     super.key,

@@ -4,6 +4,9 @@ import 'package:pdf_render/pdf_render_widgets.dart';
 
 import './dialog_components/dialog_titlebar.dart';
 
+/// Dialog for viewing pdf files
+///
+/// Takes a [title] for the dialog and [pdf] to be shown.
 class ShowPdfDialog extends StatelessWidget {
   const ShowPdfDialog({
     super.key,

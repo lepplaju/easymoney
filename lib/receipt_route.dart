@@ -6,6 +6,7 @@ import './objects/receipt.dart';
 import './widgets/dialogs/show_jpg_dialog.dart';
 import './widgets/dialogs/show_pdf_dialog.dart';
 
+/// Route for showing a Receipt
 class ReceiptRoute extends StatefulWidget {
   const ReceiptRoute({super.key, required this.receipt});
   final Receipt receipt;
@@ -14,6 +15,7 @@ class ReceiptRoute extends StatefulWidget {
   State<ReceiptRoute> createState() => _ReceiptRouteState();
 }
 
+/// State for [ReceiptRoute]
 class _ReceiptRouteState extends State<ReceiptRoute> {
   late final ProviderReceipts providerReceipts;
   var isInitialized = false;
@@ -27,6 +29,9 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
     super.didChangeDependencies();
   }
 
+  /// Loads a receipt file of the Receipt
+  ///
+  /// Loads and pushes a dialog showing the loaded file
   _loadReceiptFile() async {
     try {
       final file = await providerReceipts.getReceiptFile(widget.receipt);

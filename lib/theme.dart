@@ -27,9 +27,20 @@ class MyTheme {
     timePickerTheme: const TimePickerThemeData(
       backgroundColor: Colors.white,
     ),
-    //========================================================================
+    //==========================================================================
+    // FloatingActionButton
+    //==========================================================================
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      iconSize: 40,
+      smallSizeConstraints: BoxConstraints(minHeight: 60, minWidth: 60),
+      extendedSizeConstraints: BoxConstraints(minHeight: 70),
+      extendedTextStyle: TextStyle(
+        fontSize: 25,
+      ),
+    ),
+    //==========================================================================
     // SnackBar
-    //========================================================================
+    //==========================================================================
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.purple,
       contentTextStyle: const TextStyle(

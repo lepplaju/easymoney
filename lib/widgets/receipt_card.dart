@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../receipt_route.dart';
 import '../objects/receipt.dart';
 
+/// Card to show receipt info in the receipt list
 class ReceiptCard extends StatelessWidget {
   final Receipt receipt;
   const ReceiptCard({super.key, required this.receipt});
 
+  /// Creates a ReceiptRoute route
   PageRouteBuilder _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => ReceiptRoute(
