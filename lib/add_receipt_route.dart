@@ -58,11 +58,20 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   ///
   /// Returns a [Receipt] as a future
   Future<Receipt> _createReceipt() async {
+    late final double amount;
+    if (amountTextController.text.isEmpty) {
+      amount = 0;
+    } else {
+      try {
+        amount = double.parse(amountTextController.text.trim());
+      } catch (e) {
+        // TODO Handle error
+        return Future.error(e);
+      }
+    }
     return await providerReceipts.addReceipt(
       date: selectedDate ?? currentDate,
-      amount: amountTextController.text.trim().isEmpty
-          ? 0.00
-          : double.parse(amountTextController.text.trim()),
+      amount: amount,
       store: storeTextController.text.trim(),
       description: descriptionTextController.text.trim(),
       file: file!,

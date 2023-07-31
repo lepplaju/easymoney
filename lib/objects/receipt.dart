@@ -2,7 +2,7 @@
 class Receipt {
   final String id;
   DateTime date;
-  final double amount;
+  final int amount;
   final String store;
   String description;
   String fileName;
@@ -24,5 +24,9 @@ class Receipt {
   /// Returns the date of the receipt as dd.mm.yyyy string
   String get dateOnly {
     return '${date.day}.${date.month}.${date.year}';
+  }
+
+  double get euros {
+    return amount / 100;
   }
 }

@@ -79,7 +79,7 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
       body: Column(
         children: [
           // FIXME Localization
-          Text('Amount: ${widget.receipt.amount}€'),
+          Text('Amount: ${widget.receipt.euros}€'),
           // FIXME Localization
           const Text('Files'),
           TextButton(

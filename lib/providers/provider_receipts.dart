@@ -15,7 +15,7 @@ class ProviderReceipts with ChangeNotifier {
     Receipt(
       id: '6124846546',
       date: DateTime(2023, 4, 24),
-      amount: 35.99,
+      amount: 3599,
       store: 'Prisma',
       description: 'Allasbileiden tarvikkeita',
       fileName: '',
@@ -23,7 +23,7 @@ class ProviderReceipts with ChangeNotifier {
     Receipt(
       id: '654856546',
       date: DateTime(2023, 4, 24),
-      amount: 6.99,
+      amount: 699,
       store: 'Mestarin Herkku',
       description: 'Unohtuneita tarvikkeita',
       fileName: '',
@@ -31,7 +31,7 @@ class ProviderReceipts with ChangeNotifier {
     Receipt(
       id: '654846566',
       date: DateTime(2023, 6, 12),
-      amount: 199.99,
+      amount: 19999,
       store: 'K-Market',
       description: 'Ben & Jerry',
       fileName: '',
@@ -39,7 +39,7 @@ class ProviderReceipts with ChangeNotifier {
     Receipt(
       id: '654816546',
       date: DateTime(2023, 7, 30),
-      amount: 499.99,
+      amount: 49999,
       store: 'Kuntokauppa',
       description: 'Rautaa salille',
       fileName: '',
@@ -68,7 +68,7 @@ class ProviderReceipts with ChangeNotifier {
     final receipt = Receipt(
       id: id,
       date: DateUtils.dateOnly(date),
-      amount: amount,
+      amount: (amount * 100).toInt(),
       store: store,
       description: description,
       fileName: fileName,

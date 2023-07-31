@@ -67,7 +67,7 @@ class ReceiptCard extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '${receipt.amount}€',
+                    '${receipt.euros}€',
                     style: textTheme.headlineSmall,
                   )
                 ],
