@@ -25,6 +25,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerReceipts = Provider.of<ProviderReceipts>(context);
+      providerReceipts.fetchReceipts();
       isInitialized = true;
     }
     super.didChangeDependencies();

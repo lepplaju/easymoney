@@ -4,52 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_render/pdf_render.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../objects/receipt.dart';
 
 /// Manages receipts which are not part of any invoice
 class ProviderReceipts with ChangeNotifier {
-  final List<Receipt> _receipts = //[];
-      // For testing
-      [
-    Receipt(
-      id: '6124846546',
-      date: DateTime(2023, 4, 24),
-      amount: 3599,
-      store: 'Prisma',
-      description: 'Allasbileiden tarvikkeita',
-      fileName: '',
-    ),
-    Receipt(
-      id: '654856546',
-      date: DateTime(2023, 4, 24),
-      amount: 699,
-      store: 'Mestarin Herkku',
-      description: 'Unohtuneita tarvikkeita',
-      fileName: '',
-    ),
-    Receipt(
-      id: '654846566',
-      date: DateTime(2023, 6, 12),
-      amount: 19999,
-      store: 'K-Market',
-      description: 'Ben & Jerry',
-      fileName: '',
-    ),
-    Receipt(
-      id: '654816546',
-      date: DateTime(2023, 7, 30),
-      amount: 49999,
-      store: 'Kuntokauppa',
-      description: 'Rautaa salille',
-      fileName: '',
-    ),
-  ];
+  ProviderReceipts({required this.db});
+  Database db;
+
+  static const _receiptsTableName = 'receipts';
+  final List<Receipt> _receipts = [];
 
   /// Returns a list of all the Receipts
   List<Receipt> get receipts {
     _receipts.sort((r1, r2) => r1.date.compareTo(r2.date));
     return _receipts;
+  }
+
+  /// Loads all Receipts from database
+  Future<void> fetchReceipts() async {
+    _receipts.clear();
+    final data = await db.query(_receiptsTableName);
+    for (var map in data) {
+      _receipts.add(Receipt.fromMap(map));
+    }
+    notifyListeners();
   }
 
   /// Adds a new Receipt
@@ -63,7 +43,7 @@ class ProviderReceipts with ChangeNotifier {
     required double amount,
     required XFile file,
   }) async {
-    final id = DateTime.now().millisecondsSinceEpoch.toString();
+    final id = DateTime.now().millisecondsSinceEpoch;
     final fileName = await saveReceiptFile(file, id);
     final receipt = Receipt(
       id: id,
@@ -74,6 +54,7 @@ class ProviderReceipts with ChangeNotifier {
       fileName: fileName,
     );
     _receipts.add(receipt);
+    await db.insert(_receiptsTableName, receipt.toMap());
     notifyListeners();
     return receipt;
   }
@@ -93,13 +74,14 @@ class ProviderReceipts with ChangeNotifier {
   ///
   /// Takes the [file] to be saved and the id of the receipt for which it
   /// belongs to.
-  Future<String> saveReceiptFile(XFile file, String id) async {
+  Future<String> saveReceiptFile(XFile file, int id) async {
     final path = await _getPath();
     if (!Directory(path).existsSync()) {
       Directory(path).createSync();
     }
     final fileType = file.name.substring(file.name.lastIndexOf('.'));
     await file.saveTo('$path/$id$fileType');
+
     return '$id$fileType';
   }
 
