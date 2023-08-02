@@ -8,6 +8,7 @@ import './providers/provider_receipts.dart';
 
 import './widgets/dialogs/pic_or_pdf_dialog.dart';
 import './objects/receipt.dart';
+import './send_snack.dart';
 
 // TODO Add preview for file
 /// Route for adding a new receipt
@@ -69,13 +70,23 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         return Future.error(e);
       }
     }
-    return await providerReceipts.addReceipt(
-      date: selectedDate ?? currentDate,
-      amount: amount,
-      store: storeTextController.text.trim(),
-      description: descriptionTextController.text.trim(),
-      file: file!,
-    );
+    try {
+      final result = await providerReceipts.addReceipt(
+        date: selectedDate ?? currentDate,
+        amount: amount,
+        store: storeTextController.text.trim(),
+        description: descriptionTextController.text.trim(),
+        file: file!,
+      );
+      if (context.mounted) {
+        // FIXME Localization
+        sendSnack(context: context, content: 'Receipt created!');
+      }
+      return result;
+    } catch (e) {
+      // TODO Handle errors
+      return Future.error(e);
+    }
   }
 
   @override
