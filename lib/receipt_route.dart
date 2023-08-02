@@ -5,6 +5,7 @@ import './providers/provider_receipts.dart';
 import './objects/receipt.dart';
 import './widgets/dialogs/show_jpg_dialog.dart';
 import './widgets/dialogs/show_pdf_dialog.dart';
+import './send_snack.dart';
 
 /// Route for showing a Receipt
 class ReceiptRoute extends StatefulWidget {
@@ -76,19 +77,45 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
         title: Text('${widget.receipt.dateOnly}: ${widget.receipt.store}'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          // FIXME Localization
-          Text('Amount: ${widget.receipt.euros}€'),
-          // FIXME Localization
-          const Text('Files'),
-          TextButton(
-            onPressed: () async {
-              _loadReceiptFile();
-            },
-            child: Text(widget.receipt.fileName),
-          ),
-        ],
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            // FIXME Localization
+            const Text('Store'),
+
+            // FIXME Localization
+            Text('Amount: ${widget.receipt.euros}€'),
+            // FIXME Localization
+            const Text('Files'),
+            TextButton(
+              onPressed: () async {
+                _loadReceiptFile();
+              },
+              child: Text(widget.receipt.fileName),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                providerReceipts.deleteReceipt(widget.receipt.id).then((value) {
+                  Navigator.of(context).pop();
+                  sendSnack(
+                    context: context,
+                    // FIXME Localization
+                    content: 'Receipt was deleted',
+                  );
+                }).catchError((e) {
+                  sendSnack(
+                    context: context,
+                    // FIXME Localization
+                    content: 'Could not delete receipt',
+                  );
+                });
+              },
+              // FIXME Localization
+              child: const Text('Delete Receipt'),
+            ),
+          ],
+        ),
       ),
     );
   }

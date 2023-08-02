@@ -32,6 +32,21 @@ class ProviderReceipts with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Saves a receipt file of a Receipt
+  ///
+  /// Takes the [file] to be saved and the id of the receipt for which it
+  /// belongs to.
+  Future<String> saveReceiptFile(XFile file, int id) async {
+    final path = await _getPath();
+    if (!Directory(path).existsSync()) {
+      Directory(path).createSync();
+    }
+    final fileType = file.name.substring(file.name.lastIndexOf('.'));
+    await file.saveTo('$path/$id$fileType');
+
+    return '$id$fileType';
+  }
+
   /// Adds a new Receipt
   ///
   /// Takes the [date] of the receipt, [store], optional [description],
@@ -59,6 +74,18 @@ class ProviderReceipts with ChangeNotifier {
     return receipt;
   }
 
+  /// Deletes a receipt with [id]
+  Future<void> deleteReceipt(int id) async {
+    try {
+      await db.delete('receipts', where: 'id=?', whereArgs: [id]);
+      _receipts.removeWhere((element) => element.id == id);
+      notifyListeners();
+    } catch (e) {
+      // TODO Handle errors
+      return Future.error(e);
+    }
+  }
+
   /// Returns a path where the receipt files will be saved.
   Future<String> _getPath() async {
     const String receiptPath = '/receipts';
@@ -68,21 +95,6 @@ class ProviderReceipts with ChangeNotifier {
       Directory(path).createSync();
     }
     return path;
-  }
-
-  /// Saves a receipt file of a Receipt
-  ///
-  /// Takes the [file] to be saved and the id of the receipt for which it
-  /// belongs to.
-  Future<String> saveReceiptFile(XFile file, int id) async {
-    final path = await _getPath();
-    if (!Directory(path).existsSync()) {
-      Directory(path).createSync();
-    }
-    final fileType = file.name.substring(file.name.lastIndexOf('.'));
-    await file.saveTo('$path/$id$fileType');
-
-    return '$id$fileType';
   }
 
   /// Returns the receipt file of a [receipt]
