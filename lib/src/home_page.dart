@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './receipt_tab.dart';
+import 'features/receipts/presentation/receipt_tab.dart';
 
 /// Route for the home screen
 class HomePage extends StatefulWidget {

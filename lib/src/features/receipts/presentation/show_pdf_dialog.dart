@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf_render/pdf_render.dart';
 import 'package:pdf_render/pdf_render_widgets.dart';
 
-import './dialog_components/dialog_titlebar.dart';
+import '../../../widgets/dialog_components/dialog_titlebar.dart';
 
 /// Dialog for viewing pdf files
 ///

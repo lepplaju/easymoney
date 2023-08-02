@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './widgets/snack.dart';
+import '../presentation/snack.dart';
 
 // FIXME Document
 void sendSnack({

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/provider_receipts.dart';
-import './objects/receipt.dart';
-import './widgets/dialogs/show_jpg_dialog.dart';
-import './widgets/dialogs/show_pdf_dialog.dart';
-import './send_snack.dart';
+import '../application/provider_receipts.dart';
+import '../domain/receipt.dart';
+import 'show_jpg_dialog.dart';
+import 'show_pdf_dialog.dart';
+import '../../snacks/application/send_snack.dart';
 
 /// Route for showing a Receipt
 class ReceiptRoute extends StatefulWidget {
@@ -96,7 +96,7 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
             ),
             ElevatedButton(
               onPressed: () {
-                providerReceipts.deleteReceipt(widget.receipt.id).then((value) {
+                providerReceipts.deleteReceipt(widget.receipt).then((value) {
                   Navigator.of(context).pop();
                   sendSnack(
                     context: context,

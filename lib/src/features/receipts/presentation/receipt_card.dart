@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../receipt_route.dart';
-import '../objects/receipt.dart';
+import 'receipt_route.dart';
+import '../domain/receipt.dart';
 
 /// Card to show receipt info in the receipt list
 class ReceiptCard extends StatelessWidget {

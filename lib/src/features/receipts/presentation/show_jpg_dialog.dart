@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './dialog_components/dialog_titlebar.dart';
+import '../../../widgets/dialog_components/dialog_titlebar.dart';
 
 /// Dialog for viewing .jpg file
 ///

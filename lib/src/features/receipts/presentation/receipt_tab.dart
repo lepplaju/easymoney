@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/provider_receipts.dart';
+import '../application/provider_receipts.dart';
 
-import './widgets/receipt_card.dart';
-import './add_receipt_route.dart';
-import '../receipt_route.dart';
+import 'receipt_card.dart';
+import 'add_receipt_route.dart';
+import 'receipt_route.dart';
 
 /// Tab for Receipts in the HomePage
 class ReceiptTab extends StatefulWidget {

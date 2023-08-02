@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 
-import './providers/provider_receipts.dart';
+import '../application/provider_receipts.dart';
 
-import './widgets/dialogs/pic_or_pdf_dialog.dart';
-import './objects/receipt.dart';
-import './send_snack.dart';
+import 'pic_or_pdf_dialog.dart';
+import '../domain/receipt.dart';
+import '../../snacks/application/send_snack.dart';
 
 // TODO Add preview for file
 /// Route for adding a new receipt
