@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf_render/pdf_render.dart';
 
 import '../domain/receipt.dart';
 import '../../../utils/database.dart';
+import '../../../utils/file_operations.dart';
 
 /// Service for interacting with receipt database
 class ReceiptRepository {
@@ -15,30 +15,20 @@ class ReceiptRepository {
   Database? db;
 
   static const _receiptsTableName = 'receipts';
-
-  /// Returns a path where the receipt files will be saved.
-  Future<String> _getPath() async {
-    const String receiptPath = '/receipts';
-    final path =
-        '${(await getApplicationDocumentsDirectory()).path}$receiptPath';
-    if (!Directory(path).existsSync()) {
-      Directory(path).createSync();
-    }
-    return path;
-  }
+  static const _receiptsPath = '/receipts';
 
   /// Saves a receipt file of a Receipt
   ///
   /// Takes the [file] to be saved and the id of the receipt for which it
   /// belongs to.
   Future<void> _saveReceiptFile(XFile file, String fileName) async {
-    final path = await _getPath();
+    final path = await getPath(_receiptsPath);
     await file.saveTo('$path/$fileName');
   }
 
   /// Deletes a receipts file with [fileName]
   Future<void> _deleteReceiptFile(String fileName) async {
-    final path = await _getPath();
+    final path = await getPath(_receiptsPath);
     // TODO Handle errors
     await File('$path/$fileName').delete();
     return;
@@ -75,7 +65,7 @@ class ReceiptRepository {
 
   /// Returns the receipt file of a [receipt]
   Future<dynamic> getReceiptFile(String fileName) async {
-    final path = await _getPath();
+    final path = await getPath(_receiptsPath);
     final file = XFile('$path/$fileName');
     try {
       final fileType = file.name.substring(file.name.lastIndexOf('.'));
