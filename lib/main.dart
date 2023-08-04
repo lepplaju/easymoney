@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'features/receipts/application/provider_receipts.dart';
+import 'features/profile/application/provider_profiles.dart';
 
 import 'theme.dart';
 import 'home_page.dart';
@@ -20,13 +20,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final Future<Database> db;
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProviderReceipts()),
+        ChangeNotifierProvider(create: (context) => ProviderProfiles()),
       ],
       child: MaterialApp(
         // Removes the debug banner in debug mode

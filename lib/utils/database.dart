@@ -16,7 +16,7 @@ void _onCreate(Database db, int version) async {
     );
   ''');
   await db.execute('''
-    CREATE TABLE IF NOT EXISTS accounts (
+    CREATE TABLE IF NOT EXISTS profiles (
       id INTEGER PRIMARY KEY,
       iban TEXT NOT NULL,
       firstName TEXT NOT NULL,
