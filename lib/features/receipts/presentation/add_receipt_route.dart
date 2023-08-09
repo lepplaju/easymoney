@@ -13,7 +13,8 @@ import '../../snacks/application/send_snack.dart';
 // TODO Add preview for file
 /// Route for adding a new receipt
 class AddReceiptRoute extends StatefulWidget {
-  const AddReceiptRoute({super.key});
+  const AddReceiptRoute({super.key, required this.profileId});
+  final int profileId;
 
   @override
   State<AddReceiptRoute> createState() => _AddReceiptRouteState();
@@ -77,6 +78,8 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         store: storeTextController.text.trim(),
         description: descriptionTextController.text.trim(),
         file: file!,
+        // HACK Make this selectable
+        profileId: widget.profileId,
       );
       if (context.mounted) {
         // FIXME Localization

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_receipts.dart';
+import '../../profile/application/provider_profiles.dart';
 
 import 'receipt_card.dart';
 import 'add_receipt_route.dart';
@@ -18,20 +19,25 @@ class ReceiptTab extends StatefulWidget {
 /// State for [ReceiptTab]
 class _ReceiptTabState extends State<ReceiptTab> {
   late final ProviderReceipts providerReceipts;
+  late final ProviderProfiles providerProfiles;
 
   var isInitialized = false;
 
   @override
   void didChangeDependencies() {
     if (!isInitialized) {
+      providerProfiles = Provider.of<ProviderProfiles>(context);
       providerReceipts = Provider.of<ProviderReceipts>(context);
-      providerReceipts.fetchReceipts();
+      providerReceipts.fetchReceipts(
+          profileId: providerProfiles.selectedProfile?.id);
       isInitialized = true;
     }
     super.didChangeDependencies();
   }
 
   /// Builds a list item from list of receipts
+  ///
+  /// Takes [context] and the [index] for the item.
   Widget receiptBuilder(BuildContext context, int index) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -96,7 +102,10 @@ class _ReceiptTabState extends State<ReceiptTab> {
                 ),
                 onPressed: () {
                   Navigator.of(context)
-                      .push(_createRoute(const AddReceiptRoute()))
+                      .push(_createRoute(AddReceiptRoute(
+                    // FIXME Catch error
+                    profileId: providerProfiles.selectedProfile!.id,
+                  )))
                       .then((receipt) {
                     if (receipt != null) {
                       Navigator.of(context).push(_createRoute(

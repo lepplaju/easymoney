@@ -28,6 +28,15 @@ class MyTheme {
       backgroundColor: Colors.white,
     ),
     //==========================================================================
+    // DropdownMenuitem
+    //==========================================================================
+    dropdownMenuTheme: const DropdownMenuThemeData(
+      textStyle: TextStyle(
+        overflow: TextOverflow.fade,
+        color: Colors.white,
+      ),
+    ),
+    //==========================================================================
     // FloatingActionButton
     //==========================================================================
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

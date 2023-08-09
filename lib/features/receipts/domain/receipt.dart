@@ -6,12 +6,14 @@ class Receipt {
   String store;
   String description;
   String fileName;
+  int profileId;
 
   /// Creates Receipt
   ///
   /// Takes unique [id], [date] of the receipt, [amount] of the receipt,
   /// [store] from which the receipt is from, [description] about
-  /// the receipt and [fileName] of the attached receipt file.
+  /// the receipt, [fileName] of the attached receipt file and the [profileId]
+  /// of the profile which the receipt belongs to.
   Receipt({
     required this.id,
     required this.date,
@@ -19,6 +21,7 @@ class Receipt {
     required this.store,
     required this.description,
     required this.fileName,
+    required this.profileId,
   });
 
   /// Creates a receipt from map
@@ -31,7 +34,8 @@ class Receipt {
         amount = map['amount'],
         store = map['store'],
         description = map['description'],
-        fileName = map['fileName'];
+        fileName = map['fileName'],
+        profileId = map['profileId'];
 
   /// Returns the date of the receipt as dd.mm.yyyy string
   String get dateOnly {
@@ -52,6 +56,7 @@ class Receipt {
       'store': store,
       'description': description,
       'fileName': fileName,
+      'profileId': profileId,
     };
   }
 
@@ -63,7 +68,8 @@ class Receipt {
         'amount: $amount, '
         'store: "$store", '
         'description: "$description", '
-        'fileName: "$fileName"'
+        'fileName: "$fileName", '
+        'profileId: "$profileId"'
         '}';
   }
 }

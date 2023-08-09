@@ -16,22 +16,27 @@ class ProviderReceipts with ChangeNotifier {
   }
 
   /// Loads all Receipts from database
-  Future<void> fetchReceipts() async {
+  ///
+  /// Requires [profileId] of the profile whose receipts will be fetched.
+  Future<void> fetchReceipts({required int? profileId}) async {
+    if (profileId == null) return;
     _receipts.clear();
-    _receipts.addAll(await _receiptRepository.getReceipts());
+    _receipts.addAll(await _receiptRepository.getReceipts(profileId));
     notifyListeners();
   }
 
   /// Adds a new Receipt
   ///
   /// Takes the [date] of the receipt, [store], optional [description],
-  /// [amount] and a receipt [file].
+  /// [amount], a receipt [file] and a [profileId] for which the receipt
+  /// belongs to.
   Future<Receipt> addReceipt({
     required DateTime date,
     required String store,
     String description = '',
     required double amount,
     required XFile file,
+    required int profileId,
   }) async {
     final id = DateTime.now().millisecondsSinceEpoch;
     final fileName = '$id${file.name.substring(file.name.lastIndexOf('.'))}';
@@ -43,6 +48,7 @@ class ProviderReceipts with ChangeNotifier {
       store: store,
       description: description,
       fileName: fileName,
+      profileId: profileId,
     );
 
     _receipts.add(receipt);

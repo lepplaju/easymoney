@@ -8,6 +8,8 @@ import 'show_pdf_dialog.dart';
 import '../../snacks/application/send_snack.dart';
 
 /// Route for showing a Receipt
+///
+/// Requires [receipt] to be shown
 class ReceiptRoute extends StatefulWidget {
   const ReceiptRoute({super.key, required this.receipt});
   final Receipt receipt;

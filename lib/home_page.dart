@@ -9,6 +9,8 @@ import 'features/receipts/presentation/receipt_tab.dart';
 import 'features/profile/presentation/app_bar_button_profiles.dart';
 import 'features/profile/presentation/add_profile_route.dart';
 
+import 'utils/create_route.dart';
+
 /// Route for the home screen
 class HomePage extends StatefulWidget {
   static const routeName = '/';
@@ -22,16 +24,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   late final ProviderProfiles providerProfiles;
 
+  Future<void>? future;
   var isInitialized = false;
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    providerProfiles.getProfiles().then((value) {
-      if (providerProfiles.profiles.isEmpty) {
-        Navigator.of(context).push(_createRoute(const AddProfileRoute()));
-      }
-    }).catchError((e) {
-      Navigator.of(context).push(_createRoute(const AddProfileRoute()));
+    future = providerProfiles.getProfiles().then((value) {}).catchError((e) {
+      // FIXME Log
+      print(e);
+      Navigator.of(context).push(
+        createRoute(
+          const AddProfileRoute(
+            allowReturn: false,
+          ),
+        ),
+      );
     });
   }
 
@@ -39,32 +46,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
+      //future = providerProfiles.getProfiles();
       isInitialized = true;
     }
     super.didChangeDependencies();
-  }
-
-  /// Creates a Widget [route] to be pushed
-  PageRouteBuilder _createRoute(Widget route) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => route,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
-
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      },
-    );
   }
 
   @override
@@ -75,11 +60,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
         appBar: AppBar(
           title: const Text('EasyMoney'),
           centerTitle: true,
-          actions: [
+          actions: const [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: AppBarButtonProfiles(
-                  firstName: 'Karel', lastName: 'Parkkola'),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: AppBarButtonProfiles(),
             ),
           ],
           bottom: const TabBar(
@@ -95,13 +79,23 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             ],
           ),
         ),
-        body: const TabBarView(
-          children: [
-            ReceiptTab(),
-            // TODO Invoices
-            Placeholder(),
-          ],
-        ),
+        body: FutureBuilder(
+            future: future,
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return const TabBarView(
+                  children: [
+                    ReceiptTab(),
+                    // TODO Invoices
+                    Placeholder(),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
       ),
     );
   }

@@ -19,8 +19,7 @@ class ReceiptRepository {
 
   /// Saves a receipt file of a Receipt
   ///
-  /// Takes the [file] to be saved and the id of the receipt for which it
-  /// belongs to.
+  /// Takes the [file] to be saved and the [fileName] to be used.
   Future<void> _saveReceiptFile(XFile file, String fileName) async {
     final path = await getPath(_receiptsPath);
     await file.saveTo('$path/$fileName');
@@ -35,9 +34,15 @@ class ReceiptRepository {
   }
 
   /// Gets all the receipts from the database
-  Future<List<Receipt>> getReceipts() async {
+  ///
+  /// Requires [profileId] of the profile whose receipts will be fetched.
+  Future<List<Receipt>> getReceipts(int profileId) async {
     await _openDatabase();
-    final data = await db!.query(_receiptsTableName);
+    final data = await db!.query(
+      _receiptsTableName,
+      where: 'profileId = ?',
+      whereArgs: [profileId],
+    );
     final List<Receipt> receipts = [];
 
     for (var map in data) {
@@ -48,6 +53,8 @@ class ReceiptRepository {
   }
 
   /// Adds a Receipt to the database
+  ///
+  /// Requires [receipt] to be added and [file] to be saved.
   Future<int> addReceipt(
       {required Receipt receipt, required XFile file}) async {
     await _saveReceiptFile(file, receipt.fileName);
@@ -57,13 +64,17 @@ class ReceiptRepository {
   }
 
   /// Deletes a Receipt from the database
+  ///
+  /// Requires the [receipt] which will be removed
   Future<int> deleteReceipt(Receipt receipt) async {
     await _openDatabase();
     await _deleteReceiptFile(receipt.fileName);
     return db!.delete('receipts', where: 'id=?', whereArgs: [receipt.id]);
   }
 
-  /// Returns the receipt file of a [receipt]
+  /// Returns the receipt file
+  ///
+  /// Requires [fileName] which will be loaded.
   Future<dynamic> getReceiptFile(String fileName) async {
     final path = await getPath(_receiptsPath);
     final file = XFile('$path/$fileName');

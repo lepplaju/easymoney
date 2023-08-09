@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../../../utils/database.dart';
 import '../domain/profile.dart';
 
+/// Handles the data operations between the database and providers for profiles
 class ProfileRepository {
   static const _profileTableName = 'profiles';
   Database? db;
