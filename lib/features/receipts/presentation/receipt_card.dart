@@ -55,18 +55,22 @@ class ReceiptCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        receipt.dateOnly,
-                        style: textTheme.headlineSmall,
-                      ),
-                      Text(
-                        receipt.store,
-                        style: textTheme.headlineMedium,
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          receipt.dateOnly,
+                          style: textTheme.headlineSmall,
+                        ),
+                        Text(
+                          receipt.store,
+                          style: textTheme.headlineMedium,
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
+                        ),
+                      ],
+                    ),
                   ),
                   Text(
                     '${receipt.euros}€',

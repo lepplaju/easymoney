@@ -39,6 +39,11 @@ class _ReceiptTabState extends State<ReceiptTab> {
   ///
   /// Takes [context] and the [index] for the item.
   Widget receiptBuilder(BuildContext context, int index) {
+    if (index == providerReceipts.receipts.length) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.25,
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ReceiptCard(receipt: providerReceipts.receipts[index]),
@@ -73,7 +78,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
     return Stack(
       children: [
         ListView.builder(
-          itemCount: providerReceipts.receipts.length,
+          itemCount: providerReceipts.receipts.length + 1,
           itemBuilder: receiptBuilder,
         ),
         Positioned(
