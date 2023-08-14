@@ -40,11 +40,10 @@ class ProviderReceipts with ChangeNotifier {
   }) async {
     final id = DateTime.now().millisecondsSinceEpoch;
     final fileName = '$id${file.name.substring(file.name.lastIndexOf('.'))}';
-
     final receipt = Receipt(
       id: id,
       date: DateUtils.dateOnly(date),
-      amount: (amount * 100).toInt(),
+      amount: (amount * 100).round(),
       store: store,
       description: description,
       fileName: fileName,
