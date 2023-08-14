@@ -77,52 +77,80 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
         body: SizedBox(
           height: double.infinity,
           width: double.infinity,
-          child: Column(
-            children: [
-              // FIXME Localization
-              const Text('Add a new profile'),
-              TextField(
-                controller: profileNameController,
-                decoration: const InputDecoration(
-                  // FIXME Localization
-                  label: Text('Profile Name'),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                // FIXME Localization
+                const Text(
+                  'Add a new profile. Profiles are used '
+                  'for saving information to be put on the invoice. '
+                  'Create different profiles for different recipients '
+                  'of the invoices.',
+                  textAlign: TextAlign.center,
                 ),
-              ),
-              TextField(
-                controller: firstNameController,
-                decoration: const InputDecoration(
-                  // FIXME Localization
-                  label: Text('First Name'),
+                TextField(
+                  controller: profileNameController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Profile Name'),
+                    // FIXME Localization
+                    hintText: 'For you to recognize the profile.',
+                    isDense: true,
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
                 ),
-              ),
-              TextField(
-                controller: lastNameController,
-                decoration: const InputDecoration(
-                  // FIXME Localization
-                  label: Text('Last Name'),
+                TextField(
+                  controller: firstNameController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('First Name'),
+                    // FIXME Localization
+                    hintText: 'Ben, Jake, Rose, Sophie...',
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
                 ),
-              ),
-              TextField(
-                controller: targetController,
-                decoration: const InputDecoration(
-                  // FIXME Localization
-                  label: Text('Target'),
+                TextField(
+                  controller: lastNameController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Last Name'),
+                    hintText: 'Anderson, Patel, Smith...',
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
                 ),
-              ),
-              TextField(
-                controller: ibanController,
-                decoration: const InputDecoration(
-                  // FIXME Localization
-                  label: Text('IBAN'),
+                TextField(
+                  controller: targetController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Reference'),
+                    // FIXME Localization
+                    hintText: 'Korttelikylä, Asuva, Harju...',
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
                 ),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    _addProfile();
-                  },
-                  // FIXME Localization
-                  child: const Text('Add Profile'))
-            ],
+                TextField(
+                  controller: ibanController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('IBAN'),
+                    hintText: 'FI83 4978 8259 0005 97...',
+                  ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.done,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      _addProfile();
+                    },
+                    // FIXME Localization
+                    child: const Text('Add Profile'))
+              ],
+            ),
           ),
         ),
       ),
