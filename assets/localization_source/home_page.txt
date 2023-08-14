@@ -1,0 +1,17 @@
+// Receipts Tab Label
+
+name: "homePageReceiptsTabLabel"
+text_en: "Receipts"
+text_fi: "Kuitit"
+description: "Label for receipts tab in the HomePage."
+type: "text"
+placeholders: "{}"
+
+// Invoices Tab Label
+
+name: "homePageInvoicesTabLabel"
+text_en: "Invoices"
+text_fi: "Laskut"
+description: "Label for invoices tab in the HomePage."
+type: "text"
+placeholders: "{}"

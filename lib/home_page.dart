@@ -1,14 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-import 'features/profile/application/provider_profiles.dart';
-import 'features/receipts/presentation/receipt_tab.dart';
-import 'features/profile/presentation/app_bar_button_profiles.dart';
-import 'features/profile/presentation/add_profile_route.dart';
 import 'features/invoices/presentation/invoices_tab.dart';
+import 'features/profile/application/provider_profiles.dart';
+import 'features/profile/presentation/add_profile_route.dart';
+import 'features/profile/presentation/app_bar_button_profiles.dart';
+import 'features/receipts/presentation/receipt_tab.dart';
 
 import 'utils/create_route.dart';
 
@@ -24,6 +25,7 @@ class HomePage extends StatefulWidget {
 /// State for [HomePage]
 class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   late final ProviderProfiles providerProfiles;
+  late final AppLocalizations locals;
 
   Future<void>? future;
   var isInitialized = false;
@@ -49,7 +51,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
-      //future = providerProfiles.getProfiles();
+      locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
     super.didChangeDependencies();
@@ -69,15 +71,13 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
               child: AppBarButtonProfiles(),
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(
-                // FIXME Localization
-                text: 'Receipts',
+                text: locals.homePageReceiptsTabLabel,
               ),
               Tab(
-                // FIXME Localization
-                text: 'Invoices',
+                text: locals.homePageInvoicesTabLabel,
               ),
             ],
           ),
@@ -89,7 +89,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                 return const TabBarView(
                   children: [
                     ReceiptTab(),
-                    // TODO Invoices
                     InvoicesTab(),
                   ],
                 );

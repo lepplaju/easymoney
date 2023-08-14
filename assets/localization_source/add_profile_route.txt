@@ -6,3 +6,84 @@ text_fi: "Uusi Profiili"
 description: "Title for AddProfileRoute AppBar."
 type: "text"
 placeholders: "{}"
+
+// Description
+
+name: "addProfileRouteDescription"
+text_en: "Add a new profile. Profiles are used for saving information to be put on the invoice. Create different profiles for different recipients of the invoices."
+text_fi: "Lisää uusi profiili. Profiileja käytetään laskujen tietojen syöttämiseen. Luo yksi profiili jokaista laskutuskohdetta varten."
+description: "Description for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// Profile Name
+
+name: "addProfileRouteProfileName"
+text_en: "Profile Name"
+text_fi: "Profiilin nimi"
+description: "Profile Name label for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// Profile Name hintText
+
+name: "addProfileRouteProfileNameHint"
+text_en: "For you to recognize the profile."
+text_fi: "Sinulle profiilin tunnistamiseksi."
+description: "Hint for Profile name field in AddProfileRoute"
+type: "text"
+placeholders: "{}"
+
+// First Name
+
+name: "addProfileRouteFirstName"
+text_en: "First Name"
+text_fi: "Etunimi"
+description: "First Name label for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// Last Name
+
+name: "addProfileRouteLastName"
+text_en: "Last Name"
+text_fi: "Sukunimi"
+description: "Last Name label for in AddProfileRoute"
+type: "text"
+placeholders: "{}"
+
+// Reference label
+
+name: "addProfileRouteReference"
+text_en: "Reference"
+text_fi: "Kohteen viite"
+description: "Reference label for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// IBAN
+
+name: "addProfileRouteIBAN"
+text_en: "IBAN"
+text_fi: "IBAN"
+description: "IBAN label for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// Profile added snack
+
+name: "addProfileRouteSuccessSnack"
+text_en: "Profile added!"
+text_fi: "Profiili lisätty!"
+description: "Success snack text for AddProfileRoute."
+type: "text"
+placeholders: "{}"
+
+// Submit Button
+
+name: "addProfileRouteSubmitButton"
+text_en: "Add Profile"
+text_fi: "Lisää Profiili"
+description: "Submit button text for AddProfileRoute."
+type: "text"
+placeholders: "{}"

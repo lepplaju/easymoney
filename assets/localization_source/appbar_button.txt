@@ -1,0 +1,17 @@
+// Edit Profile
+
+name: "appBarButtonEditProfile"
+text_en: "Edit Profile"
+text_fi: "Muokkaa Profiilia"
+description: "Edit Profile button for AppBarButton."
+type: "text"
+placeholders: "{}"
+
+// Add Profile
+
+name: "appBarButtonAddProfile"
+text_en: "Add Profile"
+text_fi: "Lisää Profiili"
+description: "Add Profile button for AppBarButton."
+type: "text"
+placeholders: "{}"

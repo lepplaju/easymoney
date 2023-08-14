@@ -1,3 +1,16 @@
 {
-	"addProfileRouteAppBarTitle": "Uusi Profiili"
+	"appBarButtonEditProfile": "Muokkaa Profiilia",
+	"appBarButtonAddProfile": "Lisää Profiili",
+	"addProfileRouteAppBarTitle": "Uusi Profiili",
+	"addProfileRouteDescription": "Lisää uusi profiili. Profiileja käytetään laskujen tietojen syöttämiseen. Luo yksi profiili jokaista laskutuskohdetta varten.",
+	"addProfileRouteProfileName": "Profiilin nimi",
+	"addProfileRouteProfileNameHint": "Sinulle profiilin tunnistamiseksi.",
+	"addProfileRouteFirstName": "Etunimi",
+	"addProfileRouteLastName": "Sukunimi",
+	"addProfileRouteReference": "Kohteen viite",
+	"addProfileRouteIBAN": "IBAN",
+	"addProfileRouteSuccessSnack": "Profiili lisätty!",
+	"addProfileRouteSubmitButton": "Lisää Profiili",
+	"homePageReceiptsTabLabel": "Kuitit",
+	"homePageInvoicesTabLabel": "Laskut"
 }

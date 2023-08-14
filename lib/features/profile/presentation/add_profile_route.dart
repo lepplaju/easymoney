@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
@@ -47,7 +47,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
   }
 
   /// Add a new profile using current values from the UI
-  _addProfile() async {
+  _addProfile({required String successSnack}) async {
     // TODO Don't allow empty values
     await providerProfiles.addProfile(
       profileName: profileNameController.text.trim(),
@@ -59,7 +59,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
     );
 
     if (context.mounted) {
-      sendSnack(context: context, content: 'Added a new profile!');
+      sendSnack(context: context, content: successSnack);
       Navigator.of(context).pop();
     }
   }
@@ -81,21 +81,15 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                // FIXME Localization
-                const Text(
-                  'Add a new profile. Profiles are used '
-                  'for saving information to be put on the invoice. '
-                  'Create different profiles for different recipients '
-                  'of the invoices.',
+                Text(
+                  locals.addProfileRouteDescription,
                   textAlign: TextAlign.center,
                 ),
                 TextField(
                   controller: profileNameController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Profile Name'),
-                    // FIXME Localization
-                    hintText: 'For you to recognize the profile.',
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteProfileName),
+                    hintText: locals.addProfileRouteProfileNameHint,
                     isDense: true,
                   ),
                   textCapitalization: TextCapitalization.sentences,
@@ -103,10 +97,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 ),
                 TextField(
                   controller: firstNameController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('First Name'),
-                    // FIXME Localization
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteFirstName),
                     hintText: 'Ben, Jake, Rose, Sophie...',
                   ),
                   textCapitalization: TextCapitalization.sentences,
@@ -114,9 +106,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 ),
                 TextField(
                   controller: lastNameController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Last Name'),
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteLastName),
                     hintText: 'Anderson, Patel, Smith...',
                   ),
                   textCapitalization: TextCapitalization.sentences,
@@ -124,10 +115,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 ),
                 TextField(
                   controller: targetController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Reference'),
-                    // FIXME Localization
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteReference),
                     hintText: 'Korttelikylä, Asuva, Harju...',
                   ),
                   textCapitalization: TextCapitalization.sentences,
@@ -135,9 +124,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 ),
                 TextField(
                   controller: ibanController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('IBAN'),
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteIBAN),
                     hintText: 'FI83 4978 8259 0005 97...',
                   ),
                   textCapitalization: TextCapitalization.sentences,
@@ -145,10 +133,11 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      _addProfile();
+                      _addProfile(
+                        successSnack: locals.addProfileRouteSuccessSnack,
+                      );
                     },
-                    // FIXME Localization
-                    child: const Text('Add Profile'))
+                    child: Text(locals.addProfileRouteSubmitButton))
               ],
             ),
           ),

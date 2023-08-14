@@ -1,7 +1,85 @@
 {
+	"appBarButtonEditProfile": "Edit Profile",
+	"@appBarButtonEditProfile": {
+		"description": "Edit Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonAddProfile": "Add Profile",
+	"@appBarButtonAddProfile": {
+		"description": "Add Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
 	"addProfileRouteAppBarTitle": "New Profile",
 	"@addProfileRouteAppBarTitle": {
 		"description": "Title for AddProfileRoute AppBar.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteDescription": "Add a new profile. Profiles are used for saving information to be put on the invoice. Create different profiles for different recipients of the invoices.",
+	"@addProfileRouteDescription": {
+		"description": "Description for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteProfileName": "Profile Name",
+	"@addProfileRouteProfileName": {
+		"description": "Profile Name label for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteProfileNameHint": "For you to recognize the profile.",
+	"@addProfileRouteProfileNameHint": {
+		"description": "Hint for Profile name field in AddProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteFirstName": "First Name",
+	"@addProfileRouteFirstName": {
+		"description": "First Name label for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteLastName": "Last Name",
+	"@addProfileRouteLastName": {
+		"description": "Last Name label for in AddProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteReference": "Reference",
+	"@addProfileRouteReference": {
+		"description": "Reference label for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteIBAN": "IBAN",
+	"@addProfileRouteIBAN": {
+		"description": "IBAN label for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteSuccessSnack": "Profile added!",
+	"@addProfileRouteSuccessSnack": {
+		"description": "Success snack text for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteSubmitButton": "Add Profile",
+	"@addProfileRouteSubmitButton": {
+		"description": "Submit button text for AddProfileRoute.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"homePageReceiptsTabLabel": "Receipts",
+	"@homePageReceiptsTabLabel": {
+		"description": "Label for receipts tab in the HomePage.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"homePageInvoicesTabLabel": "Invoices",
+	"@homePageInvoicesTabLabel": {
+		"description": "Label for invoices tab in the HomePage.",
 		"type": "text",
 		"placeholders": {}
 	}

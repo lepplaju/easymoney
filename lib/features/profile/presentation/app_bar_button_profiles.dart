@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
@@ -14,7 +15,7 @@ class AppBarButtonProfiles extends StatelessWidget {
   });
 
   List<DropdownMenuItem<int>> _items(
-      BuildContext context, List<Profile> profiles) {
+      BuildContext context, List<Profile> profiles, AppLocalizations locals) {
     final List<DropdownMenuItem<int>> items = [];
     for (var profile in profiles) {
       items.add(DropdownMenuItem(
@@ -25,12 +26,10 @@ class AppBarButtonProfiles extends StatelessWidget {
         ),
       ));
     }
-    // FIXME Localization
-    items.add(
-        const DropdownMenuItem<int>(value: 0, child: Text('Edit Profile')));
-    // FIXME Localization
-    items
-        .add(const DropdownMenuItem<int>(value: 1, child: Text('Add Profile')));
+    items.add(DropdownMenuItem<int>(
+        value: 0, child: Text(locals.appBarButtonEditProfile)));
+    items.add(DropdownMenuItem<int>(
+        value: 1, child: Text(locals.appBarButtonAddProfile)));
     return items;
   }
 
@@ -68,7 +67,11 @@ class AppBarButtonProfiles extends StatelessWidget {
             providerReceipts.fetchReceipts(profileId: value);
           }
         },
-        items: _items(context, providerProfiles.profiles),
+        items: _items(
+          context,
+          providerProfiles.profiles,
+          AppLocalizations.of(context)!,
+        ),
       ),
     );
   }
