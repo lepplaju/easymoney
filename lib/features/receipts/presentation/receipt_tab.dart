@@ -1,8 +1,10 @@
+import 'package:easymoney/features/snacks/application/send_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_receipts.dart';
 import '../../profile/application/provider_profiles.dart';
+import '../../invoices/application/provider_invoices.dart';
 
 import 'receipt_card.dart';
 import 'add_receipt_route.dart';
@@ -20,6 +22,7 @@ class ReceiptTab extends StatefulWidget {
 class _ReceiptTabState extends State<ReceiptTab> {
   late final ProviderReceipts providerReceipts;
   late final ProviderProfiles providerProfiles;
+  late final ProviderInvoices providerInvoices;
 
   var isInitialized = false;
 
@@ -27,6 +30,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
+      providerInvoices = Provider.of<ProviderInvoices>(context);
       providerReceipts = Provider.of<ProviderReceipts>(context);
       providerReceipts.fetchReceipts(
           profileId: providerProfiles.selectedProfile?.id);
@@ -95,8 +99,27 @@ class _ReceiptTabState extends State<ReceiptTab> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: const Icon(Icons.picture_as_pdf_rounded),
-                  onPressed: () {
+                  onPressed: () async {
+                    // FIXME Catch null profile
                     // TODO Compose the invoice
+                    try {
+                      await providerInvoices.createInvoice(
+                        profile: providerProfiles.selectedProfile!,
+                        receipts: providerReceipts.receipts,
+                        files: await providerReceipts.getReceiptFiles(),
+                      );
+
+                      if (context.mounted) {
+                        DefaultTabController.of(context).animateTo(1);
+                        sendSnack(
+                          context: context,
+                          // FIXME Localization
+                          content: 'Invoice created!',
+                        );
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
               ),

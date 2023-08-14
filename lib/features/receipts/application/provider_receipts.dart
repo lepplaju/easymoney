@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -70,10 +72,19 @@ class ProviderReceipts with ChangeNotifier {
     }
   }
 
+  Future<List<File>> getReceiptFiles() async {
+    final files = <File>[];
+    for (var receipt in receipts) {
+      // TODO Improve performance by waiting all the receipts
+      files.add(await _receiptRepository.getReceiptFile(receipt.fileName));
+    }
+    return files;
+  }
+
   /// Returns the receipt file of a [receipt]
-  Future<dynamic> getReceiptFile(Receipt receipt) async {
+  Future<dynamic> getReceiptImage(Receipt receipt) async {
     try {
-      return await _receiptRepository.getReceiptFile(receipt.fileName);
+      return await _receiptRepository.getReceiptImage(receipt.fileName);
       // TODO Catch different errors
     } catch (e) {
       // TODO Log

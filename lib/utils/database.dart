@@ -16,6 +16,16 @@ void _onCreate(Database db, int version) async {
     );
   ''');
   await db.execute('''
+    CREATE TABLE IF NOT EXISTS invoices (
+      id INTEGER PRIMARY KEY,
+      date TEXT NOT NULL,
+      target TEXT NOT NULL,
+      name TEXT NOT NULL,
+      amount INTEGER NOT NULL,
+      fileName TEXT NOT NULL
+    );
+  ''');
+  await db.execute('''
     CREATE TABLE IF NOT EXISTS receipts (
       id INTEGER PRIMARY KEY,
       date TEXT,

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'features/receipts/application/provider_receipts.dart';
 import 'features/profile/application/provider_profiles.dart';
+import 'features/invoices/application/provider_invoices.dart';
 
 import 'theme.dart';
 import 'home_page.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (context) => ProviderReceipts()),
         ChangeNotifierProvider(create: (context) => ProviderProfiles()),
+        ChangeNotifierProvider(create: (context) => ProviderInvoices()),
       ],
       child: MaterialApp(
         // Removes the debug banner in debug mode

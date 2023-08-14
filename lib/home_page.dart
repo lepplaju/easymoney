@@ -8,6 +8,7 @@ import 'features/profile/application/provider_profiles.dart';
 import 'features/receipts/presentation/receipt_tab.dart';
 import 'features/profile/presentation/app_bar_button_profiles.dart';
 import 'features/profile/presentation/add_profile_route.dart';
+import 'features/invoices/presentation/invoices_tab.dart';
 
 import 'utils/create_route.dart';
 
@@ -32,13 +33,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
     future = providerProfiles.getProfiles().then((value) {}).catchError((e) {
       // FIXME Log
       print(e);
-      Navigator.of(context).push(
-        createRoute(
-          const AddProfileRoute(
-            allowReturn: false,
-          ),
-        ),
-      );
+      Navigator.of(context)
+          .push(
+            createRoute(
+              const AddProfileRoute(
+                allowReturn: false,
+              ),
+            ),
+          )
+          .then((value) => providerProfiles.getProfiles());
     });
   }
 
@@ -87,7 +90,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                   children: [
                     ReceiptTab(),
                     // TODO Invoices
-                    Placeholder(),
+                    InvoicesTab(),
                   ],
                 );
               } else {

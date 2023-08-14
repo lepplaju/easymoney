@@ -75,7 +75,7 @@ class ReceiptRepository {
   /// Returns the receipt file
   ///
   /// Requires [fileName] which will be loaded.
-  Future<dynamic> getReceiptFile(String fileName) async {
+  Future<dynamic> getReceiptImage(String fileName) async {
     final path = await getPath(_receiptsPath);
     final file = XFile('$path/$fileName');
     try {
@@ -96,6 +96,12 @@ class ReceiptRepository {
       debugPrint(e.toString());
       return Future.error(e);
     }
+  }
+
+  Future<File> getReceiptFile(String fileName) async {
+    final path = await getPath(_receiptsPath);
+    // FIXME Catch errors
+    return File('$path/$fileName');
   }
 
   /// Makes sure that the SQLite database is initialized and opened

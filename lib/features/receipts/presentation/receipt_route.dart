@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
 import 'show_jpg_dialog.dart';
-import 'show_pdf_dialog.dart';
+import '../../../utils/show_pdf_dialog.dart';
 import '../../snacks/application/send_snack.dart';
 
 /// Route for showing a Receipt
@@ -37,7 +37,7 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
   /// Loads and pushes a dialog showing the loaded file
   _loadReceiptFile() async {
     try {
-      final file = await providerReceipts.getReceiptFile(widget.receipt);
+      final file = await providerReceipts.getReceiptImage(widget.receipt);
       switch (file.runtimeType) {
         case Image:
           if (context.mounted) {

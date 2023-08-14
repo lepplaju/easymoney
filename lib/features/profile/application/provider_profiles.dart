@@ -54,6 +54,7 @@ class ProviderProfiles with ChangeNotifier {
 
   /// Gets all the profiles from the database
   Future<void> getProfiles() async {
+    _profiles.clear();
     final newProfiles = await _profileRepository.getProfiles();
     if (newProfiles.isEmpty) {
       return Future.error(Exception('At least one profile is required'));
