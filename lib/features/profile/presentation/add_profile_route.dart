@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
@@ -16,6 +17,7 @@ class AddProfileRoute extends StatefulWidget {
 /// State for [AddProfileRoute]
 class _AddProfileRouteState extends State<AddProfileRoute> {
   late final ProviderProfiles providerProfiles;
+  late final AppLocalizations locals;
   final profileNameController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -28,6 +30,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
+      locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
     super.didChangeDependencies();
@@ -67,8 +70,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
       onWillPop: () async => widget.allowReturn,
       child: Scaffold(
         appBar: AppBar(
-          // FIXME Localization
-          title: const Text('New Profile'),
+          title: Text(locals.addProfileRouteAppBarTitle),
           centerTitle: true,
           automaticallyImplyLeading: widget.allowReturn,
         ),

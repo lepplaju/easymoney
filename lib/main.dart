@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'features/receipts/application/provider_receipts.dart';
 import 'features/profile/application/provider_profiles.dart';
@@ -33,6 +35,15 @@ class _MyAppState extends State<MyApp> {
         // Removes the debug banner in debug mode
         debugShowCheckedModeBanner: false,
         theme: MyTheme.light,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''),
+          Locale('fi', ''),
+        ],
         routes: {
           '/': (context) => const HomePage(),
         },

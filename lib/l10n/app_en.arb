@@ -1,0 +1,8 @@
+{
+	"addProfileRouteAppBarTitle": "New Profile",
+	"@addProfileRouteAppBarTitle": {
+		"description": "Title for AddProfileRoute AppBar.",
+		"type": "text",
+		"placeholders": {}
+	}
+}

@@ -1,0 +1,8 @@
+// AppBar title
+
+name: "addProfileRouteAppBarTitle"
+text_en: "New Profile"
+text_fi: "Uusi Profiili"
+description: "Title for AddProfileRoute AppBar."
+type: "text"
+placeholders: "{}"
