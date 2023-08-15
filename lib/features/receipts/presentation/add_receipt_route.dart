@@ -1,16 +1,14 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:file_picker/file_picker.dart';
-
-import '../application/provider_receipts.dart';
+import 'package:provider/provider.dart';
 
 import 'pic_or_pdf_dialog.dart';
+import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
 import '../../snacks/application/send_snack.dart';
 
-// TODO Add preview for file
 /// Route for adding a new receipt
 class AddReceiptRoute extends StatefulWidget {
   const AddReceiptRoute({super.key, required this.profileId});
@@ -78,7 +76,6 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         store: storeTextController.text.trim(),
         description: descriptionTextController.text.trim(),
         file: file!,
-        // HACK Make this selectable
         profileId: widget.profileId,
       );
       if (context.mounted) {
@@ -100,120 +97,143 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         title: const Text('Add Receipt'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          // FIXME Localization
-          const Text('Date of the receipt'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              selectedDate == null
-                  ? Text(
-                      '${currentDate.day}.${currentDate.month}.${currentDate.year}')
-                  : Text(
-                      '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}'),
-              ElevatedButton(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // FIXME Localization
+            Column(
+              children: [
+                Text(
+                  'Date of the receipt',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                selectedDate == null
+                    ? Text(
+                        '${currentDate.day}.${currentDate.month}.${currentDate.year}',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      )
+                    : Text(
+                        '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                ElevatedButton(
+                    onPressed: () async {
+                      final date = await showDatePicker(
+                          context: context,
+                          initialDate: currentDate,
+                          firstDate:
+                              currentDate.subtract(const Duration(days: 1095)),
+                          lastDate: currentDate);
+                      if (date != null) {
+                        setState(() {
+                          selectedDate = date;
+                        });
+                      }
+                    },
+                    // FIXME Localization
+                    child: const Text('Edit')),
+                TextField(
+                  controller: storeTextController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Store'),
+                  ),
+                ),
+                TextField(
+                  controller: descriptionTextController,
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Description'),
+                  ),
+                ),
+                TextField(
+                  controller: amountTextController,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d+\.?\d{0,2}')),
+                  ],
+                  decoration: const InputDecoration(
+                    // FIXME Localization
+                    label: Text('Amount'),
+                    suffixIcon: Icon(Icons.euro),
+                  ),
+                ),
+                // FIXME Localization
+                Text(
+                  'Receipt',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                // FIXME Localization
+                const Text('Upload a picture/pdf of the receipt.'),
+                // TODO Show the receipt file
+                ElevatedButton(
                   onPressed: () async {
-                    final date = await showDatePicker(
+                    var takesPic = await showDialog<UploadType>(
                         context: context,
-                        initialDate: currentDate,
-                        firstDate:
-                            currentDate.subtract(const Duration(days: 1095)),
-                        lastDate: currentDate);
-                    if (date != null) {
-                      setState(() {
-                        selectedDate = date;
-                      });
+                        builder: (BuildContext context) {
+                          return const PicOrPdfDialog();
+                        });
+                    if (takesPic == null) return;
+                    switch (takesPic) {
+                      case UploadType.camera:
+                        file =
+                            await picker.pickImage(source: ImageSource.camera);
+                        break;
+                      case UploadType.picture:
+                        file =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        // TODO Throw error for incorrect filetype
+                        break;
+                      case UploadType.pdf:
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles();
+                        if (result != null) {
+                          file = XFile(result.files.single.path!);
+                        }
+                        break;
+                      default:
+                        break;
                     }
                   },
                   // FIXME Localization
-                  child: const Text('Edit'))
-            ],
-          ),
-          TextField(
-            controller: storeTextController,
-            decoration: const InputDecoration(
-              // FIXME Localization
-              label: Text('Store'),
+                  child: const Text('Add'),
+                ),
+              ],
             ),
-          ),
-          TextField(
-            controller: descriptionTextController,
-            decoration: const InputDecoration(
-              // FIXME Localization
-              label: Text('Description'),
-            ),
-          ),
-          TextField(
-            controller: amountTextController,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
-            ],
-            decoration: const InputDecoration(
-              // FIXME Localization
-              label: Text('Amount'),
-              suffixIcon: Icon(Icons.euro),
-            ),
-          ),
-          // FIXME Localization
-          const Text('Receipt'),
-          // FIXME Localization
-          const Text('Upload a picture/pdf of the receipt.'),
-          ElevatedButton(
-            onPressed: () async {
-              var takesPic = await showDialog<UploadType>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const PicOrPdfDialog();
-                  });
-              if (takesPic == null) return;
-              switch (takesPic) {
-                case UploadType.camera:
-                  file = await picker.pickImage(source: ImageSource.camera);
-                  break;
-                case UploadType.picture:
-                  file = await picker.pickImage(source: ImageSource.gallery);
-                  // TODO Throw error for incorrect filetype
-                  break;
-                case UploadType.pdf:
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles();
-                  if (result != null) {
-                    file = XFile(result.files.single.path!);
-                  }
-                  break;
-                default:
-                  break;
-              }
-            },
-            // FIXME Localization
-            child: const Text('Add'),
-          ),
-          const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                // FIXME Localization
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final receipt = await _createReceipt();
-                  if (context.mounted) {
-                    Navigator.of(context).pop(receipt);
-                  }
-                },
-                // FIXME Localization
-                child: const Text('Save'),
-              ),
-            ],
-          )
-        ],
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      // FIXME Localization
+                      child: const Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final receipt = await _createReceipt();
+                        if (context.mounted) {
+                          Navigator.of(context).pop(receipt);
+                        }
+                      },
+                      // FIXME Localization
+                      child: const Text('Save'),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,14 +1,15 @@
-import 'package:easymoney/features/snacks/application/send_snack.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../application/provider_receipts.dart';
-import '../../profile/application/provider_profiles.dart';
-import '../../invoices/application/provider_invoices.dart';
-
-import 'receipt_card.dart';
 import 'add_receipt_route.dart';
+import 'receipt_card.dart';
 import 'receipt_route.dart';
+
+import '../application/provider_receipts.dart';
+import '../../invoices/application/provider_invoices.dart';
+import '../../profile/application/provider_profiles.dart';
+import '../../snacks/application/send_snack.dart';
 
 /// Tab for Receipts in the HomePage
 class ReceiptTab extends StatefulWidget {
@@ -23,6 +24,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
   late final ProviderReceipts providerReceipts;
   late final ProviderProfiles providerProfiles;
   late final ProviderInvoices providerInvoices;
+  late final AppLocalizations locals;
 
   var isInitialized = false;
 
@@ -34,6 +36,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
       providerReceipts = Provider.of<ProviderReceipts>(context);
       providerReceipts.fetchReceipts(
           profileId: providerProfiles.selectedProfile?.id);
+      locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
     super.didChangeDependencies();
@@ -113,8 +116,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
                         DefaultTabController.of(context).animateTo(1);
                         sendSnack(
                           context: context,
-                          // FIXME Localization
-                          content: 'Invoice created!',
+                          content: locals.receiptTabInvoiceSuccessSanck,
                         );
                       }
                     } catch (e) {
@@ -144,8 +146,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
                     }
                   });
                 },
-                // FIXME Localization
-                label: const Text('Add Receipt'),
+                label: Text(locals.receiptTabAddReceiptButton),
               )
             ],
           ),

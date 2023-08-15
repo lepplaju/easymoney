@@ -1,0 +1,17 @@
+// Invoice Success snacks
+
+name: "receiptTabInvoiceSuccessSanck"
+text_en: "Invoice created!"
+text_fi: "Lasku luotu!"
+description: "Invoice success snack for ReceiptTab."
+type: "text"
+placeholders: "{}"
+
+// Add Receipt Button
+
+name: "receiptTabAddReceiptButton"
+text_en: "Add Receipt"
+text_fi: "Lisää Kuitti"
+description: "Add Receipt Button for ReceiptTab."
+type: "text"
+placeholders: "{}"

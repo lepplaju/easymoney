@@ -11,6 +11,18 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"receiptTabInvoiceSuccessSanck": "Invoice created!",
+	"@receiptTabInvoiceSuccessSanck": {
+		"description": "Invoice success snack for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabAddReceiptButton": "Add Receipt",
+	"@receiptTabAddReceiptButton": {
+		"description": "Add Receipt Button for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
 	"addProfileRouteAppBarTitle": "New Profile",
 	"@addProfileRouteAppBarTitle": {
 		"description": "Title for AddProfileRoute AppBar.",

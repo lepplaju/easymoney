@@ -28,12 +28,31 @@ class MyTheme {
       backgroundColor: Colors.white,
     ),
     //==========================================================================
+    //TextField
+    //==========================================================================
+    inputDecorationTheme: const InputDecorationTheme(
+      labelStyle: TextStyle(
+        fontSize: 25,
+      ),
+      floatingLabelStyle: TextStyle(
+        fontSize: 20,
+      ),
+    ),
+    //==========================================================================
     // DropdownMenuitem
     //==========================================================================
     dropdownMenuTheme: const DropdownMenuThemeData(
       textStyle: TextStyle(
         overflow: TextOverflow.fade,
         color: Colors.white,
+      ),
+    ),
+    //==========================================================================
+    // FloatingActionButton
+    //==========================================================================
+    elevatedButtonTheme: const ElevatedButtonThemeData(
+      style: ButtonStyle(
+        minimumSize: MaterialStatePropertyAll(Size(70, 50)),
       ),
     ),
     //==========================================================================
