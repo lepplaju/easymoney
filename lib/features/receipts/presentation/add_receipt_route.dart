@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pdf_render/pdf_render.dart';
 import 'package:provider/provider.dart';
 
-import 'pic_or_pdf_dialog.dart';
+import '../../../utils/show_pdf_dialog.dart';
+import '../../snacks/application/send_snack.dart';
 import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
-import '../../snacks/application/send_snack.dart';
+import 'pic_or_pdf_dialog.dart';
+import 'show_jpg_dialog.dart';
 
 /// Route for adding a new receipt
 class AddReceiptRoute extends StatefulWidget {
@@ -54,6 +59,48 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
     super.dispose();
   }
 
+  /// Loads a receipt file of the Receipt
+  ///
+  /// Loads and pushes a dialog showing the loaded file
+  _loadReceiptFile() async {
+    try {
+      switch (file!.name.substring(file!.name.lastIndexOf('.'))) {
+        case '.jpg':
+          if (context.mounted) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ShowJpgDialog(
+                  // FIXME Localization
+                  title: 'Preview',
+                  image: Image.file(File(file!.path)),
+                );
+              },
+            );
+          }
+          break;
+        case '.pdf':
+          final pdfFile = await PdfDocument.openFile(file!.path);
+          if (context.mounted) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ShowPdfDialog(
+                  // FIXME Localization
+                  title: 'Preview',
+                  pdf: pdfFile,
+                );
+              },
+            );
+          }
+          break;
+      }
+    } catch (e) {
+      // TODO Show error snackbar
+      debugPrint(e.toString());
+    }
+  }
+
   /// Creates a new Receipt
   ///
   /// Returns a [Receipt] as a future
@@ -92,6 +139,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         // FIXME Localization
         title: const Text('Add Receipt'),
@@ -109,15 +157,18 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                   'Date of the receipt',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
-                selectedDate == null
-                    ? Text(
-                        '${currentDate.day}.${currentDate.month}.${currentDate.year}',
-                        style: Theme.of(context).textTheme.displayMedium,
-                      )
-                    : Text(
-                        '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}',
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: selectedDate == null
+                      ? Text(
+                          '${currentDate.day}.${currentDate.month}.${currentDate.year}',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        )
+                      : Text(
+                          '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                ),
                 ElevatedButton(
                     onPressed: () async {
                       final date = await showDatePicker(
@@ -140,6 +191,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     // FIXME Localization
                     label: Text('Store'),
                   ),
+                  textInputAction: TextInputAction.next,
                 ),
                 TextField(
                   controller: descriptionTextController,
@@ -147,6 +199,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     // FIXME Localization
                     label: Text('Description'),
                   ),
+                  textInputAction: TextInputAction.next,
                 ),
                 TextField(
                   controller: amountTextController,
@@ -161,15 +214,32 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     label: Text('Amount'),
                     suffixIcon: Icon(Icons.euro),
                   ),
+                  textInputAction: TextInputAction.done,
                 ),
                 // FIXME Localization
-                Text(
-                  'Receipt',
-                  style: Theme.of(context).textTheme.displaySmall,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Receipt',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
                 ),
                 // FIXME Localization
-                const Text('Upload a picture/pdf of the receipt.'),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Upload a picture/pdf of the receipt.'),
+                ),
                 // TODO Show the receipt file
+                if (file != null)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                        onPressed: () {
+                          _loadReceiptFile();
+                        },
+                        child: Text(
+                            '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}')),
+                  ),
                 ElevatedButton(
                   onPressed: () async {
                     var takesPic = await showDialog<UploadType>(
@@ -180,19 +250,27 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     if (takesPic == null) return;
                     switch (takesPic) {
                       case UploadType.camera:
-                        file =
+                        final result =
                             await picker.pickImage(source: ImageSource.camera);
+                        setState(() {
+                          file = result;
+                        });
                         break;
                       case UploadType.picture:
-                        file =
+                        final result =
                             await picker.pickImage(source: ImageSource.gallery);
+                        setState(() async {
+                          file = result;
+                        });
                         // TODO Throw error for incorrect filetype
                         break;
                       case UploadType.pdf:
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles();
                         if (result != null) {
-                          file = XFile(result.files.single.path!);
+                          setState(() {
+                            file = XFile(result.files.single.path!);
+                          });
                         }
                         break;
                       default:
@@ -200,7 +278,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     }
                   },
                   // FIXME Localization
-                  child: const Text('Add'),
+                  child: Text(file == null ? 'Add' : 'Change'),
                 ),
               ],
             ),

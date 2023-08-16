@@ -7,10 +7,26 @@ enum UploadType { camera, picture, pdf }
 /// Dialog for choosing which type of file user is adding.
 class PicOrPdfDialog extends StatelessWidget {
   const PicOrPdfDialog({super.key});
+  final verticalPadding = 10.0;
+
+  Widget _button({required String text, required VoidCallback onPressed}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: verticalPadding),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: SizedBox(
+          width: double.infinity,
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final buttonWidth = MediaQuery.of(context).size.width * 0.3;
     return Center(
       child: SingleChildScrollView(
         child: Dialog(
@@ -24,45 +40,23 @@ class PicOrPdfDialog extends StatelessWidget {
             children: [
               // FIXME Localization
               const DialogTitleBar(title: 'Add a picture or pdf'),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, UploadType.camera);
-                },
-                child: SizedBox(
-                  width: buttonWidth,
-                  child: const Text(
-                    // FIXME Localization
-                    'Take Picture',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              SizedBox(height: verticalPadding),
+              _button(
+                // FIXME Localization
+                text: 'Take Picture',
+                onPressed: () => Navigator.pop(context, UploadType.camera),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, UploadType.picture);
-                },
-                child: SizedBox(
-                  width: buttonWidth,
-                  child: const Text(
-                    // FIXME Localization
-                    'Choose Picture',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              _button(
+                // FIXME Localization
+                text: 'Choose Picture',
+                onPressed: () => Navigator.pop(context, UploadType.picture),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, UploadType.pdf);
-                },
-                child: SizedBox(
-                  width: buttonWidth,
-                  child: const Text(
-                    // FIXME Localization
-                    'PDF',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
+              _button(
+                // FIXME Localization
+                text: 'PDF',
+                onPressed: () => Navigator.pop(context, UploadType.pdf),
+              ),
+              SizedBox(height: verticalPadding),
             ],
           ),
         ),
