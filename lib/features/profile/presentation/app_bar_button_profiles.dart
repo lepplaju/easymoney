@@ -68,7 +68,7 @@ class AppBarButtonProfiles extends StatelessWidget {
         value: providerProfiles.selectedProfile?.id,
         onChanged: (value) {
           if (value == 0) {
-            // TODO
+            // TODO Edit profile
           } else if (value == 1) {
             Navigator.of(context).push(createRoute(const AddProfileRoute()));
           } else {

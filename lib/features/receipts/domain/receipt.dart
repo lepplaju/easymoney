@@ -43,8 +43,8 @@ class Receipt {
   }
 
   /// Returns the amount of the Receipt in euros
-  double get euros {
-    return amount / 100;
+  String get euros {
+    return (amount / 100).toStringAsFixed(2);
   }
 
   /// Returns the Receipt as a Map

@@ -28,8 +28,8 @@ class Invoice {
     return '${date.day}.${date.month}.${date.year}';
   }
 
-  double get euros {
-    return amount / 100;
+  String get euros {
+    return (amount / 100).toStringAsFixed(2);
   }
 
   Map<String, dynamic> toMap() {

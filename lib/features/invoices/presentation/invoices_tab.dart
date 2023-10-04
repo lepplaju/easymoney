@@ -32,8 +32,11 @@ class _InvoicesTabState extends State<InvoicesTab> {
         height: MediaQuery.of(context).size.height * 0.25,
       );
     }
-    return InvoiceCard(
-      invoice: providerInvoices.invoices[index],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InvoiceCard(
+        invoice: providerInvoices.invoices[index],
+      ),
     );
   }
 
