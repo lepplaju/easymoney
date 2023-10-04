@@ -44,7 +44,7 @@ class MyTheme {
     dropdownMenuTheme: const DropdownMenuThemeData(
       textStyle: TextStyle(
         overflow: TextOverflow.fade,
-        color: Colors.white,
+        color: Colors.purple,
       ),
     ),
     //==========================================================================

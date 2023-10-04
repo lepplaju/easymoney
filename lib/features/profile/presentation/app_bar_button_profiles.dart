@@ -27,9 +27,17 @@ class AppBarButtonProfiles extends StatelessWidget {
       ));
     }
     items.add(DropdownMenuItem<int>(
-        value: 0, child: Text(locals.appBarButtonEditProfile)));
+        value: 0,
+        child: Text(
+          locals.appBarButtonEditProfile,
+          style: const TextStyle(color: Colors.black),
+        )));
     items.add(DropdownMenuItem<int>(
-        value: 1, child: Text(locals.appBarButtonAddProfile)));
+        value: 1,
+        child: Text(
+          locals.appBarButtonAddProfile,
+          style: const TextStyle(color: Colors.black),
+        )));
     return items;
   }
 
@@ -49,8 +57,9 @@ class AppBarButtonProfiles extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: Text(
                   profile.profileName,
-                  style: Theme.of(context).dropdownMenuTheme.textStyle,
+                  style: const TextStyle(color: Colors.white),
                   softWrap: false,
+                  overflow: TextOverflow.fade,
                 ),
               ),
             );
@@ -72,6 +81,7 @@ class AppBarButtonProfiles extends StatelessWidget {
           providerProfiles.profiles,
           AppLocalizations.of(context)!,
         ),
+        underline: const SizedBox(),
       ),
     );
   }
