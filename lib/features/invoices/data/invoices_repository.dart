@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:pdf_render/pdf_render.dart' as render;
-//import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../../utils/database.dart';
@@ -29,7 +29,12 @@ class InvoicesRepository {
   Future<void> deleteInvoice({required Invoice invoice}) async {
     final path = await getPath(_invoicesPath);
     // TODO Handle errors
-    await File('$path/${invoice.fileName}').delete();
+    try {
+      await File('$path/${invoice.fileName}').delete();
+    } catch (e) {
+      // FIXME Handle same file name
+      debugPrint('Could not find file named ${invoice.fileName}');
+    }
     await _openDatabase();
     await db!
         .delete(_invoicesTableName, where: 'id=?', whereArgs: [invoice.id]);

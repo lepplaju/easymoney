@@ -54,27 +54,25 @@ class ProviderInvoices with ChangeNotifier {
       final Receipt receipt = receiptMap['receipt'];
       endSum += receipt.amount;
       receiptWidgets.add(
-        pw.Expanded(
+        pw.Flexible(
           child: pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  children: [
-                    pw.Text(
-                      '${receipt.store}, ${receipt.dateOnly}',
-                      style: regularStyle,
-                    ),
-                    pw.Expanded(
-                      child: pw.Text(
-                        receipt.description,
-                        style: thinStyle,
-                      ),
-                    ),
-                  ],
-                ),
+              pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                mainAxisSize: pw.MainAxisSize.min,
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text(
+                    '${receipt.store}, ${receipt.dateOnly}',
+                    style: regularStyle,
+                  ),
+                  pw.Text(
+                    receipt.description,
+                    style: thinStyle,
+                  ),
+                ],
               ),
               pw.Text('${receipt.euros}€', style: regularStyle),
             ],
@@ -101,6 +99,8 @@ class ProviderInvoices with ChangeNotifier {
               child: pw.SizedBox(
                 width: double.infinity,
                 child: pw.Column(
+                  mainAxisAlignment: pw.MainAxisAlignment.start,
+                  mainAxisSize: pw.MainAxisSize.min,
                   children: [
                     pw.Padding(
                       padding: const pw.EdgeInsets.only(bottom: 20),
@@ -114,7 +114,13 @@ class ProviderInvoices with ChangeNotifier {
                         textAlign: pw.TextAlign.center,
                       ),
                     ),
-                    ...receiptWidgets,
+                    pw.Expanded(
+                      child: pw.Column(
+                        mainAxisAlignment: pw.MainAxisAlignment.start,
+                        mainAxisSize: pw.MainAxisSize.min,
+                        children: receiptWidgets,
+                      ),
+                    ),
                     pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       children: [
@@ -172,12 +178,14 @@ class ProviderInvoices with ChangeNotifier {
   Future<void> deleteInvoice(Invoice invoice) async {
     _invoices.removeWhere((e) => e.id == invoice.id);
     await _invoicesRepository.deleteInvoice(invoice: invoice);
+    _invoices.sort((a, b) => b.date.compareTo(a.date));
     notifyListeners();
   }
 
   Future<void> getInvoices() async {
     _invoices.clear();
     _invoices.addAll(await _invoicesRepository.getInvoices());
+    _invoices.sort((a, b) => b.date.compareTo(a.date));
     notifyListeners();
   }
 

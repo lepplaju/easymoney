@@ -105,6 +105,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
                   onPressed: () async {
                     // FIXME Catch null profile
                     // TODO Compose the invoice
+                    // TODO Add warning about receipts being deleted
                     try {
                       await providerInvoices.createInvoice(
                         profile: providerProfiles.selectedProfile!,
