@@ -10,6 +10,7 @@ import '../application/provider_receipts.dart';
 import '../../invoices/application/provider_invoices.dart';
 import '../../profile/application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
+import '../../../utils/create_route.dart';
 
 /// Tab for Receipts in the HomePage
 class ReceiptTab extends StatefulWidget {
@@ -54,29 +55,6 @@ class _ReceiptTabState extends State<ReceiptTab> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ReceiptCard(receipt: providerReceipts.receipts[index]),
-    );
-  }
-
-  /// Creates a Widget [route] to be pushed
-  PageRouteBuilder _createRoute(Widget route) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => route,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
-
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      },
     );
   }
 
@@ -135,13 +113,17 @@ class _ReceiptTabState extends State<ReceiptTab> {
                 ),
                 onPressed: () {
                   Navigator.of(context)
-                      .push(_createRoute(AddReceiptRoute(
-                    // FIXME Catch error
-                    profileId: providerProfiles.selectedProfile!.id,
-                  )))
+                      .push(
+                    createRoute(
+                      AddReceiptRoute(
+                        // FIXME Catch error
+                        profileId: providerProfiles.selectedProfile!.id,
+                      ),
+                    ),
+                  )
                       .then((receipt) {
                     if (receipt != null) {
-                      Navigator.of(context).push(_createRoute(
+                      Navigator.of(context).push(createRoute(
                         ReceiptRoute(
                           receipt: receipt,
                         ),

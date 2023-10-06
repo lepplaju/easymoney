@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/create_route.dart';
-
-//import 'receipt_route.dart';
 import '../domain/invoice.dart';
 import './invoice_route.dart';
 
@@ -12,31 +10,6 @@ import './invoice_route.dart';
 class InvoiceCard extends StatelessWidget {
   final Invoice invoice;
   const InvoiceCard({super.key, required this.invoice});
-
-  /// Creates a ReceiptRoute route
-  /*PageRouteBuilder _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => ReceiptRoute(
-        receipt: receipt,
-      ),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
-
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      },
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/create_route.dart';
 import 'receipt_route.dart';
 import '../domain/receipt.dart';
 
@@ -10,37 +11,12 @@ class ReceiptCard extends StatelessWidget {
   final Receipt receipt;
   const ReceiptCard({super.key, required this.receipt});
 
-  /// Creates a ReceiptRoute route
-  PageRouteBuilder _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => ReceiptRoute(
-        receipt: receipt,
-      ),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation = CurvedAnimation(
-          parent: animation,
-          curve: curve,
-        );
-
-        return SlideTransition(
-          position: tween.animate(curvedAnimation),
-          child: child,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(_createRoute());
+        Navigator.of(context).push(createRoute(ReceiptRoute(receipt: receipt)));
       },
       child: Container(
         decoration: BoxDecoration(
