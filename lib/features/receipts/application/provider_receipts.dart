@@ -72,6 +72,14 @@ class ProviderReceipts with ChangeNotifier {
     }
   }
 
+  Future<void> deleteAllReceipts() async {
+    for (var receipt in _receipts) {
+      await _receiptRepository.deleteReceipt(receipt);
+    }
+    _receipts.clear();
+    notifyListeners();
+  }
+
   Future<List<File>> getReceiptFiles() async {
     final files = <File>[];
     for (var receipt in receipts) {

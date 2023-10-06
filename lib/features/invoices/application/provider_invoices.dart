@@ -65,12 +65,16 @@ class ProviderInvoices with ChangeNotifier {
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Text(
-                    '${receipt.store}, ${receipt.dateOnly}',
+                    '${receipt.dateOnly}, ${receipt.store}',
                     style: regularStyle,
                   ),
-                  pw.Text(
-                    receipt.description,
-                    style: thinStyle,
+                  pw.SizedBox(
+                    width: 400,
+                    child: pw.Text(
+                      receipt.description,
+                      softWrap: true,
+                      style: thinStyle,
+                    ),
                   ),
                 ],
               ),
@@ -81,6 +85,15 @@ class ProviderInvoices with ChangeNotifier {
       );
       receiptWidgets.add(pw.Divider());
     }
+    var fileName = '${dateOnly}_${replaceNordics(text: profile.target)}';
+    var fileCount = 0;
+    var fileEnding = '';
+    while (
+        await _invoicesRepository.isFileNameTaken('$fileName$fileEnding.pdf')) {
+      fileCount++;
+      fileEnding = '_$fileCount';
+    }
+    fileName = '$fileName$fileEnding.pdf';
 
     final invoice = Invoice(
       id: DateTime.now().millisecondsSinceEpoch,
@@ -88,66 +101,61 @@ class ProviderInvoices with ChangeNotifier {
       target: profile.target,
       name: '${profile.firstName} ${profile.lastName}',
       amount: endSum,
-      fileName: '${dateOnly}_${replaceNordics(text: profile.target)}.pdf',
+      fileName: fileName,
     );
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
+          maxPages: 30,
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
-            return pw.Padding(
-              padding: const pw.EdgeInsets.all(0),
-              child: pw.SizedBox(
+            return [
+              pw.SizedBox(
                 width: double.infinity,
-                child: pw.Column(
-                  mainAxisAlignment: pw.MainAxisAlignment.start,
-                  mainAxisSize: pw.MainAxisSize.min,
-                  children: [
-                    pw.Padding(
-                      padding: const pw.EdgeInsets.only(bottom: 20),
-                      child: pw.Text(
-                        'Kululasku ${profile.target}, '
-                        '$dateOnly,\n'
-                        '${profile.firstName} ${profile.lastName}',
-                        style: boldStyle.copyWith(
-                          fontSize: 20,
-                        ),
-                        textAlign: pw.TextAlign.center,
-                      ),
+                child: pw.Padding(
+                  padding: const pw.EdgeInsets.only(bottom: 20),
+                  child: pw.Text(
+                    'Kululasku ${profile.target}, '
+                    '$dateOnly,\n'
+                    '${profile.firstName} ${profile.lastName}',
+                    style: boldStyle.copyWith(
+                      fontSize: 20,
                     ),
-                    pw.Expanded(
-                      child: pw.Column(
-                        mainAxisAlignment: pw.MainAxisAlignment.start,
-                        mainAxisSize: pw.MainAxisSize.min,
-                        children: receiptWidgets,
-                      ),
-                    ),
-                    pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Text('Yhteensä:', style: boldStyle),
-                        pw.Text('${endSum / 100}€', style: boldStyle),
-                      ],
-                    ),
-                    pw.SizedBox(height: 20),
-                    pw.Align(
-                      alignment: pw.Alignment.centerLeft,
-                      child: pw.Text('Saaja:', style: boldStyle),
-                    ),
-                    pw.Align(
-                      alignment: pw.Alignment.centerLeft,
-                      child: pw.Text(
-                        '${profile.firstName} ${profile.lastName}',
-                        style: boldStyle,
-                      ),
-                    ),
-                    pw.Align(
-                      alignment: pw.Alignment.centerLeft,
-                      child: pw.Text(profile.iban, style: boldStyle),
-                    ),
-                  ],
+                    textAlign: pw.TextAlign.center,
+                  ),
                 ),
               ),
-            );
+              //pw.Expanded(
+              //child:
+              pw.Wrap(
+                //mainAxisAlignment: pw.MainAxisAlignment.start,
+                //mainAxisSize: pw.MainAxisSize.min,
+                children: receiptWidgets,
+              ),
+              //),
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Text('Yhteensä:', style: boldStyle),
+                  pw.Text('${endSum / 100}€', style: boldStyle),
+                ],
+              ),
+              pw.SizedBox(height: 20),
+              pw.Align(
+                alignment: pw.Alignment.centerLeft,
+                child: pw.Text('Saaja:', style: boldStyle),
+              ),
+              pw.Align(
+                alignment: pw.Alignment.centerLeft,
+                child: pw.Text(
+                  '${profile.firstName} ${profile.lastName}',
+                  style: boldStyle,
+                ),
+              ),
+              pw.Align(
+                alignment: pw.Alignment.centerLeft,
+                child: pw.Text(profile.iban, style: boldStyle),
+              ),
+            ];
           }),
     );
     for (var receiptMap in receiptAndFileList) {

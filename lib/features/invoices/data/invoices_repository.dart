@@ -60,8 +60,13 @@ class InvoicesRepository {
 
   Future<XFile> getInvoiceXFile({required String fileName}) async {
     final path = await getPath(_invoicesPath);
-    final file = await XFile('$path/$fileName');
+    final file = XFile('$path/$fileName');
     return file;
+  }
+
+  Future<bool> isFileNameTaken(String fileName) async {
+    final path = await getPath(_invoicesPath);
+    return await File('$path/$fileName').exists();
   }
 
   /// Makes sure that the SQLite database is initialized and opened

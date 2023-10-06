@@ -112,7 +112,8 @@ class _ReceiptTabState extends State<ReceiptTab> {
                         receipts: providerReceipts.receipts,
                         files: await providerReceipts.getReceiptFiles(),
                       );
-
+                      // FIXME Uncomment
+                      //await providerReceipts.deleteAllReceipts();
                       if (context.mounted) {
                         DefaultTabController.of(context).animateTo(1);
                         sendSnack(
@@ -121,7 +122,8 @@ class _ReceiptTabState extends State<ReceiptTab> {
                         );
                       }
                     } catch (e) {
-                      print(e);
+                      // FIXME Log
+                      debugPrint(e.toString());
                     }
                   },
                 ),

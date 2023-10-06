@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   FutureOr<void> afterFirstLayout(BuildContext context) {
     future = providerProfiles.getProfiles().then((value) {}).catchError((e) {
       // FIXME Log
-      print(e);
+      debugPrint(e);
       Navigator.of(context)
           .push(
             createRoute(

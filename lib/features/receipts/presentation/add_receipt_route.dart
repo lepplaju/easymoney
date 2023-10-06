@@ -145,172 +145,189 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         title: const Text('Add Receipt'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // FIXME Localization
-            Column(
-              children: [
-                Text(
-                  'Date of the receipt',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: selectedDate == null
-                      ? Text(
-                          '${currentDate.day}.${currentDate.month}.${currentDate.year}',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        )
-                      : Text(
-                          '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                ),
-                ElevatedButton(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // FIXME Localization
+              Column(
+                children: [
+                  Text(
+                    'Date of the receipt',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: selectedDate == null
+                        ? Text(
+                            '${currentDate.day}.${currentDate.month}.${currentDate.year}',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          )
+                        : Text(
+                            '${selectedDate!.day}.${selectedDate!.month}.${selectedDate!.year}',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        final date = await showDatePicker(
+                            context: context,
+                            initialDate: currentDate,
+                            firstDate: currentDate
+                                .subtract(const Duration(days: 1095)),
+                            lastDate: currentDate);
+                        if (date != null) {
+                          setState(() {
+                            selectedDate = date;
+                          });
+                        }
+                      },
+                      // FIXME Localization
+                      child: const Text('Edit')),
+                  TextField(
+                    controller: storeTextController,
+                    decoration: const InputDecoration(
+                      // FIXME Localization
+                      label: Text('Store'),
+                    ),
+                    maxLength: 40,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  TextField(
+                    controller: descriptionTextController,
+                    decoration: const InputDecoration(
+                      // FIXME Localization
+                      label: Text('Description'),
+                    ),
+                    maxLines: 5,
+                    minLines: 1,
+                    maxLength: 250,
+                    textInputAction: TextInputAction.next,
+                    inputFormatters: [
+                      TextInputFormatter.withFunction((oldValue, newValue) {
+                        int newLines = newValue.text.split('\n').length;
+                        if (newLines > 20) {
+                          return oldValue;
+                        } else {
+                          return newValue;
+                        }
+                      }),
+                    ],
+                  ),
+                  TextField(
+                    controller: amountTextController,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
+                    decoration: const InputDecoration(
+                      // FIXME Localization
+                      label: Text('Amount'),
+                      suffixIcon: Icon(Icons.euro),
+                    ),
+                    maxLength: 7,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  // FIXME Localization
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Receipt',
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  ),
+                  // FIXME Localization
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Upload a picture/pdf of the receipt.'),
+                  ),
+                  // TODO Show the receipt file
+                  if (file != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextButton(
+                          onPressed: () {
+                            _loadReceiptFile();
+                          },
+                          child: Text(
+                              '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}')),
+                    ),
+                  ElevatedButton(
                     onPressed: () async {
-                      final date = await showDatePicker(
+                      var takesPic = await showDialog<UploadType>(
                           context: context,
-                          initialDate: currentDate,
-                          firstDate:
-                              currentDate.subtract(const Duration(days: 1095)),
-                          lastDate: currentDate);
-                      if (date != null) {
-                        setState(() {
-                          selectedDate = date;
-                        });
+                          builder: (BuildContext context) {
+                            return const PicOrPdfDialog();
+                          });
+                      if (takesPic == null) return;
+                      switch (takesPic) {
+                        case UploadType.camera:
+                          final result = await picker.pickImage(
+                              source: ImageSource.camera);
+                          setState(() {
+                            file = result;
+                          });
+                          break;
+                        case UploadType.picture:
+                          final result = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() async {
+                            file = result;
+                          });
+                          // TODO Throw error for incorrect filetype
+                          break;
+                        case UploadType.pdf:
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles();
+                          if (result != null) {
+                            setState(() {
+                              file = XFile(result.files.single.path!);
+                            });
+                          }
+                          break;
+                        default:
+                          break;
                       }
                     },
                     // FIXME Localization
-                    child: const Text('Edit')),
-                TextField(
-                  controller: storeTextController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Store'),
+                    child: Text(file == null ? 'Add' : 'Change'),
                   ),
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: descriptionTextController,
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Description'),
-                  ),
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: amountTextController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d+\.?\d{0,2}')),
-                  ],
-                  decoration: const InputDecoration(
-                    // FIXME Localization
-                    label: Text('Amount'),
-                    suffixIcon: Icon(Icons.euro),
-                  ),
-                  textInputAction: TextInputAction.done,
-                ),
-                // FIXME Localization
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Receipt',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ),
-                // FIXME Localization
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Upload a picture/pdf of the receipt.'),
-                ),
-                // TODO Show the receipt file
-                if (file != null)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
                         onPressed: () {
-                          _loadReceiptFile();
+                          Navigator.of(context).pop();
                         },
-                        child: Text(
-                            '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}')),
+                        // FIXME Localization
+                        child: const Text('Cancel'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final receipt = await _createReceipt();
+                          if (context.mounted) {
+                            Navigator.of(context).pop(receipt);
+                          }
+                        },
+                        // FIXME Localization
+                        child: const Text('Save'),
+                      ),
+                    ],
                   ),
-                ElevatedButton(
-                  onPressed: () async {
-                    var takesPic = await showDialog<UploadType>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return const PicOrPdfDialog();
-                        });
-                    if (takesPic == null) return;
-                    switch (takesPic) {
-                      case UploadType.camera:
-                        final result =
-                            await picker.pickImage(source: ImageSource.camera);
-                        setState(() {
-                          file = result;
-                        });
-                        break;
-                      case UploadType.picture:
-                        final result =
-                            await picker.pickImage(source: ImageSource.gallery);
-                        setState(() async {
-                          file = result;
-                        });
-                        // TODO Throw error for incorrect filetype
-                        break;
-                      case UploadType.pdf:
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-                        if (result != null) {
-                          setState(() {
-                            file = XFile(result.files.single.path!);
-                          });
-                        }
-                        break;
-                      default:
-                        break;
-                    }
-                  },
-                  // FIXME Localization
-                  child: Text(file == null ? 'Add' : 'Change'),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      // FIXME Localization
-                      child: const Text('Cancel'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final receipt = await _createReceipt();
-                        if (context.mounted) {
-                          Navigator.of(context).pop(receipt);
-                        }
-                      },
-                      // FIXME Localization
-                      child: const Text('Save'),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
