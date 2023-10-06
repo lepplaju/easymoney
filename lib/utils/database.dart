@@ -18,11 +18,13 @@ void _onCreate(Database db, int version) async {
   await db.execute('''
     CREATE TABLE IF NOT EXISTS invoices (
       id INTEGER PRIMARY KEY,
+      profileId INTEGER NOT NULL,
       date TEXT NOT NULL,
       target TEXT NOT NULL,
       name TEXT NOT NULL,
       amount INTEGER NOT NULL,
-      fileName TEXT NOT NULL
+      fileName TEXT NOT NULL,
+      FOREIGN KEY (profileId) REFERENCES profiles (id) ON DELETE CASCADE ON UPDATE CASCADE
     );
   ''');
   await db.execute('''

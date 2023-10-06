@@ -40,11 +40,13 @@ class InvoicesRepository {
         .delete(_invoicesTableName, where: 'id=?', whereArgs: [invoice.id]);
   }
 
-  Future<List<Invoice>> getInvoices() async {
+  Future<List<Invoice>> getInvoices(int profileId) async {
     await _openDatabase();
     final List<Invoice> invoices = [];
     final data = await db!.query(
       _invoicesTableName,
+      where: 'profileId = ?',
+      whereArgs: [profileId],
     );
     for (var map in data) {
       invoices.add(Invoice.fromMap(map: map));

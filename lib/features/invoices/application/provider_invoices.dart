@@ -97,6 +97,7 @@ class ProviderInvoices with ChangeNotifier {
 
     final invoice = Invoice(
       id: DateTime.now().millisecondsSinceEpoch,
+      profileId: profile.id,
       date: date,
       target: profile.target,
       name: '${profile.firstName} ${profile.lastName}',
@@ -136,7 +137,8 @@ class ProviderInvoices with ChangeNotifier {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text('Yhteensä:', style: boldStyle),
-                  pw.Text('${endSum / 100}€', style: boldStyle),
+                  pw.Text('${(endSum / 100).toStringAsFixed(2)}€',
+                      style: boldStyle),
                 ],
               ),
               pw.SizedBox(height: 20),
@@ -190,9 +192,10 @@ class ProviderInvoices with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getInvoices() async {
+  Future<void> getInvoices(int? profileId) async {
+    if (profileId == null) return;
     _invoices.clear();
-    _invoices.addAll(await _invoicesRepository.getInvoices());
+    _invoices.addAll(await _invoicesRepository.getInvoices(profileId));
     _invoices.sort((a, b) => b.date.compareTo(a.date));
     notifyListeners();
   }

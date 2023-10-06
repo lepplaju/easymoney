@@ -7,6 +7,7 @@ import '../domain/profile.dart';
 import '../presentation/add_profile_route.dart';
 import '../../../utils/create_route.dart';
 import '../../receipts/application/provider_receipts.dart';
+import '../../invoices/application/provider_invoices.dart';
 
 /// DropdownMenu for profile actions
 class AppBarButtonProfiles extends StatelessWidget {
@@ -47,6 +48,8 @@ class AppBarButtonProfiles extends StatelessWidget {
         Provider.of<ProviderProfiles>(context);
     final ProviderReceipts providerReceipts =
         Provider.of<ProviderReceipts>(context);
+    final ProviderInvoices providerInvoices =
+        Provider.of<ProviderInvoices>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButton<int>(
@@ -74,6 +77,7 @@ class AppBarButtonProfiles extends StatelessWidget {
           } else {
             providerProfiles.selectProfile(id: value!);
             providerReceipts.fetchReceipts(profileId: value);
+            providerInvoices.getInvoices(value);
           }
         },
         items: _items(

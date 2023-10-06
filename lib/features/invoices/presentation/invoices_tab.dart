@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_invoices.dart';
+import '../../profile/application/provider_profiles.dart';
 import './invoice_card.dart';
 
 class InvoicesTab extends StatefulWidget {
@@ -13,14 +14,17 @@ class InvoicesTab extends StatefulWidget {
 
 class _InvoicesTabState extends State<InvoicesTab> {
   late final ProviderInvoices providerInvoices;
+  late final ProviderProfiles providerProfiles;
 
   var isInitialized = false;
 
   @override
   void didChangeDependencies() {
     if (!isInitialized) {
+      providerProfiles = Provider.of<ProviderProfiles>(context);
       providerInvoices = Provider.of<ProviderInvoices>(context);
-      providerInvoices.getInvoices();
+      // FIXME Provide profileId
+      providerInvoices.getInvoices(providerProfiles.selectedProfile?.id);
       isInitialized = true;
     }
     super.didChangeDependencies();

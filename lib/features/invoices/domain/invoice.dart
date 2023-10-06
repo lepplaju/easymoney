@@ -1,5 +1,6 @@
 class Invoice {
   int id;
+  int profileId;
   DateTime date;
   String target;
   String name;
@@ -8,6 +9,7 @@ class Invoice {
 
   Invoice({
     required this.id,
+    required this.profileId,
     required this.date,
     required this.target,
     required this.name,
@@ -17,6 +19,7 @@ class Invoice {
 
   Invoice.fromMap({required Map<String, dynamic> map})
       : id = map['id'],
+        profileId = map['profileId'],
         date = DateTime.parse(map['date']),
         target = map['target'],
         name = map['name'],
@@ -35,6 +38,7 @@ class Invoice {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'profileId': profileId,
       'date': date.toIso8601String(),
       'target': target,
       'name': name,
@@ -47,6 +51,7 @@ class Invoice {
   String toString() {
     return '{'
         'id: $id, '
+        'profileId: $profileId,'
         'date: $date, '
         'target: $target, '
         'name: $name, '
