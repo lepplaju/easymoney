@@ -1,28 +1,4 @@
 {
-	"appBarButtonEditProfile": "Edit Profile",
-	"@appBarButtonEditProfile": {
-		"description": "Edit Profile button for AppBarButton.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"appBarButtonAddProfile": "Add Profile",
-	"@appBarButtonAddProfile": {
-		"description": "Add Profile button for AppBarButton.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabInvoiceSuccessSanck": "Invoice created!",
-	"@receiptTabInvoiceSuccessSanck": {
-		"description": "Invoice success snack for ReceiptTab.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabAddReceiptButton": "Add Receipt",
-	"@receiptTabAddReceiptButton": {
-		"description": "Add Receipt Button for ReceiptTab.",
-		"type": "text",
-		"placeholders": {}
-	},
 	"addProfileRouteAppBarTitle": "New Profile",
 	"@addProfileRouteAppBarTitle": {
 		"description": "Title for AddProfileRoute AppBar.",
@@ -92,6 +68,54 @@
 	"homePageInvoicesTabLabel": "Invoices",
 	"@homePageInvoicesTabLabel": {
 		"description": "Label for invoices tab in the HomePage.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonEditProfile": "Edit Profile",
+	"@appBarButtonEditProfile": {
+		"description": "Edit Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonAddProfile": "Add Profile",
+	"@appBarButtonAddProfile": {
+		"description": "Add Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabInvoiceSuccessSanck": "Invoice created!",
+	"@receiptTabInvoiceSuccessSanck": {
+		"description": "Invoice success snack for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabAddReceiptButton": "Add Receipt",
+	"@receiptTabAddReceiptButton": {
+		"description": "Add Receipt Button for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"cancel": "Cancel",
+	"@cancel": {
+		"description": "Cancel text for buttons etc.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"save": "Save",
+	"@save": {
+		"description": "Save text for buttons etc.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteSuccessMessage": "Profile saved!",
+	"@editProfileRouteSuccessMessage": {
+		"description": "Text for snack message for successful saving of profile",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteTitle": "Edit Profile",
+	"@editProfileRouteTitle": {
+		"description": "Title for EditProfileRoute",
 		"type": "text",
 		"placeholders": {}
 	}

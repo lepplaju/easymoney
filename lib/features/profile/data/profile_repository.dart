@@ -26,6 +26,18 @@ class ProfileRepository {
     return result;
   }
 
+  Future<int> editProfile(
+      {required int id, required Map<String, Object> data}) async {
+    await _openDatabase();
+    final result = await db!.update(
+      _profileTableName,
+      data,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result;
+  }
+
   /// Makes sure that the SQLite database is initialized and opened
   Future<void> _openDatabase() async {
     db ??= await initDb();

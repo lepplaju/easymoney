@@ -1,0 +1,17 @@
+// Snack Success Message
+
+name: "editProfileRouteSuccessMessage"
+text_en: "Profile saved!"
+text_fi: "Profiili tallennettu!"
+description: "Text for snack message for successful saving of profile"
+type: "text"
+placeholders: "{}"
+
+// Title
+
+name: "editProfileRouteTitle"
+text_en: "Edit Profile"
+text_fi: "Muokkaa profiilia"
+description: "Title for EditProfileRoute"
+type: "text"
+placeholders: "{}"

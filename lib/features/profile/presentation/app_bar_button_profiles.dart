@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
 import '../domain/profile.dart';
-import '../presentation/add_profile_route.dart';
+import './add_profile_route.dart';
+import './edit_profile_route.dart';
 import '../../../utils/create_route.dart';
 import '../../receipts/application/provider_receipts.dart';
 import '../../invoices/application/provider_invoices.dart';
@@ -71,7 +72,7 @@ class AppBarButtonProfiles extends StatelessWidget {
         value: providerProfiles.selectedProfile?.id,
         onChanged: (value) {
           if (value == 0) {
-            // TODO Edit profile
+            Navigator.of(context).push(createRoute(const EditProfileRoute()));
           } else if (value == 1) {
             Navigator.of(context).push(createRoute(const AddProfileRoute()));
           } else {

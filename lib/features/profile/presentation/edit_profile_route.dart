@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 import '../application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
 
-/// Route for adding a new profile
-class AddProfileRoute extends StatefulWidget {
-  const AddProfileRoute({super.key, this.allowReturn = true});
+/// Route for editing a profile
+class EditProfileRoute extends StatefulWidget {
+  const EditProfileRoute({super.key, this.allowReturn = true});
   final bool allowReturn;
 
   @override
-  State<AddProfileRoute> createState() => _AddProfileRouteState();
+  State<EditProfileRoute> createState() => _EditProfileRouteState();
 }
 
-/// State for [AddProfileRoute]
-class _AddProfileRouteState extends State<AddProfileRoute> {
+/// State for [EditProfileRoute]
+class _EditProfileRouteState extends State<EditProfileRoute> {
   late final ProviderProfiles providerProfiles;
   late final AppLocalizations locals;
   final profileNameController = TextEditingController();
@@ -30,6 +30,12 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
+      final selectedProfile = providerProfiles.selectedProfile;
+      profileNameController.text = selectedProfile!.profileName;
+      firstNameController.text = selectedProfile.firstName;
+      lastNameController.text = selectedProfile.lastName;
+      ibanController.text = selectedProfile.iban;
+      targetController.text = selectedProfile.target;
       locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
@@ -46,10 +52,11 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
     super.dispose();
   }
 
-  /// Add a new profile using current values from the UI
-  _addProfile({required String successSnack}) async {
+  /// Edit a profile using current values from the UI
+  _saveProfile() async {
     // TODO Don't allow empty values
-    await providerProfiles.addProfile(
+    await providerProfiles.editProfile(
+      id: providerProfiles.selectedProfile!.id,
       profileName: profileNameController.text.trim(),
       firstName: firstNameController.text.trim(),
       lastName: lastNameController.text.trim(),
@@ -57,9 +64,13 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
       iban: ibanController.text.trim(),
       target: targetController.text.trim(),
     );
+    providerProfiles.selectProfile(id: providerProfiles.selectedProfile!.id);
 
     if (context.mounted) {
-      sendSnack(context: context, content: successSnack);
+      sendSnack(
+        context: context,
+        content: locals.editProfileRouteSuccessMessage,
+      );
       Navigator.of(context).pop();
     }
   }
@@ -70,7 +81,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
       onWillPop: () async => widget.allowReturn,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(locals.addProfileRouteAppBarTitle),
+          title: Text(locals.editProfileRouteTitle),
           centerTitle: true,
           automaticallyImplyLeading: widget.allowReturn,
         ),
@@ -81,10 +92,6 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                Text(
-                  locals.addProfileRouteDescription,
-                  textAlign: TextAlign.center,
-                ),
                 TextField(
                   controller: profileNameController,
                   decoration: InputDecoration(
@@ -134,14 +141,24 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _addProfile(
-                          successSnack: locals.addProfileRouteSuccessSnack,
-                        );
-                      },
-                      child: Text(locals.addProfileRouteSubmitButton)),
-                )
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(locals.cancel),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _saveProfile();
+                        },
+                        child: Text(locals.save),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

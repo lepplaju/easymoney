@@ -1,0 +1,17 @@
+// Cancel
+
+name: "cancel"
+text_en: "Cancel"
+text_fi: "Peruuta"
+description: "Cancel text for buttons etc."
+type: "text"
+placeholders: "{}"
+
+// Save
+
+name: "save"
+text_en: "Save"
+text_fi: "Tallenna"
+description: "Save text for buttons etc."
+type: "text"
+placeholders: "{}"

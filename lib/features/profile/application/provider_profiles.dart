@@ -52,6 +52,27 @@ class ProviderProfiles with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> editProfile({
+    required int id,
+    required String profileName,
+    required String firstName,
+    required String lastName,
+    required String iban,
+    required String target,
+  }) async {
+    final data = {
+      'profileName': profileName,
+      'firstName': firstName,
+      'lastName': lastName,
+      'iban': iban,
+      'target': target
+    };
+    await _profileRepository.editProfile(id: id, data: data);
+    _profiles.removeWhere((element) => element.id == id);
+    _profiles.add(Profile.fromMap({...data, 'id': id}));
+    notifyListeners();
+  }
+
   /// Gets all the profiles from the database
   Future<void> getProfiles() async {
     _profiles.clear();
