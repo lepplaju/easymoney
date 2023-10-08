@@ -20,6 +20,7 @@ class ProviderInvoices with ChangeNotifier {
 
   /// Returns the list of the invoices
   List<Invoice> get invoices {
+    _invoices.sort((i1, i2) => i2.date.compareTo(i1.date));
     return _invoices;
   }
 
@@ -188,7 +189,6 @@ class ProviderInvoices with ChangeNotifier {
   Future<void> deleteInvoice(Invoice invoice) async {
     _invoices.removeWhere((e) => e.id == invoice.id);
     await _invoicesRepository.deleteInvoice(invoice: invoice);
-    _invoices.sort((a, b) => b.date.compareTo(a.date));
     notifyListeners();
   }
 
@@ -196,7 +196,6 @@ class ProviderInvoices with ChangeNotifier {
     if (profileId == null) return;
     _invoices.clear();
     _invoices.addAll(await _invoicesRepository.getInvoices(profileId));
-    _invoices.sort((a, b) => b.date.compareTo(a.date));
     notifyListeners();
   }
 

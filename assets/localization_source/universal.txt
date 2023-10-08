@@ -15,3 +15,12 @@ text_fi: "Tallenna"
 description: "Save text for buttons etc."
 type: "text"
 placeholders: "{}"
+
+// Delete
+
+name: "delete"
+text_en: "Delete"
+text_fi: "Poista"
+description: "Delete text for buttons etc."
+type: "text"
+placeholders: "{}"

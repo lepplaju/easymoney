@@ -13,7 +13,7 @@ class ProviderReceipts with ChangeNotifier {
 
   /// Returns a list of all the Receipts
   List<Receipt> get receipts {
-    _receipts.sort((r1, r2) => r1.date.compareTo(r2.date));
+    _receipts.sort((r1, r2) => r2.date.compareTo(r1.date));
     return _receipts;
   }
 

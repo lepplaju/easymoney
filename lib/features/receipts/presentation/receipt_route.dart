@@ -72,6 +72,59 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
     }
   }
 
+  Widget _dataWidget({
+    required String title,
+    required String content,
+  }) {
+    return Column(
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        Text(
+          content,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+      ],
+    );
+  }
+
+  Widget _description({required String title, required String content}) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: double.infinity,
+            constraints: const BoxConstraints(maxHeight: 200),
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: Colors.pink.shade100,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: RawScrollbar(
+              radius: const Radius.circular(5),
+              thumbVisibility: true,
+              thumbColor: Colors.pink,
+              child: SingleChildScrollView(
+                  child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(content),
+              )),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,44 +132,57 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
         title: Text('${widget.receipt.dateOnly}: ${widget.receipt.store}'),
         centerTitle: true,
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            // FIXME Localization
-            const Text('Store'),
-
-            // FIXME Localization
-            Text('Amount: ${widget.receipt.euros}€'),
-            // FIXME Localization
-            const Text('Files'),
-            TextButton(
-              onPressed: () async {
-                _loadReceiptFile();
-              },
-              child: Text(widget.receipt.fileName),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                providerReceipts.deleteReceipt(widget.receipt).then((value) {
-                  Navigator.of(context).pop();
-                  sendSnack(
-                    context: context,
-                    // FIXME Localization
-                    content: 'Receipt was deleted',
-                  );
-                }).catchError((e) {
-                  sendSnack(
-                    context: context,
-                    // FIXME Localization
-                    content: 'Could not delete receipt',
-                  );
-                });
-              },
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
               // FIXME Localization
-              child: const Text('Delete Receipt'),
-            ),
-          ],
+              _dataWidget(title: 'Date:', content: widget.receipt.dateOnly),
+              // FIXME Localization
+              _dataWidget(title: 'Sum:', content: '${widget.receipt.euros}€'),
+              // FIXME Localization
+              _dataWidget(title: 'Store:', content: widget.receipt.store),
+              // FIXME Localization
+              _description(
+                  title: 'Description:', content: widget.receipt.description),
+              // FIXME Localization
+              Text(
+                'Files',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                child: TextButton(
+                  onPressed: () async {
+                    _loadReceiptFile();
+                  },
+                  child: Text(widget.receipt.fileName),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  providerReceipts.deleteReceipt(widget.receipt).then((value) {
+                    Navigator.of(context).pop();
+                    sendSnack(
+                      context: context,
+                      // FIXME Localization
+                      content: 'Receipt was deleted',
+                    );
+                  }).catchError((e) {
+                    sendSnack(
+                      context: context,
+                      // FIXME Localization
+                      content: 'Could not delete receipt',
+                    );
+                  });
+                },
+                // FIXME Localization
+                child: const Text('Delete Receipt'),
+              ),
+            ],
+          ),
         ),
       ),
     );
