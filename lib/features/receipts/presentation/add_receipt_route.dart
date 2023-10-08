@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+//import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -204,7 +204,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     maxLines: 5,
                     minLines: 1,
                     maxLength: 250,
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.newline,
                     inputFormatters: [
                       TextInputFormatter.withFunction((oldValue, newValue) {
                         int newLines = newValue.text.split('\n').length;
@@ -250,11 +250,13 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextButton(
-                          onPressed: () {
-                            _loadReceiptFile();
-                          },
-                          child: Text(
-                              '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}')),
+                        onPressed: () {
+                          _loadReceiptFile();
+                        },
+                        child: Text(file!.name.length > 15
+                            ? '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}'
+                            : file!.name),
+                      ),
                     ),
                   ElevatedButton(
                     onPressed: () async {
@@ -280,15 +282,17 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                           });
                           // TODO Throw error for incorrect filetype
                           break;
-                        case UploadType.pdf:
+                        // TODO Add support for pdf
+                        /*case UploadType.pdf:
                           FilePickerResult? result =
                               await FilePicker.platform.pickFiles();
                           if (result != null) {
+                            // TODO Throw error if not pdf
                             setState(() {
                               file = XFile(result.files.single.path!);
                             });
                           }
-                          break;
+                          break;*/
                         default:
                           break;
                       }

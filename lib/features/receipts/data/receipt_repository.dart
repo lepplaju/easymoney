@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:pdf_render/pdf_render.dart';
+//import 'package:pdf_render/pdf_render.dart';
 
 import '../domain/receipt.dart';
 import '../../../utils/database.dart';
@@ -84,9 +84,10 @@ class ReceiptRepository {
         case '.jpg':
           Image image = Image.file(File(file.path));
           return image;
-        case '.pdf':
+        // TODO Support pdf files
+        /*case '.pdf':
           PdfDocument doc = await PdfDocument.openFile(file.path);
-          return doc;
+          return doc;*/
         default:
           return Future.error(Exception('Incorrect filetype \'$fileType\''));
       }

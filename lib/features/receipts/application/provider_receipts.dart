@@ -40,6 +40,10 @@ class ProviderReceipts with ChangeNotifier {
     required XFile file,
     required int profileId,
   }) async {
+    // TODO Throw error if not jpg or pdf
+    if (!file.name.endsWith('.jpg')) {
+      throw Exception('Wrong file format');
+    }
     final id = DateTime.now().millisecondsSinceEpoch;
     final fileName = '$id${file.name.substring(file.name.lastIndexOf('.'))}';
     final receipt = Receipt(
@@ -52,9 +56,9 @@ class ProviderReceipts with ChangeNotifier {
       profileId: profileId,
     );
 
-    _receipts.add(receipt);
     // TODO Handle error
     await _receiptRepository.addReceipt(receipt: receipt, file: file);
+    _receipts.add(receipt);
     notifyListeners();
 
     return receipt;

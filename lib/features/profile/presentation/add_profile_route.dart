@@ -69,6 +69,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
     return WillPopScope(
       onWillPop: () async => widget.allowReturn,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(locals.addProfileRouteAppBarTitle),
           centerTitle: true,

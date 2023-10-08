@@ -83,6 +83,9 @@ class MyTheme {
         borderRadius: BorderRadius.circular(4),
       ),
     ),
+    scrollbarTheme: ScrollbarThemeData(
+      thumbColor: MaterialStateProperty.all(Colors.pink),
+    ),
 
     textTheme: TextTheme(
       //========================================================================

@@ -22,7 +22,8 @@ class InvoicesRepository {
     await _openDatabase();
     final path = await getPath(_invoicesPath);
     final file = File('$path/${invoice.fileName}');
-    await file.writeAsBytes(await doc.save());
+    final savedDoc = await doc.save();
+    await file.writeAsBytes(savedDoc);
     await db!.insert(_invoicesTableName, invoice.toMap());
   }
 

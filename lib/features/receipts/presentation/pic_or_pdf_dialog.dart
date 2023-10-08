@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/dialog_components/dialog_titlebar.dart';
 
-enum UploadType { camera, picture, pdf }
+enum UploadType { camera, picture }
 
 /// Dialog for choosing which type of file user is adding.
 class PicOrPdfDialog extends StatelessWidget {
@@ -39,7 +39,7 @@ class PicOrPdfDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               // FIXME Localization
-              const DialogTitleBar(title: 'Add a picture or pdf'),
+              const DialogTitleBar(title: 'Add a picture'),
               SizedBox(height: verticalPadding),
               _button(
                 // FIXME Localization
@@ -51,11 +51,11 @@ class PicOrPdfDialog extends StatelessWidget {
                 text: 'Choose Picture',
                 onPressed: () => Navigator.pop(context, UploadType.picture),
               ),
-              _button(
-                // FIXME Localization
+              // TODO Add support for pdf
+              /*_button(
                 text: 'PDF',
                 onPressed: () => Navigator.pop(context, UploadType.pdf),
-              ),
+              ),*/
               SizedBox(height: verticalPadding),
             ],
           ),

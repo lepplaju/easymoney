@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
 import 'show_jpg_dialog.dart';
-import '../../../utils/show_pdf_dialog.dart';
+//import '../../../utils/show_pdf_dialog.dart';
 import '../../snacks/application/send_snack.dart';
 
 /// Route for showing a Receipt
@@ -53,7 +53,8 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
           }
           break;
         default:
-          if (context.mounted) {
+          // TODO Support pdf files
+          /*if (context.mounted) {
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -63,7 +64,7 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
                 );
               },
             );
-          }
+          }*/
           break;
       }
     } catch (e) {
@@ -109,10 +110,9 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
               color: Colors.pink.shade100,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: RawScrollbar(
+            child: Scrollbar(
               radius: const Radius.circular(5),
-              thumbVisibility: true,
-              thumbColor: Colors.pink,
+              thumbVisibility: false,
               child: SingleChildScrollView(
                   child: Padding(
                 padding: const EdgeInsets.all(8.0),
