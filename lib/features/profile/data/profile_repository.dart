@@ -38,6 +38,15 @@ class ProfileRepository {
     return result;
   }
 
+  Future<int> deleteProfile(int id) async {
+    await _openDatabase();
+    return await db!.delete(
+      _profileTableName,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   /// Makes sure that the SQLite database is initialized and opened
   Future<void> _openDatabase() async {
     db ??= await initDb();

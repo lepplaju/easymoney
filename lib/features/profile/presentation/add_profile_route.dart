@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import '../application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
 
+import '../../../widgets/info_dialog.dart';
+import '../../../widgets/confirm_dialog.dart';
+
 /// Route for adding a new profile
 class AddProfileRoute extends StatefulWidget {
   const AddProfileRoute({super.key, this.allowReturn = true});
@@ -48,7 +51,48 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
 
   /// Add a new profile using current values from the UI
   _addProfile({required String successSnack}) async {
-    // TODO Don't allow empty values
+    if (profileNameController.text.trim().isEmpty ||
+        firstNameController.text.trim().isEmpty ||
+        lastNameController.text.trim().isEmpty ||
+        targetController.text.trim().isEmpty ||
+        ibanController.text.trim().isEmpty) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const InfoDialg(
+              // FIXME Localization
+              child: Text('None of the fields can be empty!'),
+            );
+          });
+      return;
+    }
+    final confirmation = await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            // FIXME Localization
+            child: Column(
+              children: [
+                Text(
+                  // FIXME Localization
+                  'Is this correct IBAN?',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  // FIXME Localization
+                  ibanController.text.trim(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: Colors.black),
+                ),
+              ],
+            ),
+          );
+        });
+    if (confirmation == null) return;
+    if (!confirmation) return;
+
     await providerProfiles.addProfile(
       profileName: profileNameController.text.trim(),
       firstName: firstNameController.text.trim(),
@@ -60,7 +104,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
 
     if (context.mounted) {
       sendSnack(context: context, content: successSnack);
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(providerProfiles.selectedProfile!.id);
     }
   }
 

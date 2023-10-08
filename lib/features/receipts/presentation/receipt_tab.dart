@@ -11,6 +11,7 @@ import '../../invoices/application/provider_invoices.dart';
 import '../../profile/application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
 import '../../../utils/create_route.dart';
+import '../../../widgets/confirm_dialog.dart';
 
 /// Tab for Receipts in the HomePage
 class ReceiptTab extends StatefulWidget {
@@ -84,6 +85,29 @@ class _ReceiptTabState extends State<ReceiptTab> {
                     // FIXME Catch null profile
                     // TODO Compose the invoice
                     // TODO Add warning about receipts being deleted
+                    final confirmation = await showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ConfirmDialog(
+                            // FIXME Localization
+                            child: Column(
+                              children: [
+                                Text(
+                                  // FIXME Localization
+                                  'Do you want to create an invoice?',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                Text(
+                                  // FIXME Localization
+                                  'This will delete all current receipts permanently.',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                          );
+                        });
+                    if (confirmation == null) return;
+                    if (!confirmation) return;
                     try {
                       await providerInvoices.createInvoice(
                         profile: providerProfiles.selectedProfile!,

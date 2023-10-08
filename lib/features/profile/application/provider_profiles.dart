@@ -11,6 +11,7 @@ class ProviderProfiles with ChangeNotifier {
 
   /// Returns all of the profiles
   List<Profile> get profiles {
+    _profiles.sort((a, b) => a.profileName.compareTo(b.profileName));
     return _profiles;
   }
 
@@ -37,6 +38,12 @@ class ProviderProfiles with ChangeNotifier {
     required String iban,
     required String target,
   }) async {
+    // TODO Throw a proper exception
+    if (profileName.isEmpty ||
+        firstName.isEmpty ||
+        lastName.isEmpty ||
+        iban.isEmpty ||
+        target.isEmpty) throw Exception('No profile field can be empty');
     final id = DateTime.now().millisecondsSinceEpoch;
     final profile = Profile(
       id: id,
@@ -49,6 +56,8 @@ class ProviderProfiles with ChangeNotifier {
 
     await _profileRepository.addProfile(profile: profile);
     _profiles.add(profile);
+    _selectedProfile =
+        _profiles.firstWhere((element) => element.id == profile.id);
     notifyListeners();
   }
 
@@ -71,6 +80,15 @@ class ProviderProfiles with ChangeNotifier {
     _profiles.removeWhere((element) => element.id == id);
     _profiles.add(Profile.fromMap({...data, 'id': id}));
     notifyListeners();
+  }
+
+  Future<void> deleteProfile(int id) async {
+    final affected = await _profileRepository.deleteProfile(id);
+    if (affected != 0) {
+      _profiles.removeWhere((element) => element.id == id);
+      _selectedProfile = _profiles[0];
+      notifyListeners();
+    }
   }
 
   /// Gets all the profiles from the database

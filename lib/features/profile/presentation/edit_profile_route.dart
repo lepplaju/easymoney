@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
 import '../../snacks/application/send_snack.dart';
+import '../../../widgets/info_dialog.dart';
+import '../../../widgets/confirm_dialog.dart';
 
 /// Route for editing a profile
 class EditProfileRoute extends StatefulWidget {
@@ -54,7 +56,47 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
 
   /// Edit a profile using current values from the UI
   _saveProfile() async {
-    // TODO Don't allow empty values
+    if (profileNameController.text.trim().isEmpty ||
+        firstNameController.text.trim().isEmpty ||
+        lastNameController.text.trim().isEmpty ||
+        targetController.text.trim().isEmpty ||
+        ibanController.text.trim().isEmpty) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const InfoDialg(
+              // FIXME Localization
+              child: Text('None of the fields can be empty!'),
+            );
+          });
+      return;
+    }
+    final confirmation = await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialog(
+            // FIXME Localization
+            child: Column(
+              children: [
+                Text(
+                  // FIXME Localization
+                  'Is this correct IBAN?',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  // FIXME Localization
+                  ibanController.text.trim(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: Colors.black),
+                ),
+              ],
+            ),
+          );
+        });
+    if (confirmation == null) return;
+    if (!confirmation) return;
     await providerProfiles.editProfile(
       id: providerProfiles.selectedProfile!.id,
       profileName: profileNameController.text.trim(),
@@ -85,81 +127,129 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
           centerTitle: true,
           automaticallyImplyLeading: widget.allowReturn,
         ),
-        body: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                TextField(
-                  controller: profileNameController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteProfileName),
-                    hintText: locals.addProfileRouteProfileNameHint,
-                    isDense: true,
+        body: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: profileNameController,
+                    decoration: InputDecoration(
+                      label: Text(locals.addProfileRouteProfileName),
+                      hintText: locals.addProfileRouteProfileNameHint,
+                      isDense: true,
+                    ),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.next,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: firstNameController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteFirstName),
-                    hintText: 'Ben, Jake, Rose, Sophie...',
+                  TextField(
+                    controller: firstNameController,
+                    decoration: InputDecoration(
+                      label: Text(locals.addProfileRouteFirstName),
+                      hintText: 'Ben, Jake, Rose, Sophie...',
+                    ),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.next,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: lastNameController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteLastName),
-                    hintText: 'Anderson, Patel, Smith...',
+                  TextField(
+                    controller: lastNameController,
+                    decoration: InputDecoration(
+                      label: Text(locals.addProfileRouteLastName),
+                      hintText: 'Anderson, Patel, Smith...',
+                    ),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.next,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: targetController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteReference),
-                    hintText: 'Korttelikylä, Asuva, Harju...',
+                  TextField(
+                    controller: targetController,
+                    decoration: InputDecoration(
+                      label: Text(locals.addProfileRouteReference),
+                      hintText: 'Korttelikylä, Asuva, Harju...',
+                    ),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.next,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.next,
-                ),
-                TextField(
-                  controller: ibanController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteIBAN),
-                    hintText: 'FI83 4978 8259 0005 97...',
+                  TextField(
+                    controller: ibanController,
+                    decoration: InputDecoration(
+                      label: Text(locals.addProfileRouteIBAN),
+                      hintText: 'FI83 4978 8259 0005 97...',
+                    ),
+                    textCapitalization: TextCapitalization.sentences,
+                    textInputAction: TextInputAction.done,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.done,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(locals.cancel),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(locals.cancel),
+                          ),
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _saveProfile();
-                        },
-                        child: Text(locals.save),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              _saveProfile();
+                            },
+                            child: Text(locals.save),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      style:
+                          Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.red),
+                              ),
+                      onPressed: () async {
+                        // TODO Delete profile
+                        final confirmation = await showDialog<bool>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ConfirmDialog(
+                                // FIXME Localization
+                                child: Text(
+                                  // FIXME Localization
+                                  'Do you want to delete this profile?',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                              );
+                            });
+                        if (confirmation == null) return;
+                        if (!confirmation) return;
+                        await providerProfiles.deleteProfile(
+                            providerProfiles.selectedProfile!.id);
+                        if (context.mounted) {
+                          Navigator.of(context)
+                              .pop(providerProfiles.selectedProfile!.id);
+                        }
+                      },
+                      child: const SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          // FIXME Localization
+                          'Delete Profile',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

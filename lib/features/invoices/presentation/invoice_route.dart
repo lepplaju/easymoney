@@ -14,6 +14,44 @@ class InvoiceRoute extends StatelessWidget {
   });
   final Invoice invoice;
 
+  Widget _dataWidget(
+    BuildContext context, {
+    required String title,
+    required String content,
+  }) {
+    return Column(
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        Text(
+          content,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+      ],
+    );
+  }
+
+  Widget _actionButton(
+      {required VoidCallback onPressed, required String text}) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: SizedBox(
+          width: 80,
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ProviderInvoices providerInvoices =
@@ -27,8 +65,35 @@ class InvoiceRoute extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: [
-            // FIXME Localization
-            const Text('Files'),
+            _dataWidget(
+              context,
+              // FIXME Localization
+              title: 'Date:',
+              content: invoice.dateOnly,
+            ),
+            _dataWidget(
+              context,
+              // FIXME Localization
+              title: 'Reference:',
+              content: invoice.target,
+            ),
+            _dataWidget(
+              context,
+              // FIXME Localization
+              title: 'Invoicer:',
+              content: invoice.name,
+            ),
+            _dataWidget(
+              context,
+              // FIXME Localization
+              title: 'Amount:',
+              content: '${invoice.euros}€',
+            ),
+            Text(
+              // FIXME Localization
+              'File:',
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
             TextButton(
               onPressed: () async {
                 final pdf =
@@ -47,22 +112,22 @@ class InvoiceRoute extends StatelessWidget {
               },
               child: Text(invoice.fileName),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                Share.shareXFiles(
-                  [await providerInvoices.getInvoiceXFile(invoice: invoice)],
-                  subject: 'Kululasku, ${invoice.target}, ${invoice.dateOnly}',
-                  text: 'Liitteenä kululasku hankituista tarvikkeista kohteelle'
-                      ' ${invoice.target}.\n\n'
-                      'Ystävällisin terveisin,\n'
-                      // FIXME Use profile name
-                      'FIXME Add name',
-                );
-              },
-              // FIXME Localization
-              child: const Text('Send Invoice'),
-            ),
-            ElevatedButton(
+            _actionButton(
+                onPressed: () async {
+                  Share.shareXFiles(
+                    [await providerInvoices.getInvoiceXFile(invoice: invoice)],
+                    subject:
+                        'Kululasku, ${invoice.target}, ${invoice.dateOnly}',
+                    text:
+                        'Liitteenä kululasku hankituista tarvikkeista kohteelle'
+                        ' ${invoice.target}.\n\n'
+                        'Ystävällisin terveisin,\n'
+                        '${invoice.name}',
+                  );
+                },
+                // FIXME Localization
+                text: 'Send'),
+            _actionButton(
               onPressed: () {
                 providerInvoices.deleteInvoice(invoice).then((value) {
                   Navigator.of(context).pop();
@@ -80,7 +145,7 @@ class InvoiceRoute extends StatelessWidget {
                 });
               },
               // FIXME Localization
-              child: const Text('Delete Invoice'),
+              text: 'Delete',
             ),
           ],
         ),
