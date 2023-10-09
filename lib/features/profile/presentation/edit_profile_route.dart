@@ -71,32 +71,34 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
           });
       return;
     }
-    final confirmation = await showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return ConfirmDialog(
-            // FIXME Localization
-            child: Column(
-              children: [
-                Text(
-                  // FIXME Localization
-                  'Is this correct IBAN?',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                Text(
-                  // FIXME Localization
-                  ibanController.text.trim(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            ),
-          );
-        });
-    if (confirmation == null) return;
-    if (!confirmation) return;
+    if (ibanController.text.trim() != providerProfiles.selectedProfile!.iban) {
+      final confirmation = await showDialog<bool>(
+          context: context,
+          builder: (BuildContext context) {
+            return ConfirmDialog(
+              // FIXME Localization
+              child: Column(
+                children: [
+                  Text(
+                    // FIXME Localization
+                    'Is this correct IBAN?',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  Text(
+                    // FIXME Localization
+                    ibanController.text.trim(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: Colors.black),
+                  ),
+                ],
+              ),
+            );
+          });
+      if (confirmation == null) return;
+      if (!confirmation) return;
+    }
     await providerProfiles.editProfile(
       id: providerProfiles.selectedProfile!.id,
       profileName: profileNameController.text.trim(),

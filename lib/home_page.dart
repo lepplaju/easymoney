@@ -10,6 +10,7 @@ import 'features/profile/application/provider_profiles.dart';
 import 'features/profile/presentation/add_profile_route.dart';
 import 'features/profile/presentation/app_bar_button_profiles.dart';
 import 'features/receipts/presentation/receipt_tab.dart';
+import 'info_route.dart';
 
 import 'utils/create_route.dart';
 
@@ -65,6 +66,12 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
         appBar: AppBar(
           title: const Text('EasyMoney'),
           centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.info_outline_rounded),
+            onPressed: () {
+              Navigator.of(context).push(createRoute(const InfoRoute()));
+            },
+          ),
           actions: const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
