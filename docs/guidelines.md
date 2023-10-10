@@ -1,3 +1,3 @@
 # Coding style & guidelines
 
-Coming soon!
+Coming soon! Basically follows standard flutter styling.
