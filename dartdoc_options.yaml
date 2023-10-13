@@ -1,0 +1,17 @@
+dartdoc:
+  categories:
+    "General":
+      markdown: docs/general.md
+    "Utils":
+      markdown: docs/utils.md
+    "Widgets":
+      markdown: docs/widgets.md
+    "Invoices":
+      markdown: docs/invoices.md
+    "Profile":
+      markdown: docs/profile.md
+    "Receipts":
+      markdown: docs/receipts.md
+    "Snacks":
+      markdown: docs/snacks.md
+  categoryOrder: ["General", "Second Category"]

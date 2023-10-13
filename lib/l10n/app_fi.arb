@@ -17,6 +17,7 @@
 	"receiptTabAddReceiptButton": "Lisää Kuitti",
 	"cancel": "Peruuta",
 	"save": "Tallenna",
+	"delete": "Poista",
 	"editProfileRouteSuccessMessage": "Profiili tallennettu!",
 	"editProfileRouteTitle": "Muokkaa profiilia"
 }
