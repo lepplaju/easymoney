@@ -22,7 +22,7 @@ title: EasyMoney
 description: >- # this means to ignore newlines until "baseurl:"
   EasyMoney is an awesome app to make invoicing easier!
 domain: ben-pp.github.io 
-baseurl: "/EasyMoney" # the subpath of your site, e.g. /blog
+baseurl: "/easymoney" # the subpath of your site, e.g. /blog
 url: https://ben-pp.github.io # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  ben-pp
 
