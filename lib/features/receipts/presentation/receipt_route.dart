@@ -5,11 +5,14 @@ import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
 import 'show_jpg_dialog.dart';
 //import '../../../utils/show_pdf_dialog.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
+import '../../../widgets/data_widget.dart';
 
-/// Route for showing a Receipt
+/// Route for showing a single Receipt
 ///
 /// Requires [receipt] to be shown
+///
+/// {@category Receipts}
 class ReceiptRoute extends StatefulWidget {
   const ReceiptRoute({super.key, required this.receipt});
   final Receipt receipt;
@@ -73,26 +76,9 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
     }
   }
 
-  Widget _dataWidget({
-    required String title,
-    required String content,
-  }) {
-    return Column(
-      children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displaySmall,
-        ),
-        Text(
-          content,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displayMedium,
-        ),
-      ],
-    );
-  }
-
+  /// Shows the description of the Receipt
+  ///
+  /// Requires [title] and [content] which will be scrollable if too long.
   Widget _description({required String title, required String content}) {
     return Column(
       children: [
@@ -138,11 +124,11 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
           child: Column(
             children: [
               // FIXME Localization
-              _dataWidget(title: 'Date:', content: widget.receipt.dateOnly),
+              DataWidget(title: 'Date:', content: widget.receipt.dateOnly),
               // FIXME Localization
-              _dataWidget(title: 'Sum:', content: '${widget.receipt.euros}€'),
+              DataWidget(title: 'Sum:', content: '${widget.receipt.euros}€'),
               // FIXME Localization
-              _dataWidget(title: 'Store:', content: widget.receipt.store),
+              DataWidget(title: 'Store:', content: widget.receipt.store),
               // FIXME Localization
               _description(
                   title: 'Description:', content: widget.receipt.description),

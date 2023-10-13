@@ -15,6 +15,7 @@ import 'info_route.dart';
 import 'utils/create_route.dart';
 
 /// Route for the home screen
+/// {@nodoc}
 class HomePage extends StatefulWidget {
   static const routeName = '/';
 

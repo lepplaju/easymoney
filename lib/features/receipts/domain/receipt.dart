@@ -1,4 +1,6 @@
 /// Represents a transaction to be included in the invoice
+///
+/// {@category Receipts}
 class Receipt {
   final int id;
   DateTime date;
@@ -26,8 +28,8 @@ class Receipt {
 
   /// Creates a receipt from map
   ///
-  /// Takes a [map] containing fields: id, date, amount, store, description
-  /// and fileName
+  /// Takes a [map] containing fields: id, profileId, date, amount, store,
+  /// description and fileName
   Receipt.fromMap(Map<String, dynamic> map)
       : id = map['id'],
         date = DateTime.parse(map['date']),
@@ -42,7 +44,7 @@ class Receipt {
     return '${date.day}.${date.month}.${date.year}';
   }
 
-  /// Returns the amount of the Receipt in euros
+  /// Returns the amount of the Receipt in euros as a String
   String get euros {
     return (amount / 100).toStringAsFixed(2);
   }

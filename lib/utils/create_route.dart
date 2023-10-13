@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Creates a Widget [route] to be pushed
+///
+/// {@category Utils}
 PageRouteBuilder createRoute(Widget route) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => route,

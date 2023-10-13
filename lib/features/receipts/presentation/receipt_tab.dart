@@ -9,11 +9,13 @@ import 'receipt_route.dart';
 import '../application/provider_receipts.dart';
 import '../../invoices/application/provider_invoices.dart';
 import '../../profile/application/provider_profiles.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
 import '../../../utils/create_route.dart';
 import '../../../widgets/confirm_dialog.dart';
 
 /// Tab for Receipts in the HomePage
+///
+/// Shows all the receipts for the selected profile.
 class ReceiptTab extends StatefulWidget {
   const ReceiptTab({super.key});
 

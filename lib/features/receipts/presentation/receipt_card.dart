@@ -7,6 +7,8 @@ import '../domain/receipt.dart';
 /// Card to show receipt info in the receipt list
 ///
 /// Requires [receipt] to be shown.
+///
+/// {@category Receipts}
 class ReceiptCard extends StatelessWidget {
   final Receipt receipt;
   const ReceiptCard({super.key, required this.receipt});

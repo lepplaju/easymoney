@@ -11,13 +11,24 @@ import '../../receipts/application/provider_receipts.dart';
 import '../../invoices/application/provider_invoices.dart';
 
 /// DropdownMenu for profile actions
+///
+/// This contains all created profiles and edit/add profile options
+///
+/// {@category Profile}
 class AppBarButtonProfiles extends StatelessWidget {
   const AppBarButtonProfiles({
     super.key,
   });
 
+  /// Creates a list of items for the dropdown menu
+  ///
+  /// Requires BuildContext [context], list of [profiles] and
+  /// localizations [locals]
   List<DropdownMenuItem<int>> _items(
-      BuildContext context, List<Profile> profiles, AppLocalizations locals) {
+    BuildContext context,
+    List<Profile> profiles,
+    AppLocalizations locals,
+  ) {
     final List<DropdownMenuItem<int>> items = [];
     for (var profile in profiles) {
       items.add(DropdownMenuItem(

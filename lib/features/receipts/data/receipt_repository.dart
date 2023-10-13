@@ -10,8 +10,9 @@ import '../../../utils/database.dart';
 import '../../../utils/file_operations.dart';
 
 /// Service for interacting with receipt database
+///
+/// {@category Receipts}
 class ReceiptRepository {
-  //ReceiptRepository({required this.db});
   Database? db;
 
   static const _receiptsTableName = 'receipts';
@@ -99,6 +100,7 @@ class ReceiptRepository {
     }
   }
 
+  /// Gets a file for Receipt by [fileName]
   Future<File> getReceiptFile(String fileName) async {
     final path = await getPath(_receiptsPath);
     // FIXME Catch errors

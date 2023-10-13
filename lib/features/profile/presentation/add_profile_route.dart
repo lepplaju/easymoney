@@ -3,12 +3,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
 
 import '../../../widgets/info_dialog.dart';
 import '../../../widgets/confirm_dialog.dart';
 
 /// Route for adding a new profile
+///
+/// If [allowReturn] is set to false, phones return button will be
+/// disabled. Defaults to true.
+///
+/// {@category Profile}
 class AddProfileRoute extends StatefulWidget {
   const AddProfileRoute({super.key, this.allowReturn = true});
   final bool allowReturn;

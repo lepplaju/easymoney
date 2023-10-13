@@ -13,6 +13,9 @@ import '../../profile/domain/profile.dart';
 import '../domain/invoice.dart';
 import '../../../utils/replace_nordics.dart';
 
+/// Manages invoices
+///
+/// {@category Invoices}
 class ProviderInvoices with ChangeNotifier {
   final InvoicesRepository _invoicesRepository = InvoicesRepository();
 
@@ -24,7 +27,11 @@ class ProviderInvoices with ChangeNotifier {
     return _invoices;
   }
 
-  /// Composes a pdf from [receipts]
+  /// Composes a pdf invoice from receipts
+  ///
+  /// Requires [profile] to whom the invoice is created,
+  /// list of the [receipts] to be used and list of [files] which
+  /// are the pictures of the receipts.
   Future<void> createInvoice({
     required Profile profile,
     required List<Receipt> receipts,
@@ -186,12 +193,18 @@ class ProviderInvoices with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Deletes an invoice
+  ///
+  /// Requires [invoice] which will be deleted
   Future<void> deleteInvoice(Invoice invoice) async {
     _invoices.removeWhere((e) => e.id == invoice.id);
     await _invoicesRepository.deleteInvoice(invoice: invoice);
     notifyListeners();
   }
 
+  /// Fetches all the invoices of a profile
+  ///
+  /// Requires [profileId] of the profile whose invoices are fetched.
   Future<void> getInvoices(int? profileId) async {
     if (profileId == null) return;
     _invoices.clear();
@@ -199,10 +212,16 @@ class ProviderInvoices with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Returns a file of the invoice
+  ///
+  /// Requires [invoice] of whose file is returned.
   Future<render.PdfDocument> getInvoiceFile({required Invoice invoice}) async {
     return await _invoicesRepository.getInvoiceFile(fileName: invoice.fileName);
   }
 
+  /// Returns a file of the invoice as XFile
+  ///
+  /// Requires [invoice] of whose file is returned.
   Future<XFile> getInvoiceXFile({required Invoice invoice}) async {
     return await _invoicesRepository.getInvoiceXFile(
         fileName: invoice.fileName);

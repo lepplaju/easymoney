@@ -1,3 +1,6 @@
+/// Represents a invoice that will be composed out of receipts
+///
+/// {@category Invoices}
 class Invoice {
   int id;
   int profileId;
@@ -7,6 +10,12 @@ class Invoice {
   int amount;
   String fileName;
 
+  /// Creates an invoice
+  ///
+  /// Requires unique [id], [profileId] of the profile to whom it
+  /// belongs, [date] of the creation, [target] as who will be the
+  /// invoices payer, [name] of the invoicer, [amount] of what the
+  /// total is and [fileName] with which the invoice will be saved.
   Invoice({
     required this.id,
     required this.profileId,
@@ -17,6 +26,10 @@ class Invoice {
     required this.fileName,
   });
 
+  /// Creates an Invoice from a map
+  ///
+  /// Requires a [map] containing fields: id, profileId, date, target,
+  /// name, amount and fileName.
   Invoice.fromMap({required Map<String, dynamic> map})
       : id = map['id'],
         profileId = map['profileId'],
@@ -31,10 +44,12 @@ class Invoice {
     return '${date.day}.${date.month}.${date.year}';
   }
 
+  /// Returns the amount in euros as a String
   String get euros {
     return (amount / 100).toStringAsFixed(2);
   }
 
+  /// Returns the Invoice as a map
   Map<String, dynamic> toMap() {
     return {
       'id': id,

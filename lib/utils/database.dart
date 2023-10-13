@@ -47,6 +47,8 @@ void _onConfigure(Database db) async {
 }
 
 /// Initialize and return the database
+///
+/// {@category Utils}
 Future<Database> initDb() async {
   const dbName = 'easymoney.db';
   final databasesPath = await getDatabasesPath();

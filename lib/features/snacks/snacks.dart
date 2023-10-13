@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../presentation/snack.dart';
+import './src/snack.dart';
 
-// FIXME Document
+/// Sens a snackbar notification
+///
+/// Takes [context], message [content] and optional [action]
+///
+/// {@category Snacks}
 void sendSnack({
   required BuildContext context,
   required String content,

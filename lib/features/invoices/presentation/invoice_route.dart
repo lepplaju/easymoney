@@ -4,9 +4,15 @@ import 'package:share_plus/share_plus.dart';
 
 import '../application/provider_invoices.dart';
 import '../domain/invoice.dart';
+import '../../../widgets/data_widget.dart';
 import '../../../utils/show_pdf_dialog.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
 
+/// Route to show a single Invoice
+///
+/// Requires the [invoice] that will be shown.
+///
+/// {@category Invoices}
 class InvoiceRoute extends StatelessWidget {
   const InvoiceRoute({
     super.key,
@@ -14,27 +20,7 @@ class InvoiceRoute extends StatelessWidget {
   });
   final Invoice invoice;
 
-  Widget _dataWidget(
-    BuildContext context, {
-    required String title,
-    required String content,
-  }) {
-    return Column(
-      children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displaySmall,
-        ),
-        Text(
-          content,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.displayMedium,
-        ),
-      ],
-    );
-  }
-
+  /// Button to be shown with different actions
   Widget _actionButton(
       {required VoidCallback onPressed, required String text}) {
     return Padding(
@@ -65,26 +51,22 @@ class InvoiceRoute extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: [
-            _dataWidget(
-              context,
+            DataWidget(
               // FIXME Localization
               title: 'Date:',
               content: invoice.dateOnly,
             ),
-            _dataWidget(
-              context,
+            DataWidget(
               // FIXME Localization
               title: 'Reference:',
               content: invoice.target,
             ),
-            _dataWidget(
-              context,
+            DataWidget(
               // FIXME Localization
               title: 'Invoicer:',
               content: invoice.name,
             ),
-            _dataWidget(
-              context,
+            DataWidget(
               // FIXME Localization
               title: 'Amount:',
               content: '${invoice.euros}€',

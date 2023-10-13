@@ -5,6 +5,8 @@ import '../../../widgets/dialog_components/dialog_titlebar.dart';
 /// Dialog for viewing .jpg file
 ///
 /// Takes [title] for the dialog and [image] to be shown.
+///
+/// {@category Receipts}
 class ShowJpgDialog extends StatelessWidget {
   const ShowJpgDialog({
     super.key,

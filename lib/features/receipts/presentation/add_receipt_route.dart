@@ -8,13 +8,18 @@ import 'package:pdf_render/pdf_render.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/show_pdf_dialog.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
 import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
 import 'pic_or_pdf_dialog.dart';
 import 'show_jpg_dialog.dart';
 
 /// Route for adding a new receipt
+///
+/// Requires [profileId] of the profile for whom the receipt will be
+/// added.
+///
+/// {@category Receipts}
 class AddReceiptRoute extends StatefulWidget {
   const AddReceiptRoute({super.key, required this.profileId});
   final int profileId;

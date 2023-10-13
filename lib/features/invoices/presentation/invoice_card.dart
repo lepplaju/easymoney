@@ -4,9 +4,11 @@ import '../../../utils/create_route.dart';
 import '../domain/invoice.dart';
 import './invoice_route.dart';
 
-/// Card to show receipt info in the receipt list
+/// Card to show invoice as a list item
 ///
-/// Requires [receipt] to be shown.
+/// Requires [invoice] to that will be shown.
+///
+/// {@category Invoices}
 class InvoiceCard extends StatelessWidget {
   final Invoice invoice;
   const InvoiceCard({super.key, required this.invoice});

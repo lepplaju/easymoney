@@ -10,11 +10,18 @@ import '../../../utils/database.dart';
 import '../../../utils/file_operations.dart';
 import '../domain/invoice.dart';
 
+/// Service for interacting with invoice database
+///
+/// {@category Invoices}
 class InvoicesRepository {
   Database? db;
   static const _invoicesPath = '/invoices';
   static const _invoicesTableName = 'invoices';
 
+  /// Saves an invoice
+  ///
+  /// Requires the [invoice] that will be saved and pdf [doc] that
+  /// is the invoice file.
   Future<void> saveInvoice({
     required Invoice invoice,
     required pw.Document doc,
@@ -27,6 +34,7 @@ class InvoicesRepository {
     await db!.insert(_invoicesTableName, invoice.toMap());
   }
 
+  /// Deletes an [invoice]
   Future<void> deleteInvoice({required Invoice invoice}) async {
     final path = await getPath(_invoicesPath);
     // TODO Handle errors
@@ -41,6 +49,9 @@ class InvoicesRepository {
         .delete(_invoicesTableName, where: 'id=?', whereArgs: [invoice.id]);
   }
 
+  /// Returns all the invoices of a profile
+  ///
+  /// Requires [profileId] of the profile whose invoices will be fetched.
   Future<List<Invoice>> getInvoices(int profileId) async {
     await _openDatabase();
     final List<Invoice> invoices = [];
@@ -55,18 +66,29 @@ class InvoicesRepository {
     return invoices;
   }
 
+  /// Returns the pdf file of invoice
+  ///
+  /// Requires [fileName] of the invoice which will be fetched.
   Future<render.PdfDocument> getInvoiceFile({required String fileName}) async {
     final path = await getPath(_invoicesPath);
     final pdf = await render.PdfDocument.openFile('$path/$fileName');
     return pdf;
   }
 
+  /// Retruns invoice file as XFile
+  ///
+  /// Requires [fileName] of the invoice which will be fetched.
   Future<XFile> getInvoiceXFile({required String fileName}) async {
     final path = await getPath(_invoicesPath);
     final file = XFile('$path/$fileName');
     return file;
   }
 
+  /// Checks if the file name is already taken
+  ///
+  /// Requires [fileName] that will be checked
+  ///
+  /// Returns true if [fileName] exists and false if not.
   Future<bool> isFileNameTaken(String fileName) async {
     final path = await getPath(_invoicesPath);
     return await File('$path/$fileName').exists();

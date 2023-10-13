@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart';
 /// document directory. This should start with '/'.
 /// Returns the whole path starting with applications document directory
 /// with [path] appended to it.
+///
+/// {@category Utils}
 Future<String> getPath(String path) async {
   final wholePath = '${(await getApplicationDocumentsDirectory()).path}$path';
   if (!Directory(wholePath).existsSync()) {

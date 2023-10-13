@@ -76,6 +76,7 @@ class ProviderReceipts with ChangeNotifier {
     }
   }
 
+  /// Deletes all of the Receipts
   Future<void> deleteAllReceipts() async {
     for (var receipt in _receipts) {
       await _receiptRepository.deleteReceipt(receipt);
@@ -84,6 +85,7 @@ class ProviderReceipts with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Gets the files of the receipts
   Future<List<File>> getReceiptFiles() async {
     final files = <File>[];
     for (var receipt in receipts) {

@@ -10,19 +10,25 @@ import 'features/invoices/application/provider_invoices.dart';
 import 'theme.dart';
 import 'home_page.dart';
 
+/// Entry point of the program
+/// {@nodoc}
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const EasyMoney());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+/// EasyMoney apps main widget
+///
+/// {@nodoc}
+class EasyMoney extends StatefulWidget {
+  const EasyMoney({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<EasyMoney> createState() => _EasyMoneyState();
 }
 
-class _MyAppState extends State<MyApp> {
+/// State for [EasyMoney]
+class _EasyMoneyState extends State<EasyMoney> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         // Removes the debug banner in debug mode
         debugShowCheckedModeBanner: false,
-        theme: MyTheme.light,
+        theme: EasyMoneyTheme.light,
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

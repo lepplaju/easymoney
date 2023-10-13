@@ -1,4 +1,6 @@
 /// Class for holding user information used when composing the invoice
+///
+/// {@category Profile}
 class Profile {
   final int id;
   final String profileName;
@@ -8,7 +10,7 @@ class Profile {
   final String target;
 
   /// Creates the profile with [id], [profileName], [firstName], [lastName],
-  /// [iban] and target.
+  /// [iban] and [target].
   Profile({
     required this.id,
     required this.profileName,
@@ -20,7 +22,8 @@ class Profile {
 
   /// Creates a profile from map
   ///
-  /// Takes a [map] containing fields: id, firstName, lastName and iban
+  /// Takes a [map] containing fields: id, firstName, lastName, iban
+  /// and target
   Profile.fromMap(Map<String, dynamic> map)
       : id = map['id'],
         profileName = map['profileName'],

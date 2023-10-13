@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-// FIXME Document
-class MyTheme {
+/// Theme used in the app
+///
+/// Use this to control the visuals of EasyMoney.
+/// {@nodoc}
+class EasyMoneyTheme {
   static final light = ThemeData(
     colorScheme: ColorScheme(
       brightness: Brightness.light,

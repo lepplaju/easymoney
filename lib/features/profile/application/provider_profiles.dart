@@ -4,6 +4,8 @@ import '../domain/profile.dart';
 import '../data/profile_repository.dart';
 
 /// Provider for managing user profiles
+///
+/// {@category Profile}
 class ProviderProfiles with ChangeNotifier {
   final ProfileRepository _profileRepository = ProfileRepository();
   final List<Profile> _profiles = [];
@@ -61,6 +63,11 @@ class ProviderProfiles with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Edits a profile.
+  ///
+  /// Requires [id] of the profile which will be edited,
+  /// new [profileName], new [firstName], new [lastName], new [iban]
+  /// and a new [target].
   Future<void> editProfile({
     required int id,
     required String profileName,
@@ -82,6 +89,9 @@ class ProviderProfiles with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Deletes a profile.
+  ///
+  /// Deletes a profile with [id].
   Future<void> deleteProfile(int id) async {
     final affected = await _profileRepository.deleteProfile(id);
     if (affected != 0) {

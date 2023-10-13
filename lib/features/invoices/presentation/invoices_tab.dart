@@ -5,6 +5,9 @@ import '../application/provider_invoices.dart';
 import '../../profile/application/provider_profiles.dart';
 import './invoice_card.dart';
 
+/// Tab for listing all of the invoices of the selected profile.
+///
+/// {@category Invoices}
 class InvoicesTab extends StatefulWidget {
   const InvoicesTab({super.key});
 
@@ -12,6 +15,7 @@ class InvoicesTab extends StatefulWidget {
   State<InvoicesTab> createState() => _InvoicesTabState();
 }
 
+/// State for the [InvoicesTab]
 class _InvoicesTabState extends State<InvoicesTab> {
   late final ProviderInvoices providerInvoices;
   late final ProviderProfiles providerProfiles;
@@ -30,6 +34,9 @@ class _InvoicesTabState extends State<InvoicesTab> {
     super.didChangeDependencies();
   }
 
+  /// Builds a Invoice Card
+  ///
+  /// Requires BuildContext [context] and [index] of the item.
   Widget invoiceBuilder(BuildContext context, int index) {
     if (index == providerInvoices.invoices.length) {
       return SizedBox(

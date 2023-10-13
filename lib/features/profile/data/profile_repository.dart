@@ -3,7 +3,9 @@ import 'package:sqflite/sqflite.dart';
 import '../../../utils/database.dart';
 import '../domain/profile.dart';
 
-/// Handles the data operations between the database and providers for profiles
+/// Handles the data between the database and providers for profiles
+///
+/// {@category Profile}
 class ProfileRepository {
   static const _profileTableName = 'profiles';
   Database? db;
@@ -26,6 +28,10 @@ class ProfileRepository {
     return result;
   }
 
+  /// Edits the profile
+  ///
+  /// Requires [id] of the profile that is edited and updated [data] of
+  /// the profile.
   Future<int> editProfile(
       {required int id, required Map<String, Object> data}) async {
     await _openDatabase();
@@ -38,6 +44,9 @@ class ProfileRepository {
     return result;
   }
 
+  /// Deletes profile.
+  ///
+  /// Deletes the profile with the [id].
   Future<int> deleteProfile(int id) async {
     await _openDatabase();
     return await db!.delete(

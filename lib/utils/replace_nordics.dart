@@ -1,3 +1,6 @@
+/// Replaces all the nordics from [text] with 'a' or 'o'
+///
+/// {@category Utils}
 String replaceNordics({required String text}) {
   final regularA = RegExp('[äåáàâãåæ]', caseSensitive: false);
   final regularO = RegExp('[öøóòôõ]', caseSensitive: false);

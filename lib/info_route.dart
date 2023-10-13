@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import './widgets/data_widget.dart';
 
+/// Route for showing info about the app
+///
+/// {@nodoc}
 class InfoRoute extends StatelessWidget {
   const InfoRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final packageInfo = PackageInfo.fromPlatform();
     return Scaffold(
       appBar: AppBar(
         // FIXME Localization

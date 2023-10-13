@@ -3,14 +3,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_profiles.dart';
-import '../../snacks/application/send_snack.dart';
+import '../../snacks/snacks.dart';
 import '../../../widgets/info_dialog.dart';
 import '../../../widgets/confirm_dialog.dart';
 
 /// Route for editing a profile
+/// {@category Profile}
 class EditProfileRoute extends StatefulWidget {
-  const EditProfileRoute({super.key, this.allowReturn = true});
-  final bool allowReturn;
+  const EditProfileRoute({super.key});
 
   @override
   State<EditProfileRoute> createState() => _EditProfileRouteState();
@@ -121,137 +121,133 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => widget.allowReturn,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(locals.editProfileRouteTitle),
-          centerTitle: true,
-          automaticallyImplyLeading: widget.allowReturn,
-        ),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: profileNameController,
-                    decoration: InputDecoration(
-                      label: Text(locals.addProfileRouteProfileName),
-                      hintText: locals.addProfileRouteProfileNameHint,
-                      isDense: true,
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.next,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(locals.editProfileRouteTitle),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                TextField(
+                  controller: profileNameController,
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteProfileName),
+                    hintText: locals.addProfileRouteProfileNameHint,
+                    isDense: true,
                   ),
-                  TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      label: Text(locals.addProfileRouteFirstName),
-                      hintText: 'Ben, Jake, Rose, Sophie...',
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextField(
+                  controller: firstNameController,
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteFirstName),
+                    hintText: 'Ben, Jake, Rose, Sophie...',
                   ),
-                  TextField(
-                    controller: lastNameController,
-                    decoration: InputDecoration(
-                      label: Text(locals.addProfileRouteLastName),
-                      hintText: 'Anderson, Patel, Smith...',
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextField(
+                  controller: lastNameController,
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteLastName),
+                    hintText: 'Anderson, Patel, Smith...',
                   ),
-                  TextField(
-                    controller: targetController,
-                    decoration: InputDecoration(
-                      label: Text(locals.addProfileRouteReference),
-                      hintText: 'Korttelikylä, Asuva, Harju...',
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.next,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextField(
+                  controller: targetController,
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteReference),
+                    hintText: 'Korttelikylä, Asuva, Harju...',
                   ),
-                  TextField(
-                    controller: ibanController,
-                    decoration: InputDecoration(
-                      label: Text(locals.addProfileRouteIBAN),
-                      hintText: 'FI83 4978 8259 0005 97...',
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputAction: TextInputAction.done,
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.next,
+                ),
+                TextField(
+                  controller: ibanController,
+                  decoration: InputDecoration(
+                    label: Text(locals.addProfileRouteIBAN),
+                    hintText: 'FI83 4978 8259 0005 97...',
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(locals.cancel),
-                          ),
+                  textCapitalization: TextCapitalization.sentences,
+                  textInputAction: TextInputAction.done,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(locals.cancel),
                         ),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _saveProfile();
-                            },
-                            child: Text(locals.save),
-                          ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _saveProfile();
+                          },
+                          child: Text(locals.save),
                         ),
                       ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      style:
-                          Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.red),
-                              ),
-                      onPressed: () async {
-                        // TODO Delete profile
-                        final confirmation = await showDialog<bool>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return ConfirmDialog(
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style:
+                        Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.red),
+                            ),
+                    onPressed: () async {
+                      // TODO Delete profile
+                      final confirmation = await showDialog<bool>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ConfirmDialog(
+                              // FIXME Localization
+                              child: Text(
                                 // FIXME Localization
-                                child: Text(
-                                  // FIXME Localization
-                                  'Do you want to delete this profile?',
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                              );
-                            });
-                        if (confirmation == null) return;
-                        if (!confirmation) return;
-                        await providerProfiles.deleteProfile(
-                            providerProfiles.selectedProfile!.id);
-                        if (context.mounted) {
-                          Navigator.of(context)
-                              .pop(providerProfiles.selectedProfile!.id);
-                        }
-                      },
-                      child: const SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          // FIXME Localization
-                          'Delete Profile',
-                          textAlign: TextAlign.center,
-                        ),
+                                'Do you want to delete this profile?',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                            );
+                          });
+                      if (confirmation == null) return;
+                      if (!confirmation) return;
+                      await providerProfiles
+                          .deleteProfile(providerProfiles.selectedProfile!.id);
+                      if (context.mounted) {
+                        Navigator.of(context)
+                            .pop(providerProfiles.selectedProfile!.id);
+                      }
+                    },
+                    child: const SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        // FIXME Localization
+                        'Delete Profile',
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

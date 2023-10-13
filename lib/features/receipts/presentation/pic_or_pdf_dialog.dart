@@ -5,10 +5,15 @@ import '../../../widgets/dialog_components/dialog_titlebar.dart';
 enum UploadType { camera, picture }
 
 /// Dialog for choosing which type of file user is adding.
+///
+/// {@category Receipts}
 class PicOrPdfDialog extends StatelessWidget {
   const PicOrPdfDialog({super.key});
   final verticalPadding = 10.0;
 
+  /// Builds a button widget for the options
+  ///
+  /// Requires [text] and a void function [onPressed]
   Widget _button({required String text, required VoidCallback onPressed}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: verticalPadding),
