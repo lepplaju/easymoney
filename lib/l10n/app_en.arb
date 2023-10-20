@@ -1,4 +1,40 @@
 {
+	"appBarButtonEditProfile": "Edit Profile",
+	"@appBarButtonEditProfile": {
+		"description": "Edit Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonAddProfile": "Add Profile",
+	"@appBarButtonAddProfile": {
+		"description": "Add Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteSuccessMessage": "Profile saved!",
+	"@editProfileRouteSuccessMessage": {
+		"description": "Text for snack message for successful saving of profile",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteTitle": "Edit Profile",
+	"@editProfileRouteTitle": {
+		"description": "Title for EditProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabInvoiceSuccessSanck": "Invoice created!",
+	"@receiptTabInvoiceSuccessSanck": {
+		"description": "Invoice success snack for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabAddReceiptButton": "Add Receipt",
+	"@receiptTabAddReceiptButton": {
+		"description": "Add Receipt Button for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
 	"addProfileRouteAppBarTitle": "New Profile",
 	"@addProfileRouteAppBarTitle": {
 		"description": "Title for AddProfileRoute AppBar.",
@@ -71,27 +107,33 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"appBarButtonEditProfile": "Edit Profile",
-	"@appBarButtonEditProfile": {
-		"description": "Edit Profile button for AppBarButton.",
+	"infoRouteTitle": "About",
+	"@infoRouteTitle": {
+		"description": "Title for InfoRoute",
 		"type": "text",
 		"placeholders": {}
 	},
-	"appBarButtonAddProfile": "Add Profile",
-	"@appBarButtonAddProfile": {
-		"description": "Add Profile button for AppBarButton.",
+	"infoRouteContribute": "Want to contribute?",
+	"@infoRouteContribute": {
+		"description": "Description",
 		"type": "text",
 		"placeholders": {}
 	},
-	"receiptTabInvoiceSuccessSanck": "Invoice created!",
-	"@receiptTabInvoiceSuccessSanck": {
-		"description": "Invoice success snack for ReceiptTab.",
+	"infoRouteDeveloper": "Developer",
+	"@infoRouteDeveloper": {
+		"description": "Developer text for InfoRoute",
 		"type": "text",
 		"placeholders": {}
 	},
-	"receiptTabAddReceiptButton": "Add Receipt",
-	"@receiptTabAddReceiptButton": {
-		"description": "Add Receipt Button for ReceiptTab.",
+	"infoRouteVersion": "Version",
+	"@infoRouteVersion": {
+		"description": "Version text for InfoRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"infoRouteLibraries": "Libraries used",
+	"@infoRouteLibraries": {
+		"description": "Libraries text for InfoRoute",
 		"type": "text",
 		"placeholders": {}
 	},
@@ -110,18 +152,6 @@
 	"delete": "Delete",
 	"@delete": {
 		"description": "Delete text for buttons etc.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"editProfileRouteSuccessMessage": "Profile saved!",
-	"@editProfileRouteSuccessMessage": {
-		"description": "Text for snack message for successful saving of profile",
-		"type": "text",
-		"placeholders": {}
-	},
-	"editProfileRouteTitle": "Edit Profile",
-	"@editProfileRouteTitle": {
-		"description": "Title for EditProfileRoute",
 		"type": "text",
 		"placeholders": {}
 	}

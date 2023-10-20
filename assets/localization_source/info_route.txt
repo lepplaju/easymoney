@@ -1,0 +1,44 @@
+// Title
+
+name: "infoRouteTitle"
+text_en: "About"
+text_fi: "Tietoa"
+description: "Title for InfoRoute"
+type: "text"
+placeholders: "{}"
+
+// Contribute label
+
+name: "infoRouteContribute"
+text_en: "Want to contribute?"
+text_fi: "Haluatko osallistua kehittämiseen?"
+description: "Description"
+type: "text"
+placeholders: "{}"
+
+// Developer
+
+name: "infoRouteDeveloper"
+text_en: "Developer"
+text_fi: "Kehittäjä"
+description: "Developer text for InfoRoute"
+type: "text"
+placeholders: "{}"
+
+// Version
+
+name: "infoRouteVersion"
+text_en: "Version"
+text_fi: "Versio"
+description: "Version text for InfoRoute"
+type: "text"
+placeholders: "{}"
+
+// Libraries
+
+name: "infoRouteLibraries"
+text_en: "Libraries used"
+text_fi: "Kirjastot käytössä"
+description: "Libraries text for InfoRoute"
+type: "text"
+placeholders: "{}"

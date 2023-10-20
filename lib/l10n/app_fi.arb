@@ -1,4 +1,10 @@
 {
+	"appBarButtonEditProfile": "Muokkaa Profiilia",
+	"appBarButtonAddProfile": "Lisää Profiili",
+	"editProfileRouteSuccessMessage": "Profiili tallennettu!",
+	"editProfileRouteTitle": "Muokkaa profiilia",
+	"receiptTabInvoiceSuccessSanck": "Lasku luotu!",
+	"receiptTabAddReceiptButton": "Lisää Kuitti",
 	"addProfileRouteAppBarTitle": "Uusi Profiili",
 	"addProfileRouteDescription": "Lisää uusi profiili. Profiileja käytetään laskujen tietojen syöttämiseen. Luo yksi profiili jokaista laskutuskohdetta varten.",
 	"addProfileRouteProfileName": "Profiilin nimi",
@@ -11,13 +17,12 @@
 	"addProfileRouteSubmitButton": "Lisää Profiili",
 	"homePageReceiptsTabLabel": "Kuitit",
 	"homePageInvoicesTabLabel": "Laskut",
-	"appBarButtonEditProfile": "Muokkaa Profiilia",
-	"appBarButtonAddProfile": "Lisää Profiili",
-	"receiptTabInvoiceSuccessSanck": "Lasku luotu!",
-	"receiptTabAddReceiptButton": "Lisää Kuitti",
+	"infoRouteTitle": "Tietoa",
+	"infoRouteContribute": "Haluatko osallistua kehittämiseen?",
+	"infoRouteDeveloper": "Kehittäjä",
+	"infoRouteVersion": "Versio",
+	"infoRouteLibraries": "Kirjastot käytössä",
 	"cancel": "Peruuta",
 	"save": "Tallenna",
-	"delete": "Poista",
-	"editProfileRouteSuccessMessage": "Profiili tallennettu!",
-	"editProfileRouteTitle": "Muokkaa profiilia"
+	"delete": "Poista"
 }
