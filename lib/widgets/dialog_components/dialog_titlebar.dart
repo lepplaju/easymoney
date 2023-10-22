@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 /// [backgroundColor] will be used to override default color.
 class DialogTitleBar extends StatelessWidget {
   const DialogTitleBar({
-    Key? key,
+    super.key,
     this.title,
     this.showX = true,
     this.backgroundColor,
-  }) : super(key: key);
+  });
   final String? title;
   final bool showX;
   final Color? backgroundColor;

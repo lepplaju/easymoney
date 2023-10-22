@@ -117,18 +117,17 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
     return WillPopScope(
       onWillPop: () async => widget.allowReturn,
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(locals.addProfileRouteAppBarTitle),
           centerTitle: true,
           automaticallyImplyLeading: widget.allowReturn,
         ),
-        body: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   locals.addProfileRouteDescription,
