@@ -133,6 +133,8 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
               _description(
                   title: locals.description,
                   content: widget.receipt.description),
+              // FIXME Localization
+              DataWidget(title: 'Minute', content: widget.receipt.minute),
               Text(
                 locals.file,
                 style: Theme.of(context).textTheme.displaySmall,

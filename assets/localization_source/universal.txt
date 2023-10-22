@@ -96,3 +96,12 @@ text_fi: "Tiedosto"
 description: "File text"
 type: "text"
 placeholders: "{}"
+
+// Minute
+
+name: "minute"
+text_en: "Minute"
+text_fi: "Pöytäkirja"
+description: "Minute text"
+type: "text"
+placeholders: "{}"

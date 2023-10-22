@@ -35,6 +35,7 @@ void _onCreate(Database db, int version) async {
       store TEXT,
       description TEXT,
       fileName TEXT,
+      minute TEXT,
       profileId INT NOT NULL,
       FOREIGN KEY (profileId) REFERENCES profiles (id) ON DELETE CASCADE ON UPDATE CASCADE
     );

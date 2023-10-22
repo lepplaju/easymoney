@@ -16,6 +16,10 @@
 	"addReceiptRouteDate": "Kuitin päivämäärä",
 	"addReceiptRouteReceipt": "Kuitti",
 	"addReceiptRouteUploadHelp": "Lataa kuva kuitista.",
+	"addReceiptRouteInvalidStore": "Kauppa ei voi olla tyhjä.",
+	"addReceiptRouteInvalidAmount": "Summa ei voi olla tyhjä.",
+	"addReceiptRouteInvalidMinute": "Pöytäkirja ei voi olla tyhjä.",
+	"addReceiptRouteInvalidPicture": "Lataa kuva kuitista.",
 	"picOrPdfDialogTitle": "Lisää kuva",
 	"picOrPdfDialogTake": "Ota kuva",
 	"picOrPdfDialogChoose": "Valitse kuva",
@@ -56,5 +60,6 @@
 	"store": "Liike",
 	"description": "Lisätietoja",
 	"change": "Muuta",
-	"file": "Tiedosto"
+	"file": "Tiedosto",
+	"minute": "Pöytäkirja"
 }

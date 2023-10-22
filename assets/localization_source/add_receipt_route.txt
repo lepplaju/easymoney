@@ -51,3 +51,39 @@ text_fi: "Lataa kuva kuitista."
 description: "Upload help text for AddReceiptRoute"
 type: "text"
 placeholders: "{}"
+
+// Invalid store
+
+name: "addReceiptRouteInvalidStore"
+text_en: "Store can not be empty."
+text_fi: "Kauppa ei voi olla tyhjä."
+description: "No empty store text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Invalid amount
+
+name: "addReceiptRouteInvalidAmount"
+text_en: "Amount can not be empty."
+text_fi: "Summa ei voi olla tyhjä."
+description: "No empty amount text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Invalid minute
+
+name: "addReceiptRouteInvalidMinute"
+text_en: "Minute can not be empty."
+text_fi: "Pöytäkirja ei voi olla tyhjä."
+description: "No empty minute text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Invalid picture
+
+name: "addReceiptRouteInvalidPicture"
+text_en: "Upload a picture of the receipt."
+text_fi: "Lataa kuva kuitista."
+description: "Picture of the receipt needed text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"

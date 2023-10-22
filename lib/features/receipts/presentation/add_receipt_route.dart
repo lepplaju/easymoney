@@ -9,6 +9,7 @@ import 'package:pdf_render/pdf_render.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/show_pdf_dialog.dart';
+import '../../../widgets/info_dialog.dart';
 import '../../snacks/snacks.dart';
 import '../application/provider_receipts.dart';
 import '../domain/receipt.dart';
@@ -35,6 +36,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   final storeTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
   final amountTextController = TextEditingController();
+  final minuteTextController = TextEditingController();
   late final DateTime currentDate;
   final ImagePicker picker = ImagePicker();
 
@@ -62,6 +64,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
     storeTextController.dispose();
     descriptionTextController.dispose();
     amountTextController.dispose();
+    minuteTextController.dispose();
     super.dispose();
   }
 
@@ -109,6 +112,29 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   ///
   /// Returns a [Receipt] as a future
   Future<Receipt> _createReceipt({required AppLocalizations locals}) async {
+    if (storeTextController.text.trim().isEmpty ||
+        amountTextController.text.trim().isEmpty ||
+        minuteTextController.text.trim().isEmpty ||
+        file == null) {
+      late final String message;
+      if (storeTextController.text.trim().isEmpty) {
+        message = locals.addReceiptRouteInvalidStore;
+      } else if (amountTextController.text.trim().isEmpty) {
+        message = locals.addReceiptRouteInvalidAmount;
+      } else if (minuteTextController.text.trim().isEmpty) {
+        message = locals.addReceiptRouteInvalidMinute;
+      } else {
+        message = locals.addReceiptRouteInvalidPicture;
+      }
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return InfoDialg(
+              child: Text(message),
+            );
+          });
+      return Future.error('validation-error');
+    }
     late final double amount;
     if (amountTextController.text.isEmpty) {
       amount = 0;
@@ -126,6 +152,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         amount: amount,
         store: storeTextController.text.trim(),
         description: descriptionTextController.text.trim(),
+        minute: minuteTextController.text.trim(),
         file: file!,
         profileId: widget.profileId,
       );
@@ -144,7 +171,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   Widget build(BuildContext context) {
     final locals = AppLocalizations.of(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(locals!.addReceiptRouteTitle),
         centerTitle: true,
@@ -188,18 +215,24 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                         }
                       },
                       child: Text(locals.edit)),
+
+                  // Store
                   TextField(
                     controller: storeTextController,
                     decoration: InputDecoration(
                       label: Text(locals.store),
+                      hintText: 'Prisma, Lidl...',
                     ),
                     maxLength: 40,
                     textInputAction: TextInputAction.next,
                   ),
+
+                  // Description
                   TextField(
                     controller: descriptionTextController,
                     decoration: InputDecoration(
                       label: Text(locals.description),
+                      hintText: 'Grillijuhliin, Halloween etc...',
                     ),
                     maxLines: 5,
                     minLines: 1,
@@ -229,6 +262,15 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                       suffixIcon: const Icon(Icons.euro),
                     ),
                     maxLength: 7,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  TextField(
+                    controller: minuteTextController,
+                    decoration: InputDecoration(
+                      label: Text(locals.minute),
+                      hintText: 'Kokous 1/23, Meeting 1/23...',
+                    ),
+                    maxLength: 20,
                     textInputAction: TextInputAction.done,
                   ),
                   Padding(
@@ -305,12 +347,15 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      // Cancel button
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text(locals.cancel),
                       ),
+
+                      // Save button
                       ElevatedButton(
                         onPressed: () async {
                           final receipt = await _createReceipt(locals: locals);

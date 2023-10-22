@@ -101,6 +101,30 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"addReceiptRouteInvalidStore": "Store can not be empty.",
+	"@addReceiptRouteInvalidStore": {
+		"description": "No empty store text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidAmount": "Amount can not be empty.",
+	"@addReceiptRouteInvalidAmount": {
+		"description": "No empty amount text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidMinute": "Minute can not be empty.",
+	"@addReceiptRouteInvalidMinute": {
+		"description": "No empty minute text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidPicture": "Upload a picture of the receipt.",
+	"@addReceiptRouteInvalidPicture": {
+		"description": "Picture of the receipt needed text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
 	"picOrPdfDialogTitle": "Add a picture",
 	"@picOrPdfDialogTitle": {
 		"description": "Add picture text for PicOrPdfDialog",
@@ -344,6 +368,12 @@
 	"file": "File",
 	"@file": {
 		"description": "File text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"minute": "Minute",
+	"@minute": {
+		"description": "Minute text",
 		"type": "text",
 		"placeholders": {}
 	}

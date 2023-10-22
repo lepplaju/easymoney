@@ -56,7 +56,7 @@ class ProviderInvoices with ChangeNotifier {
     final date = DateTime.now();
     final dateOnly = '${date.day}.${date.month}.${date.year}';
     final receiptWidgets = <pw.Widget>[];
-
+    // TODO Add receipt minutes to invoice pdf
     int endSum = 0;
     for (var receiptMap in receiptAndFileList) {
       final Receipt receipt = receiptMap['receipt'];
@@ -72,10 +72,12 @@ class ProviderInvoices with ChangeNotifier {
                 mainAxisSize: pw.MainAxisSize.min,
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
+                  // Receipt title
                   pw.Text(
                     '${receipt.dateOnly}, ${receipt.store}',
                     style: regularStyle,
                   ),
+                  // Receipt description
                   pw.SizedBox(
                     width: 400,
                     child: pw.Text(
@@ -83,6 +85,10 @@ class ProviderInvoices with ChangeNotifier {
                       softWrap: true,
                       style: thinStyle,
                     ),
+                  ),
+                  pw.Text(
+                    'Pöytäkirja: ${receipt.minute}',
+                    style: boldStyle.copyWith(fontSize: 10),
                   ),
                 ],
               ),

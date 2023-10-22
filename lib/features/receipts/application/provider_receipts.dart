@@ -30,13 +30,14 @@ class ProviderReceipts with ChangeNotifier {
   /// Adds a new Receipt
   ///
   /// Takes the [date] of the receipt, [store], optional [description],
-  /// [amount], a receipt [file] and a [profileId] for which the receipt
-  /// belongs to.
+  /// [amount], [minute] where the transaction was approved, a receipt [file]
+  /// and a [profileId] for which the receipt belongs to.
   Future<Receipt> addReceipt({
     required DateTime date,
     required String store,
     String description = '',
     required double amount,
+    required String minute,
     required XFile file,
     required int profileId,
   }) async {
@@ -52,6 +53,7 @@ class ProviderReceipts with ChangeNotifier {
       amount: (amount * 100).round(),
       store: store,
       description: description,
+      minute: minute,
       fileName: fileName,
       profileId: profileId,
     );

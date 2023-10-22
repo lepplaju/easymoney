@@ -9,12 +9,14 @@ class Receipt {
   String description;
   String fileName;
   int profileId;
+  String minute;
 
   /// Creates Receipt
   ///
   /// Takes unique [id], [date] of the receipt, [amount] of the receipt,
   /// [store] from which the receipt is from, [description] about
-  /// the receipt, [fileName] of the attached receipt file and the [profileId]
+  /// the receipt, [fileName] of the attached receipt file, [minute] where
+  /// the transaction was approved and the [profileId]
   /// of the profile which the receipt belongs to.
   Receipt({
     required this.id,
@@ -24,12 +26,13 @@ class Receipt {
     required this.description,
     required this.fileName,
     required this.profileId,
+    required this.minute,
   });
 
   /// Creates a receipt from map
   ///
   /// Takes a [map] containing fields: id, profileId, date, amount, store,
-  /// description and fileName
+  /// description, minute and fileName
   Receipt.fromMap(Map<String, dynamic> map)
       : id = map['id'],
         date = DateTime.parse(map['date']),
@@ -37,7 +40,8 @@ class Receipt {
         store = map['store'],
         description = map['description'],
         fileName = map['fileName'],
-        profileId = map['profileId'];
+        profileId = map['profileId'],
+        minute = map['minute'];
 
   /// Returns the date of the receipt as dd.mm.yyyy string
   String get dateOnly {
@@ -58,6 +62,7 @@ class Receipt {
       'store': store,
       'description': description,
       'fileName': fileName,
+      'minute': minute,
       'profileId': profileId,
     };
   }
@@ -71,6 +76,7 @@ class Receipt {
         'store: "$store", '
         'description: "$description", '
         'fileName: "$fileName", '
+        'minute: "$minute", '
         'profileId: "$profileId"'
         '}';
   }
