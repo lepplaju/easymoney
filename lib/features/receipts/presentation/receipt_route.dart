@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../application/provider_receipts.dart';
@@ -24,12 +25,14 @@ class ReceiptRoute extends StatefulWidget {
 /// State for [ReceiptRoute]
 class _ReceiptRouteState extends State<ReceiptRoute> {
   late final ProviderReceipts providerReceipts;
+  late final AppLocalizations locals;
   var isInitialized = false;
 
   @override
   void didChangeDependencies() {
     if (!isInitialized) {
       providerReceipts = Provider.of<ProviderReceipts>(context);
+      locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
     super.didChangeDependencies();
@@ -123,18 +126,15 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
           width: double.infinity,
           child: Column(
             children: [
-              // FIXME Localization
-              DataWidget(title: 'Date:', content: widget.receipt.dateOnly),
-              // FIXME Localization
-              DataWidget(title: 'Sum:', content: '${widget.receipt.euros}€'),
-              // FIXME Localization
-              DataWidget(title: 'Store:', content: widget.receipt.store),
-              // FIXME Localization
+              DataWidget(title: locals.date, content: widget.receipt.dateOnly),
+              DataWidget(
+                  title: locals.amount, content: '${widget.receipt.euros}€'),
+              DataWidget(title: locals.store, content: widget.receipt.store),
               _description(
-                  title: 'Description:', content: widget.receipt.description),
-              // FIXME Localization
+                  title: locals.description,
+                  content: widget.receipt.description),
               Text(
-                'Files',
+                locals.file,
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               Padding(
@@ -153,19 +153,16 @@ class _ReceiptRouteState extends State<ReceiptRoute> {
                     Navigator.of(context).pop();
                     sendSnack(
                       context: context,
-                      // FIXME Localization
-                      content: 'Receipt was deleted',
+                      content: locals.receiptRouteDeleteSuccessSnack,
                     );
                   }).catchError((e) {
                     sendSnack(
                       context: context,
-                      // FIXME Localization
-                      content: 'Could not delete receipt',
+                      content: locals.receiptRouteDeleteErrorSnack,
                     );
                   });
                 },
-                // FIXME Localization
-                child: const Text('Delete Receipt'),
+                child: Text(locals.delete),
               ),
             ],
           ),

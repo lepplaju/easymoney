@@ -1,0 +1,26 @@
+// Title
+
+name: "picOrPdfDialogTitle"
+text_en: "Add a picture"
+text_fi: "Lisää kuva"
+description: "Add picture text for PicOrPdfDialog"
+type: "text"
+placeholders: "{}"
+
+// Take a picture
+
+name: "picOrPdfDialogTake"
+text_en: "Take picture"
+text_fi: "Ota kuva"
+description: "Take a pic text for PicOrPdfDialog"
+type: "text"
+placeholders: "{}"
+
+// Choose picture
+
+name: "picOrPdfDialogChoose"
+text_en: "Choose picture"
+text_fi: "Valitse kuva"
+description: "Choose a pic text for PicOrPdfDialog"
+type: "text"
+placeholders: "{}"

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -42,6 +43,7 @@ class InvoiceRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProviderInvoices providerInvoices =
         Provider.of<ProviderInvoices>(context);
+    final locals = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('${invoice.dateOnly}: ${invoice.target}'),
@@ -52,28 +54,23 @@ class InvoiceRoute extends StatelessWidget {
         child: Column(
           children: [
             DataWidget(
-              // FIXME Localization
-              title: 'Date:',
+              title: locals!.invoiceRouteDate,
               content: invoice.dateOnly,
             ),
             DataWidget(
-              // FIXME Localization
-              title: 'Reference:',
+              title: locals.invoiceRouteReference,
               content: invoice.target,
             ),
             DataWidget(
-              // FIXME Localization
-              title: 'Invoicer:',
+              title: locals.invoiceRouteInvoicer,
               content: invoice.name,
             ),
             DataWidget(
-              // FIXME Localization
-              title: 'Amount:',
+              title: locals.invoiceRouteAmount,
               content: '${invoice.euros}€',
             ),
             Text(
-              // FIXME Localization
-              'File:',
+              locals.invoiceRouteFile,
               style: Theme.of(context).textTheme.displaySmall,
             ),
             TextButton(
@@ -107,27 +104,23 @@ class InvoiceRoute extends StatelessWidget {
                         '${invoice.name}',
                   );
                 },
-                // FIXME Localization
-                text: 'Send'),
+                text: locals.invoiceRouteSend),
             _actionButton(
               onPressed: () {
                 providerInvoices.deleteInvoice(invoice).then((value) {
                   Navigator.of(context).pop();
                   sendSnack(
                     context: context,
-                    // FIXME Localization
-                    content: 'Invoice was deleted',
+                    content: locals.invoiceRouteSnackDeleteSuccess,
                   );
                 }).catchError((e) {
                   sendSnack(
                     context: context,
-                    // FIXME Localization
-                    content: 'Could not delete Invoice',
+                    content: locals.invoiceRouteSnackDeleteError,
                   );
                 });
               },
-              // FIXME Localization
-              text: 'Delete',
+              text: locals.delete,
             ),
           ],
         ),

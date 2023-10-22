@@ -87,3 +87,21 @@ text_fi: "Lisää Profiili"
 description: "Submit button text for AddProfileRoute."
 type: "text"
 placeholders: "{}"
+
+// Empty fields
+
+name: "addProfileRouteNoEmptyFields"
+text_en: "None of the fields can be empty!"
+text_fi: "Mikään kentistä ei voi olla tyhjä!"
+description: "Empty fields validation error for AddProfileRoute"
+type: "text"
+placeholders: "{}"
+
+// Correct IBAN
+
+name: "addProfileRouteCorrectIban"
+text_en: "Is this correct IBAN?"
+text_fi: "Onko tämä IBAN oikein?"
+description: "IBAN confirmation text for AddProfileRoute"
+type: "text"
+placeholders: "{}"

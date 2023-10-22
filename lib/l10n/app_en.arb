@@ -23,6 +23,12 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"editProfileRouteConfirmDelete": "Do you want to delete this profile?",
+	"@editProfileRouteConfirmDelete": {
+		"description": "Confirm delete text for EditProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
 	"receiptTabInvoiceSuccessSanck": "Invoice created!",
 	"@receiptTabInvoiceSuccessSanck": {
 		"description": "Invoice success snack for ReceiptTab.",
@@ -32,6 +38,132 @@
 	"receiptTabAddReceiptButton": "Add Receipt",
 	"@receiptTabAddReceiptButton": {
 		"description": "Add Receipt Button for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabConfirmInvoice": "Do you want to create an invoice?",
+	"@receiptTabConfirmInvoice": {
+		"description": "Confirm invoice creation text for ReceiptTab",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabConfirmDescription": "This will delete all current receipts permanently.",
+	"@receiptTabConfirmDescription": {
+		"description": "Description for confirm invoice description.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptRouteDeleteSuccessSnack": "Receipt was deleted.",
+	"@receiptRouteDeleteSuccessSnack": {
+		"description": "Deleted receipt snack for ReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptRouteDeleteErrorSnack": "Could not delete receipt.",
+	"@receiptRouteDeleteErrorSnack": {
+		"description": "Delete error snack for ReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteFilePreview": "Preview",
+	"@addReceiptRouteFilePreview": {
+		"description": "Preview text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteCreatedSnack": "Receipt created!",
+	"@addReceiptRouteCreatedSnack": {
+		"description": "Receipt created snack for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteTitle": "Add Receipt",
+	"@addReceiptRouteTitle": {
+		"description": "Title for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteDate": "Date of the receipt",
+	"@addReceiptRouteDate": {
+		"description": "Date text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteReceipt": "Receipt",
+	"@addReceiptRouteReceipt": {
+		"description": "Receipt text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteUploadHelp": "Upload a picture of the receipt.",
+	"@addReceiptRouteUploadHelp": {
+		"description": "Upload help text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogTitle": "Add a picture",
+	"@picOrPdfDialogTitle": {
+		"description": "Add picture text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogTake": "Take picture",
+	"@picOrPdfDialogTake": {
+		"description": "Take a pic text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogChoose": "Choose picture",
+	"@picOrPdfDialogChoose": {
+		"description": "Choose a pic text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteDate": "Date",
+	"@invoiceRouteDate": {
+		"description": "Date text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteReference": "Reference",
+	"@invoiceRouteReference": {
+		"description": "Reference text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteInvoicer": "Invoicer",
+	"@invoiceRouteInvoicer": {
+		"description": "Invoicer text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteAmount": "Amount",
+	"@invoiceRouteAmount": {
+		"description": "Amount text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteFile": "File",
+	"@invoiceRouteFile": {
+		"description": "File text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSend": "Send",
+	"@invoiceRouteSend": {
+		"description": "Send text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSnackDeleteSuccess": "Invoice was deleted.",
+	"@invoiceRouteSnackDeleteSuccess": {
+		"description": "Snack delete success text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSnackDeleteError": "Could not delete invoice.",
+	"@invoiceRouteSnackDeleteError": {
+		"description": "Snack delete error text for InvoiceRoute",
 		"type": "text",
 		"placeholders": {}
 	},
@@ -95,6 +227,18 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"addProfileRouteNoEmptyFields": "None of the fields can be empty!",
+	"@addProfileRouteNoEmptyFields": {
+		"description": "Empty fields validation error for AddProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addProfileRouteCorrectIban": "Is this correct IBAN?",
+	"@addProfileRouteCorrectIban": {
+		"description": "IBAN confirmation text for AddProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
 	"homePageReceiptsTabLabel": "Receipts",
 	"@homePageReceiptsTabLabel": {
 		"description": "Label for receipts tab in the HomePage.",
@@ -143,15 +287,63 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"add": "Add",
+	"@add": {
+		"description": "Add text",
+		"type": "text",
+		"placeholders": {}
+	},
 	"save": "Save",
 	"@save": {
 		"description": "Save text for buttons etc.",
 		"type": "text",
 		"placeholders": {}
 	},
+	"edit": "Edit",
+	"@edit": {
+		"description": "Edit text",
+		"type": "text",
+		"placeholders": {}
+	},
 	"delete": "Delete",
 	"@delete": {
 		"description": "Delete text for buttons etc.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"date": "Date",
+	"@date": {
+		"description": "Date text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"amount": "Amount",
+	"@amount": {
+		"description": "Amount text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"store": "Store",
+	"@store": {
+		"description": "Store text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"description": "Description",
+	"@description": {
+		"description": "Description text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"change": "Change",
+	"@change": {
+		"description": "Change text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"file": "File",
+	"@file": {
+		"description": "File text",
 		"type": "text",
 		"placeholders": {}
 	}

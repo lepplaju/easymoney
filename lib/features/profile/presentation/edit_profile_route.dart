@@ -55,7 +55,7 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
   }
 
   /// Edit a profile using current values from the UI
-  _saveProfile() async {
+  _saveProfile({required AppLocalizations locals}) async {
     if (profileNameController.text.trim().isEmpty ||
         firstNameController.text.trim().isEmpty ||
         lastNameController.text.trim().isEmpty ||
@@ -64,9 +64,8 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const InfoDialg(
-              // FIXME Localization
-              child: Text('None of the fields can be empty!'),
+            return InfoDialg(
+              child: Text(locals.addProfileRouteNoEmptyFields),
             );
           });
       return;
@@ -76,16 +75,13 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
           context: context,
           builder: (BuildContext context) {
             return ConfirmDialog(
-              // FIXME Localization
               child: Column(
                 children: [
                   Text(
-                    // FIXME Localization
-                    'Is this correct IBAN?',
+                    locals.addProfileRouteIBAN,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Text(
-                    // FIXME Localization
                     ibanController.text.trim(),
                     style: Theme.of(context)
                         .textTheme
@@ -198,7 +194,7 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            _saveProfile();
+                            _saveProfile(locals: locals);
                           },
                           child: Text(locals.save),
                         ),
@@ -215,15 +211,12 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
                                   MaterialStateProperty.all(Colors.red),
                             ),
                     onPressed: () async {
-                      // TODO Delete profile
                       final confirmation = await showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) {
                             return ConfirmDialog(
-                              // FIXME Localization
                               child: Text(
-                                // FIXME Localization
-                                'Do you want to delete this profile?',
+                                locals.editProfileRouteConfirmDelete,
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                             );
@@ -237,11 +230,10 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
                             .pop(providerProfiles.selectedProfile!.id);
                       }
                     },
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        // FIXME Localization
-                        'Delete Profile',
+                        locals.delete,
                         textAlign: TextAlign.center,
                       ),
                     ),

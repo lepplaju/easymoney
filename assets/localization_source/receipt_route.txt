@@ -1,0 +1,17 @@
+// Deleted snack
+
+name: "receiptRouteDeleteSuccessSnack"
+text_en: "Receipt was deleted."
+text_fi: "Kuitti poistettin."
+description: "Deleted receipt snack for ReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Snack error
+
+name: "receiptRouteDeleteErrorSnack"
+text_en: "Could not delete receipt."
+text_fi: "Kuittia ei voitu poistaa."
+description: "Delete error snack for ReceiptRoute"
+type: "text"
+placeholders: "{}"

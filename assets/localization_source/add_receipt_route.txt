@@ -1,0 +1,53 @@
+// File Preview
+
+name: "addReceiptRouteFilePreview"
+text_en: "Preview"
+text_fi: "Esikatsele"
+description: "Preview text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Created Snack
+
+name: "addReceiptRouteCreatedSnack"
+text_en: "Receipt created!"
+text_fi: "Kuitti luotu!"
+description: "Receipt created snack for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Title
+
+name: "addReceiptRouteTitle"
+text_en: "Add Receipt"
+text_fi: "Lisää kuitti"
+description: "Title for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Date
+
+name: "addReceiptRouteDate"
+text_en: "Date of the receipt"
+text_fi: "Kuitin päivämäärä"
+description: "Date text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Receipt
+
+name: "addReceiptRouteReceipt"
+text_en: "Receipt"
+text_fi: "Kuitti"
+description: "Receipt text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"
+
+// Upload help
+
+name: "addReceiptRouteUploadHelp"
+text_en: "Upload a picture of the receipt."
+text_fi: "Lataa kuva kuitista."
+description: "Upload help text for AddReceiptRoute"
+type: "text"
+placeholders: "{}"

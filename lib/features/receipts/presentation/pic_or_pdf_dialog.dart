@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../widgets/dialog_components/dialog_titlebar.dart';
 
@@ -32,6 +33,7 @@ class PicOrPdfDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locals = AppLocalizations.of(context);
     return Center(
       child: SingleChildScrollView(
         child: Dialog(
@@ -43,17 +45,14 @@ class PicOrPdfDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // FIXME Localization
-              const DialogTitleBar(title: 'Add a picture'),
+              DialogTitleBar(title: locals!.picOrPdfDialogTitle),
               SizedBox(height: verticalPadding),
               _button(
-                // FIXME Localization
-                text: 'Take Picture',
+                text: locals.picOrPdfDialogTake,
                 onPressed: () => Navigator.pop(context, UploadType.camera),
               ),
               _button(
-                // FIXME Localization
-                text: 'Choose Picture',
+                text: locals.picOrPdfDialogChoose,
                 onPressed: () => Navigator.pop(context, UploadType.picture),
               ),
               // TODO Add support for pdf

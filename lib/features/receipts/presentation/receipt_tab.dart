@@ -85,23 +85,18 @@ class _ReceiptTabState extends State<ReceiptTab> {
                   child: const Icon(Icons.picture_as_pdf_rounded),
                   onPressed: () async {
                     // FIXME Catch null profile
-                    // TODO Compose the invoice
-                    // TODO Add warning about receipts being deleted
                     final confirmation = await showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) {
                           return ConfirmDialog(
-                            // FIXME Localization
                             child: Column(
                               children: [
                                 Text(
-                                  // FIXME Localization
-                                  'Do you want to create an invoice?',
+                                  locals.receiptTabConfirmInvoice,
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 Text(
-                                  // FIXME Localization
-                                  'This will delete all current receipts permanently.',
+                                  locals.receiptTabConfirmDescription,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ],

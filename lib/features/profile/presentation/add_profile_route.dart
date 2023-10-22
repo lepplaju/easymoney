@@ -55,7 +55,10 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
   }
 
   /// Add a new profile using current values from the UI
-  _addProfile({required String successSnack}) async {
+  _addProfile({
+    required String successSnack,
+    required AppLocalizations locals,
+  }) async {
     if (profileNameController.text.trim().isEmpty ||
         firstNameController.text.trim().isEmpty ||
         lastNameController.text.trim().isEmpty ||
@@ -64,9 +67,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const InfoDialg(
-              // FIXME Localization
-              child: Text('None of the fields can be empty!'),
+            return InfoDialg(
+              child: Text(locals.addProfileRouteNoEmptyFields),
             );
           });
       return;
@@ -75,16 +77,13 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
         context: context,
         builder: (BuildContext context) {
           return ConfirmDialog(
-            // FIXME Localization
             child: Column(
               children: [
                 Text(
-                  // FIXME Localization
-                  'Is this correct IBAN?',
+                  locals.addProfileRouteIBAN,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  // FIXME Localization
                   ibanController.text.trim(),
                   style: Theme.of(context)
                       .textTheme
@@ -188,6 +187,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                       onPressed: () {
                         _addProfile(
                           successSnack: locals.addProfileRouteSuccessSnack,
+                          locals: locals,
                         );
                       },
                       child: Text(locals.addProfileRouteSubmitButton)),

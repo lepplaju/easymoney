@@ -7,6 +7,15 @@ description: "Cancel text for buttons etc."
 type: "text"
 placeholders: "{}"
 
+// Add
+
+name: "add"
+text_en: "Add"
+text_fi: "Lisää"
+description: "Add text"
+type: "text"
+placeholders: "{}"
+
 // Save
 
 name: "save"
@@ -16,11 +25,74 @@ description: "Save text for buttons etc."
 type: "text"
 placeholders: "{}"
 
+// Edit
+
+name: "edit"
+text_en: "Edit"
+text_fi: "Muokkaa"
+description: "Edit text"
+type: "text"
+placeholders: "{}"
+
 // Delete
 
 name: "delete"
 text_en: "Delete"
 text_fi: "Poista"
 description: "Delete text for buttons etc."
+type: "text"
+placeholders: "{}"
+
+// Date
+
+name: "date"
+text_en: "Date"
+text_fi: "Päivämäärä"
+description: "Date text"
+type: "text"
+placeholders: "{}"
+
+// Amount
+
+name: "amount"
+text_en: "Amount"
+text_fi: "Summa"
+description: "Amount text"
+type: "text"
+placeholders: "{}"
+
+// Store
+
+name: "store"
+text_en: "Store"
+text_fi: "Liike"
+description: "Store text"
+type: "text"
+placeholders: "{}"
+
+// Description
+
+name: "description"
+text_en: "Description"
+text_fi: "Lisätietoja"
+description: "Description text"
+type: "text"
+placeholders: "{}"
+
+// Change
+
+name: "change"
+text_en: "Change"
+text_fi: "Muuta"
+description: "Change text"
+type: "text"
+placeholders: "{}"
+
+// File
+
+name: "file"
+text_en: "File"
+text_fi: "Tiedosto"
+description: "File text"
 type: "text"
 placeholders: "{}"

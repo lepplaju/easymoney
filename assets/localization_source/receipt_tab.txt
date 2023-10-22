@@ -15,3 +15,21 @@ text_fi: "Lisää Kuitti"
 description: "Add Receipt Button for ReceiptTab."
 type: "text"
 placeholders: "{}"
+
+// Confirm creation
+
+name: "receiptTabConfirmInvoice"
+text_en: "Do you want to create an invoice?"
+text_fi: "Haluatko varmasti luoda laskun?"
+description: "Confirm invoice creation text for ReceiptTab"
+type: "text"
+placeholders: "{}"
+
+// Confirm creation description
+
+name: "receiptTabConfirmDescription"
+text_en: "This will delete all current receipts permanently."
+text_fi: "Tämä poistaa kaikki tämänhetkiset kuitit pysyvästi."
+description: "Description for confirm invoice description."
+type: "text"
+placeholders: "{}"

@@ -1,0 +1,71 @@
+// Date
+
+name: "invoiceRouteDate"
+text_en: "Date"
+text_fi: "Päivä"
+description: "Date text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Reference
+
+name: "invoiceRouteReference"
+text_en: "Reference"
+text_fi: "Viite"
+description: "Reference text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Invoicer
+
+name: "invoiceRouteInvoicer"
+text_en: "Invoicer"
+text_fi: "Laskuttaja"
+description: "Invoicer text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Amount
+
+name: "invoiceRouteAmount"
+text_en: "Amount"
+text_fi: "Summa"
+description: "Amount text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// File
+
+name: "invoiceRouteFile"
+text_en: "File"
+text_fi: "Tiedosto"
+description: "File text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Send
+
+name: "invoiceRouteSend"
+text_en: "Send"
+text_fi: "Lähetä"
+description: "Send text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Snack delete success
+
+name: "invoiceRouteSnackDeleteSuccess"
+text_en: "Invoice was deleted."
+text_fi: "Lasku poistettiin."
+description: "Snack delete success text for InvoiceRoute"
+type: "text"
+placeholders: "{}"
+
+// Snack delete error
+
+name: "invoiceRouteSnackDeleteError"
+text_en: "Could not delete invoice."
+text_fi: "Laskua ei voitu poistaa."
+description: "Snack delete error text for InvoiceRoute"
+type: "text"
+placeholders: "{}"

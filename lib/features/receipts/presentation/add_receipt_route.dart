@@ -2,6 +2,7 @@ import 'dart:io';
 
 //import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pdf_render/pdf_render.dart';
@@ -67,7 +68,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   /// Loads a receipt file of the Receipt
   ///
   /// Loads and pushes a dialog showing the loaded file
-  _loadReceiptFile() async {
+  _loadReceiptFile({required AppLocalizations locals}) async {
     try {
       switch (file!.name.substring(file!.name.lastIndexOf('.'))) {
         case '.jpg':
@@ -76,8 +77,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
               context: context,
               builder: (BuildContext context) {
                 return ShowJpgDialog(
-                  // FIXME Localization
-                  title: 'Preview',
+                  title: locals.addReceiptRouteFilePreview,
                   image: Image.file(File(file!.path)),
                 );
               },
@@ -91,8 +91,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
               context: context,
               builder: (BuildContext context) {
                 return ShowPdfDialog(
-                  // FIXME Localization
-                  title: 'Preview',
+                  title: locals.addReceiptRouteFilePreview,
                   pdf: pdfFile,
                 );
               },
@@ -109,7 +108,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   /// Creates a new Receipt
   ///
   /// Returns a [Receipt] as a future
-  Future<Receipt> _createReceipt() async {
+  Future<Receipt> _createReceipt({required AppLocalizations locals}) async {
     late final double amount;
     if (amountTextController.text.isEmpty) {
       amount = 0;
@@ -131,8 +130,8 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
         profileId: widget.profileId,
       );
       if (context.mounted) {
-        // FIXME Localization
-        sendSnack(context: context, content: 'Receipt created!');
+        sendSnack(
+            context: context, content: locals.addReceiptRouteCreatedSnack);
       }
       return result;
     } catch (e) {
@@ -143,11 +142,11 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
 
   @override
   Widget build(BuildContext context) {
+    final locals = AppLocalizations.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        // FIXME Localization
-        title: const Text('Add Receipt'),
+        title: Text(locals!.addReceiptRouteTitle),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -156,11 +155,10 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // FIXME Localization
               Column(
                 children: [
                   Text(
-                    'Date of the receipt',
+                    locals.addReceiptRouteDate,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                   Padding(
@@ -189,22 +187,19 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                           });
                         }
                       },
-                      // FIXME Localization
-                      child: const Text('Edit')),
+                      child: Text(locals.edit)),
                   TextField(
                     controller: storeTextController,
-                    decoration: const InputDecoration(
-                      // FIXME Localization
-                      label: Text('Store'),
+                    decoration: InputDecoration(
+                      label: Text(locals.store),
                     ),
                     maxLength: 40,
                     textInputAction: TextInputAction.next,
                   ),
                   TextField(
                     controller: descriptionTextController,
-                    decoration: const InputDecoration(
-                      // FIXME Localization
-                      label: Text('Description'),
+                    decoration: InputDecoration(
+                      label: Text(locals.description),
                     ),
                     maxLines: 5,
                     minLines: 1,
@@ -229,26 +224,23 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                       FilteringTextInputFormatter.allow(
                           RegExp(r'^\d+\.?\d{0,2}')),
                     ],
-                    decoration: const InputDecoration(
-                      // FIXME Localization
-                      label: Text('Amount'),
-                      suffixIcon: Icon(Icons.euro),
+                    decoration: InputDecoration(
+                      label: Text(locals.amount),
+                      suffixIcon: const Icon(Icons.euro),
                     ),
                     maxLength: 7,
                     textInputAction: TextInputAction.done,
                   ),
-                  // FIXME Localization
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Receipt',
+                      locals.addReceiptRouteReceipt,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
-                  // FIXME Localization
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Upload a picture/pdf of the receipt.'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(locals.addReceiptRouteUploadHelp),
                   ),
                   // TODO Show the receipt file
                   if (file != null)
@@ -256,7 +248,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextButton(
                         onPressed: () {
-                          _loadReceiptFile();
+                          _loadReceiptFile(locals: locals);
                         },
                         child: Text(file!.name.length > 15
                             ? '...${file!.name.substring(file!.name.lastIndexOf('.') - 15)}'
@@ -302,8 +294,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                           break;
                       }
                     },
-                    // FIXME Localization
-                    child: Text(file == null ? 'Add' : 'Change'),
+                    child: Text(file == null ? locals.add : locals.change),
                   ),
                 ],
               ),
@@ -318,18 +309,16 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        // FIXME Localization
-                        child: const Text('Cancel'),
+                        child: Text(locals.cancel),
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          final receipt = await _createReceipt();
+                          final receipt = await _createReceipt(locals: locals);
                           if (context.mounted) {
                             Navigator.of(context).pop(receipt);
                           }
                         },
-                        // FIXME Localization
-                        child: const Text('Save'),
+                        child: Text(locals.save),
                       ),
                     ],
                   ),
