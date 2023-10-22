@@ -105,3 +105,39 @@ text_fi: "Pöytäkirja"
 description: "Minute text"
 type: "text"
 placeholders: "{}"
+
+// Status waiting
+
+name: "waiting"
+text_en: "Waiting"
+text_fi: "Odottaa"
+description: "Waiting status text"
+type: "text"
+placeholders: "{}"
+
+// Status sent
+
+name: "sent"
+text_en: "Sent"
+text_fi: "Lähetetty"
+description: "Sent status text"
+type: "text"
+placeholders: "{}"
+
+// Status paid
+
+name: "paid"
+text_en: "Paid"
+text_fi: "Maksettu"
+description: "Paid status text"
+type: "text"
+placeholders: "{}"
+
+// Status
+
+name: "status"
+text_en: "Status"
+text_fi: "Tila"
+description: "Status text"
+type: "text"
+placeholders: "{}"

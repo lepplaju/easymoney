@@ -34,6 +34,23 @@ class InvoicesRepository {
     await db!.insert(_invoicesTableName, invoice.toMap());
   }
 
+  /// Changes the invoice status
+  ///
+  /// Requires the [id] of the invoice to be changed and the [data] map
+  /// containing status key with the status enum name.
+  Future<void> changeStatus({
+    required int id,
+    required Map<String, String> data,
+  }) async {
+    await _openDatabase();
+    await db!.update(
+      _invoicesTableName,
+      data,
+      where: 'id=?',
+      whereArgs: [id],
+    );
+  }
+
   /// Deletes an [invoice]
   Future<void> deleteInvoice({required Invoice invoice}) async {
     final path = await getPath(_invoicesPath);

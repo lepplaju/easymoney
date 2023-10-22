@@ -376,5 +376,29 @@
 		"description": "Minute text",
 		"type": "text",
 		"placeholders": {}
+	},
+	"waiting": "Waiting",
+	"@waiting": {
+		"description": "Waiting status text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sent": "Sent",
+	"@sent": {
+		"description": "Sent status text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"paid": "Paid",
+	"@paid": {
+		"description": "Paid status text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"status": "Status",
+	"@status": {
+		"description": "Status text",
+		"type": "text",
+		"placeholders": {}
 	}
 }

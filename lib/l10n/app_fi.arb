@@ -61,5 +61,9 @@
 	"description": "Lisätietoja",
 	"change": "Muuta",
 	"file": "Tiedosto",
-	"minute": "Pöytäkirja"
+	"minute": "Pöytäkirja",
+	"waiting": "Odottaa",
+	"sent": "Lähetetty",
+	"paid": "Maksettu",
+	"status": "Tila"
 }

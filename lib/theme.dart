@@ -147,7 +147,7 @@ class EasyMoneyTheme {
       ),
 
       labelMedium: const TextStyle(
-        //color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
         fontSize: 16,
       ),

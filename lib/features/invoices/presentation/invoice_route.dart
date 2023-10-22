@@ -43,7 +43,24 @@ class InvoiceRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProviderInvoices providerInvoices =
         Provider.of<ProviderInvoices>(context);
-    final locals = AppLocalizations.of(context);
+    final locals = AppLocalizations.of(context)!;
+    late final String statusText;
+    late final Color statusColor;
+    switch (invoice.status.name) {
+      case 'waiting':
+        statusText = locals.waiting;
+        statusColor = Colors.pink;
+      case 'sent':
+        statusText = locals.sent;
+        statusColor = Colors.purple;
+      case 'paid':
+        statusText = locals.paid;
+        statusColor = Colors.green;
+      default:
+        statusText = 'error';
+        statusColor = Colors.red;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('${invoice.dateOnly}: ${invoice.target}'),
@@ -53,8 +70,23 @@ class InvoiceRoute extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: [
+            Container(
+              color: statusColor,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Center(
+                  child: Text(
+                    '${locals.status}: $statusText',
+                    style: Theme.of(context)
+                        .textTheme
+                        .displaySmall!
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
             DataWidget(
-              title: locals!.invoiceRouteDate,
+              title: locals.invoiceRouteDate,
               content: invoice.dateOnly,
             ),
             DataWidget(

@@ -23,6 +23,7 @@ void _onCreate(Database db, int version) async {
       target TEXT NOT NULL,
       name TEXT NOT NULL,
       amount INTEGER NOT NULL,
+      status TEXT NOT NULL,
       fileName TEXT NOT NULL,
       FOREIGN KEY (profileId) REFERENCES profiles (id) ON DELETE CASCADE ON UPDATE CASCADE
     );

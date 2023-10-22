@@ -199,6 +199,25 @@ class ProviderInvoices with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Changes the status of the invoice
+  ///
+  /// Requires [id] of the invoice to be changed and the [status] which
+  /// will be given to the invoice
+  Future<void> changeStatus({
+    required int id,
+    required Status status,
+  }) async {
+    final data = {'status': status.name};
+    await _invoicesRepository.changeStatus(id: id, data: data);
+    final oldInvoice = _invoices.firstWhere((invoice) => invoice.id == id);
+    _invoices.removeWhere((invoice) => invoice.id == id);
+    _invoices.add(Invoice.fromMap(map: {
+      ...oldInvoice.toMap(),
+      'status': status.name,
+    }));
+    notifyListeners();
+  }
+
   /// Deletes an invoice
   ///
   /// Requires [invoice] which will be deleted
