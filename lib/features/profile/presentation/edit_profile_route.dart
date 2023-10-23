@@ -227,7 +227,7 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
                           .deleteProfile(providerProfiles.selectedProfile!.id);
                       if (context.mounted) {
                         Navigator.of(context)
-                            .pop(providerProfiles.selectedProfile!.id);
+                            .pop(providerProfiles.selectedProfile?.id);
                       }
                     },
                     child: SizedBox(

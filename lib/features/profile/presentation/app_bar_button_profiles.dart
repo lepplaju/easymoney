@@ -30,6 +30,7 @@ class AppBarButtonProfiles extends StatelessWidget {
     AppLocalizations locals,
   ) {
     final List<DropdownMenuItem<int>> items = [];
+
     for (var profile in profiles) {
       items.add(DropdownMenuItem(
         value: profile.id,
@@ -88,6 +89,16 @@ class AppBarButtonProfiles extends StatelessWidget {
                 .then((value) {
               if (value.runtimeType == int) {
                 providerReceipts.fetchReceipts(profileId: value);
+              } else {
+                Navigator.of(context)
+                    .push(
+                      createRoute(
+                        const AddProfileRoute(
+                          allowReturn: false,
+                        ),
+                      ),
+                    )
+                    .then((value) => providerProfiles.getProfiles());
               }
             });
           } else if (value == 1) {

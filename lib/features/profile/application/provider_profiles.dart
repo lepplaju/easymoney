@@ -96,7 +96,7 @@ class ProviderProfiles with ChangeNotifier {
     final affected = await _profileRepository.deleteProfile(id);
     if (affected != 0) {
       _profiles.removeWhere((element) => element.id == id);
-      _selectedProfile = _profiles[0];
+      _selectedProfile = _profiles.isEmpty ? null : _profiles[0];
       notifyListeners();
     }
   }
@@ -109,7 +109,7 @@ class ProviderProfiles with ChangeNotifier {
       return Future.error(Exception('At least one profile is required'));
     }
     _profiles.addAll(newProfiles);
-    _selectedProfile = _profiles[0];
+    _selectedProfile = _profiles.isEmpty ? null : _profiles[0];
     notifyListeners();
   }
 }

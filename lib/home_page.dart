@@ -73,11 +73,12 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
               Navigator.of(context).push(createRoute(const InfoRoute()));
             },
           ),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: AppBarButtonProfiles(),
-            ),
+          actions: [
+            if (providerProfiles.profiles.isNotEmpty)
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: AppBarButtonProfiles(),
+              ),
           ],
           bottom: TabBar(
             tabs: [
