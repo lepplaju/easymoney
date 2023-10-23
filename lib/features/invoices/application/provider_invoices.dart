@@ -38,6 +38,11 @@ class ProviderInvoices with ChangeNotifier {
     required List<File> files,
   }) async {
     final receiptAndFileList = <Map<String, dynamic>>[];
+
+    final footer = pw.Footer(
+      trailing: pw.Text('Created using EasyMoney'),
+    );
+
     for (var receipt in receipts) {
       final receiptMap = {
         'receipt': receipt,
@@ -120,6 +125,7 @@ class ProviderInvoices with ChangeNotifier {
     );
     pdf.addPage(
       pw.MultiPage(
+          footer: (_) => footer,
           maxPages: 30,
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
@@ -181,14 +187,20 @@ class ProviderInvoices with ChangeNotifier {
         pw.Page(
           build: (pw.Context context) {
             return pw.Column(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
               children: [
-                pw.Text(
-                  '${receipt.store}, ${receipt.dateOnly}',
-                  style: boldStyle.copyWith(fontSize: 20),
+                pw.Column(
+                  children: [
+                    pw.Text(
+                      '${receipt.store}, ${receipt.dateOnly}',
+                      style: boldStyle.copyWith(fontSize: 20),
+                    ),
+                    pw.Image(
+                      pw.MemoryImage(file.readAsBytesSync()),
+                    ),
+                  ],
                 ),
-                pw.Image(
-                  pw.MemoryImage(file.readAsBytesSync()),
-                ),
+                footer,
               ],
             );
           },
