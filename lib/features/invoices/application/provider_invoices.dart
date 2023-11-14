@@ -185,22 +185,28 @@ class ProviderInvoices with ChangeNotifier {
       pdf.addPage(
         pw.Page(
           build: (pw.Context context) {
-            return pw.Column(
-              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-              children: [
-                pw.Column(
-                  children: [
-                    pw.Text(
-                      '${receipt.store}, ${receipt.dateOnly}',
-                      style: boldStyle.copyWith(fontSize: 20),
+            return pw.Expanded(
+              child: pw.Column(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  pw.Expanded(
+                    child: pw.Column(
+                      children: [
+                        pw.Text(
+                          '${receipt.store}, ${receipt.dateOnly}',
+                          style: boldStyle.copyWith(fontSize: 20),
+                        ),
+                        pw.Expanded(
+                          child: pw.Image(
+                            pw.MemoryImage(file.readAsBytesSync()),
+                          ),
+                        ),
+                      ],
                     ),
-                    pw.Image(
-                      pw.MemoryImage(file.readAsBytesSync()),
-                    ),
-                  ],
-                ),
-                footer,
-              ],
+                  ),
+                  footer,
+                ],
+              ),
             );
           },
         ),
