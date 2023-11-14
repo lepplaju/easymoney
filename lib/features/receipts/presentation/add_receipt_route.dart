@@ -75,7 +75,7 @@ class _AddReceiptRouteState extends State<AddReceiptRoute> {
   _loadReceiptFile({required AppLocalizations locals}) async {
     try {
       switch (file!.name.substring(file!.name.lastIndexOf('.'))) {
-        case '.jpg':
+        case '.jpg' || '.png':
           if (context.mounted) {
             showDialog(
               context: context,
