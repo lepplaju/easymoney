@@ -54,10 +54,10 @@ class InvoicesRepository {
   /// Deletes an [invoice]
   Future<void> deleteInvoice({required Invoice invoice}) async {
     final path = await getPath(_invoicesPath);
-    // TODO Handle errors
     try {
       await File('$path/${invoice.fileName}').delete();
     } catch (e) {
+      // FIXME Log
       // FIXME Handle same file name
       debugPrint('Could not find file named ${invoice.fileName}');
     }

@@ -84,7 +84,7 @@ class _ReceiptTabState extends State<ReceiptTab> {
                   ),
                   child: const Icon(Icons.picture_as_pdf_rounded),
                   onPressed: () async {
-                    // FIXME Catch null profile
+                    if (providerProfiles.selectedProfile == null) return;
                     final confirmation = await showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) {
@@ -133,24 +133,25 @@ class _ReceiptTabState extends State<ReceiptTab> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(
-                    createRoute(
-                      AddReceiptRoute(
-                        // FIXME Catch error
-                        profileId: providerProfiles.selectedProfile!.id,
-                      ),
-                    ),
-                  )
-                      .then((receipt) {
-                    if (receipt != null) {
-                      Navigator.of(context).push(createRoute(
-                        ReceiptRoute(
-                          receipt: receipt,
+                  if (providerProfiles.selectedProfile != null) {
+                    Navigator.of(context)
+                        .push(
+                      createRoute(
+                        AddReceiptRoute(
+                          profileId: providerProfiles.selectedProfile!.id,
                         ),
-                      ));
-                    }
-                  });
+                      ),
+                    )
+                        .then((receipt) {
+                      if (receipt != null) {
+                        Navigator.of(context).push(createRoute(
+                          ReceiptRoute(
+                            receipt: receipt,
+                          ),
+                        ));
+                      }
+                    });
+                  }
                 },
                 label: Text(locals.receiptTabAddReceiptButton),
               )

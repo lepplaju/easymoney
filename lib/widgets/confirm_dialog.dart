@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import './dialog_components/dialog_titlebar.dart';
 
@@ -8,15 +9,16 @@ class ConfirmDialog extends StatelessWidget {
       {super.key,
       this.title = 'Pssst!',
       required this.child,
-      this.yesText = 'Yes',
-      this.noText = 'Cancel'});
+      this.yesText,
+      this.noText});
   final String title;
   final Widget child;
-  final String yesText;
-  final String noText;
+  final String? yesText;
+  final String? noText;
 
   @override
   Widget build(BuildContext context) {
+    final locals = AppLocalizations.of(context)!;
     return Center(
       child: SingleChildScrollView(
         child: Dialog(
@@ -42,11 +44,11 @@ class ConfirmDialog extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(false),
-                          child: Text(noText),
+                          child: Text(noText ?? locals.cancel),
                         ),
                         ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(true),
-                          child: Text(yesText),
+                          child: Text(yesText ?? locals.yes),
                         ),
                       ],
                     ),

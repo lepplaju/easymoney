@@ -7,6 +7,15 @@ description: "Cancel text for buttons etc."
 type: "text"
 placeholders: "{}"
 
+// Yes
+
+name: "yes"
+text_en: "Yes"
+text_fi: "Kyllä"
+description: "Yes text"
+type: "text"
+placeholders: "{}"
+
 // Add
 
 name: "add"

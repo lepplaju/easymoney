@@ -29,7 +29,6 @@ class ReceiptRepository {
   /// Deletes a receipts file with [fileName]
   Future<void> _deleteReceiptFile(String fileName) async {
     final path = await getPath(_receiptsPath);
-    // TODO Handle errors
     await File('$path/$fileName').delete();
     return;
   }
@@ -82,7 +81,7 @@ class ReceiptRepository {
     try {
       final fileType = file.name.substring(file.name.lastIndexOf('.'));
       switch (fileType) {
-        case '.jpg':
+        case '.jpg' || '.png':
           Image image = Image.file(File(file.path));
           return image;
         // TODO Support pdf files
@@ -92,7 +91,6 @@ class ReceiptRepository {
         default:
           return Future.error(Exception('Incorrect filetype \'$fileType\''));
       }
-      // TODO Catch different errors
     } catch (e) {
       // TODO Log
       debugPrint(e.toString());
@@ -103,8 +101,13 @@ class ReceiptRepository {
   /// Gets a file for Receipt by [fileName]
   Future<File> getReceiptFile(String fileName) async {
     final path = await getPath(_receiptsPath);
-    // FIXME Catch errors
-    return File('$path/$fileName');
+    try {
+      return File('$path/$fileName');
+    } catch (e) {
+      // FIXME Log
+      debugPrint(e.toString());
+      return Future.error('Error while trying to load receipt file');
+    }
   }
 
   /// Makes sure that the SQLite database is initialized and opened

@@ -1,196 +1,4 @@
 {
-	"appBarButtonEditProfile": "Edit Profile",
-	"@appBarButtonEditProfile": {
-		"description": "Edit Profile button for AppBarButton.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"appBarButtonAddProfile": "Add Profile",
-	"@appBarButtonAddProfile": {
-		"description": "Add Profile button for AppBarButton.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"editProfileRouteSuccessMessage": "Profile saved!",
-	"@editProfileRouteSuccessMessage": {
-		"description": "Text for snack message for successful saving of profile",
-		"type": "text",
-		"placeholders": {}
-	},
-	"editProfileRouteTitle": "Edit Profile",
-	"@editProfileRouteTitle": {
-		"description": "Title for EditProfileRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"editProfileRouteConfirmDelete": "Do you want to delete this profile?",
-	"@editProfileRouteConfirmDelete": {
-		"description": "Confirm delete text for EditProfileRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabInvoiceSuccessSanck": "Invoice created!",
-	"@receiptTabInvoiceSuccessSanck": {
-		"description": "Invoice success snack for ReceiptTab.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabAddReceiptButton": "Add Receipt",
-	"@receiptTabAddReceiptButton": {
-		"description": "Add Receipt Button for ReceiptTab.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabConfirmInvoice": "Do you want to create an invoice?",
-	"@receiptTabConfirmInvoice": {
-		"description": "Confirm invoice creation text for ReceiptTab",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptTabConfirmDescription": "This will delete all current receipts permanently.",
-	"@receiptTabConfirmDescription": {
-		"description": "Description for confirm invoice description.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptRouteDeleteSuccessSnack": "Receipt was deleted.",
-	"@receiptRouteDeleteSuccessSnack": {
-		"description": "Deleted receipt snack for ReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"receiptRouteDeleteErrorSnack": "Could not delete receipt.",
-	"@receiptRouteDeleteErrorSnack": {
-		"description": "Delete error snack for ReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteFilePreview": "Preview",
-	"@addReceiptRouteFilePreview": {
-		"description": "Preview text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteCreatedSnack": "Receipt created!",
-	"@addReceiptRouteCreatedSnack": {
-		"description": "Receipt created snack for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteTitle": "Add Receipt",
-	"@addReceiptRouteTitle": {
-		"description": "Title for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteDate": "Date of the receipt",
-	"@addReceiptRouteDate": {
-		"description": "Date text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteReceipt": "Receipt",
-	"@addReceiptRouteReceipt": {
-		"description": "Receipt text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteUploadHelp": "Upload a picture of the receipt.",
-	"@addReceiptRouteUploadHelp": {
-		"description": "Upload help text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteInvalidStore": "Store can not be empty.",
-	"@addReceiptRouteInvalidStore": {
-		"description": "No empty store text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteInvalidAmount": "Amount can not be empty.",
-	"@addReceiptRouteInvalidAmount": {
-		"description": "No empty amount text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteInvalidMinute": "Minute can not be empty.",
-	"@addReceiptRouteInvalidMinute": {
-		"description": "No empty minute text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"addReceiptRouteInvalidPicture": "Upload a picture of the receipt.",
-	"@addReceiptRouteInvalidPicture": {
-		"description": "Picture of the receipt needed text for AddReceiptRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"picOrPdfDialogTitle": "Add a picture",
-	"@picOrPdfDialogTitle": {
-		"description": "Add picture text for PicOrPdfDialog",
-		"type": "text",
-		"placeholders": {}
-	},
-	"picOrPdfDialogTake": "Take picture",
-	"@picOrPdfDialogTake": {
-		"description": "Take a pic text for PicOrPdfDialog",
-		"type": "text",
-		"placeholders": {}
-	},
-	"picOrPdfDialogChoose": "Choose picture",
-	"@picOrPdfDialogChoose": {
-		"description": "Choose a pic text for PicOrPdfDialog",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteDate": "Date",
-	"@invoiceRouteDate": {
-		"description": "Date text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteReference": "Reference",
-	"@invoiceRouteReference": {
-		"description": "Reference text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteInvoicer": "Invoicer",
-	"@invoiceRouteInvoicer": {
-		"description": "Invoicer text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteAmount": "Amount",
-	"@invoiceRouteAmount": {
-		"description": "Amount text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteFile": "File",
-	"@invoiceRouteFile": {
-		"description": "File text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteSend": "Send",
-	"@invoiceRouteSend": {
-		"description": "Send text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteSnackDeleteSuccess": "Invoice was deleted.",
-	"@invoiceRouteSnackDeleteSuccess": {
-		"description": "Snack delete success text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
-	"invoiceRouteSnackDeleteError": "Could not delete invoice.",
-	"@invoiceRouteSnackDeleteError": {
-		"description": "Snack delete error text for InvoiceRoute",
-		"type": "text",
-		"placeholders": {}
-	},
 	"addProfileRouteAppBarTitle": "New Profile",
 	"@addProfileRouteAppBarTitle": {
 		"description": "Title for AddProfileRoute AppBar.",
@@ -263,18 +71,6 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"homePageReceiptsTabLabel": "Receipts",
-	"@homePageReceiptsTabLabel": {
-		"description": "Label for receipts tab in the HomePage.",
-		"type": "text",
-		"placeholders": {}
-	},
-	"homePageInvoicesTabLabel": "Invoices",
-	"@homePageInvoicesTabLabel": {
-		"description": "Label for invoices tab in the HomePage.",
-		"type": "text",
-		"placeholders": {}
-	},
 	"infoRouteTitle": "About",
 	"@infoRouteTitle": {
 		"description": "Title for InfoRoute",
@@ -305,9 +101,213 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"addReceiptRouteFilePreview": "Preview",
+	"@addReceiptRouteFilePreview": {
+		"description": "Preview text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteCreatedSnack": "Receipt created!",
+	"@addReceiptRouteCreatedSnack": {
+		"description": "Receipt created snack for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteTitle": "Add Receipt",
+	"@addReceiptRouteTitle": {
+		"description": "Title for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteDate": "Date of the receipt",
+	"@addReceiptRouteDate": {
+		"description": "Date text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteReceipt": "Receipt",
+	"@addReceiptRouteReceipt": {
+		"description": "Receipt text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteUploadHelp": "Upload a picture of the receipt.",
+	"@addReceiptRouteUploadHelp": {
+		"description": "Upload help text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidStore": "Store can not be empty.",
+	"@addReceiptRouteInvalidStore": {
+		"description": "No empty store text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidAmount": "Amount can not be empty.",
+	"@addReceiptRouteInvalidAmount": {
+		"description": "No empty amount text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidMinute": "Minute can not be empty.",
+	"@addReceiptRouteInvalidMinute": {
+		"description": "No empty minute text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addReceiptRouteInvalidPicture": "Upload a picture of the receipt.",
+	"@addReceiptRouteInvalidPicture": {
+		"description": "Picture of the receipt needed text for AddReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteDate": "Date",
+	"@invoiceRouteDate": {
+		"description": "Date text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteReference": "Reference",
+	"@invoiceRouteReference": {
+		"description": "Reference text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteInvoicer": "Invoicer",
+	"@invoiceRouteInvoicer": {
+		"description": "Invoicer text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteAmount": "Amount",
+	"@invoiceRouteAmount": {
+		"description": "Amount text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteFile": "File",
+	"@invoiceRouteFile": {
+		"description": "File text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSend": "Send",
+	"@invoiceRouteSend": {
+		"description": "Send text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSnackDeleteSuccess": "Invoice was deleted.",
+	"@invoiceRouteSnackDeleteSuccess": {
+		"description": "Snack delete success text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteSnackDeleteError": "Could not delete invoice.",
+	"@invoiceRouteSnackDeleteError": {
+		"description": "Snack delete error text for InvoiceRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invoiceRouteConfirmDeleteText": "Do you want to delete the invoice?",
+	"@invoiceRouteConfirmDeleteText": {
+		"description": "Text for confirmation dialog when deleting an invoice",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptRouteDeleteSuccessSnack": "Receipt was deleted.",
+	"@receiptRouteDeleteSuccessSnack": {
+		"description": "Deleted receipt snack for ReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptRouteDeleteErrorSnack": "Could not delete receipt.",
+	"@receiptRouteDeleteErrorSnack": {
+		"description": "Delete error snack for ReceiptRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptRouteConfirmDeleteText": "Do you want to delete this receipt?",
+	"@receiptRouteConfirmDeleteText": {
+		"description": "Confirm text to show when deleting a receipt",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogTitle": "Add a picture",
+	"@picOrPdfDialogTitle": {
+		"description": "Add picture text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogTake": "Take picture",
+	"@picOrPdfDialogTake": {
+		"description": "Take a pic text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"picOrPdfDialogChoose": "Choose picture",
+	"@picOrPdfDialogChoose": {
+		"description": "Choose a pic text for PicOrPdfDialog",
+		"type": "text",
+		"placeholders": {}
+	},
+	"homePageReceiptsTabLabel": "Receipts",
+	"@homePageReceiptsTabLabel": {
+		"description": "Label for receipts tab in the HomePage.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"homePageInvoicesTabLabel": "Invoices",
+	"@homePageInvoicesTabLabel": {
+		"description": "Label for invoices tab in the HomePage.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonEditProfile": "Edit Profile",
+	"@appBarButtonEditProfile": {
+		"description": "Edit Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"appBarButtonAddProfile": "Add Profile",
+	"@appBarButtonAddProfile": {
+		"description": "Add Profile button for AppBarButton.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabInvoiceSuccessSanck": "Invoice created!",
+	"@receiptTabInvoiceSuccessSanck": {
+		"description": "Invoice success snack for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabAddReceiptButton": "Add Receipt",
+	"@receiptTabAddReceiptButton": {
+		"description": "Add Receipt Button for ReceiptTab.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabConfirmInvoice": "Do you want to create an invoice?",
+	"@receiptTabConfirmInvoice": {
+		"description": "Confirm invoice creation text for ReceiptTab",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receiptTabConfirmDescription": "This will delete all current receipts permanently.",
+	"@receiptTabConfirmDescription": {
+		"description": "Description for confirm invoice description.",
+		"type": "text",
+		"placeholders": {}
+	},
 	"cancel": "Cancel",
 	"@cancel": {
 		"description": "Cancel text for buttons etc.",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yes": "Yes",
+	"@yes": {
+		"description": "Yes text",
 		"type": "text",
 		"placeholders": {}
 	},
@@ -398,6 +398,24 @@
 	"status": "Status",
 	"@status": {
 		"description": "Status text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteSuccessMessage": "Profile saved!",
+	"@editProfileRouteSuccessMessage": {
+		"description": "Text for snack message for successful saving of profile",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteTitle": "Edit Profile",
+	"@editProfileRouteTitle": {
+		"description": "Title for EditProfileRoute",
+		"type": "text",
+		"placeholders": {}
+	},
+	"editProfileRouteConfirmDelete": "Do you want to delete this profile?",
+	"@editProfileRouteConfirmDelete": {
+		"description": "Confirm delete text for EditProfileRoute",
 		"type": "text",
 		"placeholders": {}
 	}

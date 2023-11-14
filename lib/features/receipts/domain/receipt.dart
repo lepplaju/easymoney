@@ -2,6 +2,7 @@
 ///
 /// {@category Receipts}
 class Receipt {
+  static const acceptedFileTypes = ['jpg', 'png'];
   final int id;
   DateTime date;
   int amount;

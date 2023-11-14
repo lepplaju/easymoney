@@ -40,12 +40,11 @@ class ProviderProfiles with ChangeNotifier {
     required String iban,
     required String target,
   }) async {
-    // TODO Throw a proper exception
     if (profileName.isEmpty ||
         firstName.isEmpty ||
         lastName.isEmpty ||
         iban.isEmpty ||
-        target.isEmpty) throw Exception('No profile field can be empty');
+        target.isEmpty) throw Exception('invalid-fields');
     final id = DateTime.now().millisecondsSinceEpoch;
     final profile = Profile(
       id: id,

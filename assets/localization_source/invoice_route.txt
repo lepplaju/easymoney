@@ -69,3 +69,12 @@ text_fi: "Laskua ei voitu poistaa."
 description: "Snack delete error text for InvoiceRoute"
 type: "text"
 placeholders: "{}"
+
+// Delete confirm text
+
+name: "invoiceRouteConfirmDeleteText"
+text_en: "Do you want to delete the invoice?"
+text_fi: "Tahdotko varmasti poistaa laskun?"
+description: "Text for confirmation dialog when deleting an invoice"
+type: "text"
+placeholders: "{}"

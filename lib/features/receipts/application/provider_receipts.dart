@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easymoney/utils/file_operations.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -41,8 +42,7 @@ class ProviderReceipts with ChangeNotifier {
     required XFile file,
     required int profileId,
   }) async {
-    // TODO Throw error if not jpg or pdf
-    if (!file.name.endsWith('.jpg')) {
+    if (!isAcceptedType(Receipt.acceptedFileTypes, file.name)) {
       throw Exception('Wrong file format');
     }
     final id = DateTime.now().millisecondsSinceEpoch;
@@ -58,7 +58,6 @@ class ProviderReceipts with ChangeNotifier {
       profileId: profileId,
     );
 
-    // TODO Handle error
     await _receiptRepository.addReceipt(receipt: receipt, file: file);
     _receipts.add(receipt);
     notifyListeners();
@@ -73,7 +72,6 @@ class ProviderReceipts with ChangeNotifier {
       _receipts.removeWhere((element) => element.id == receipt.id);
       notifyListeners();
     } catch (e) {
-      // TODO Handle errors
       return Future.error(e);
     }
   }
@@ -101,7 +99,6 @@ class ProviderReceipts with ChangeNotifier {
   Future<dynamic> getReceiptImage(Receipt receipt) async {
     try {
       return await _receiptRepository.getReceiptImage(receipt.fileName);
-      // TODO Catch different errors
     } catch (e) {
       // TODO Log
       debugPrint(e.toString());

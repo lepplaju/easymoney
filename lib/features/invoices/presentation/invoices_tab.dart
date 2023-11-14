@@ -27,7 +27,6 @@ class _InvoicesTabState extends State<InvoicesTab> {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
       providerInvoices = Provider.of<ProviderInvoices>(context);
-      // FIXME Provide profileId
       providerInvoices.getInvoices(providerProfiles.selectedProfile?.id);
       isInitialized = true;
     }

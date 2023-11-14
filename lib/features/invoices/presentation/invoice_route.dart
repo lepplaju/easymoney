@@ -8,6 +8,7 @@ import '../domain/invoice.dart';
 import '../../../widgets/data_widget.dart';
 import '../../../utils/show_pdf_dialog.dart';
 import '../../snacks/snacks.dart';
+import '../../../widgets/confirm_dialog.dart';
 
 /// Route to show a single Invoice
 ///
@@ -137,8 +138,21 @@ class InvoiceRoute extends StatelessWidget {
                   );
                 },
                 text: locals.invoiceRouteSend),
+            // Delete the invoice
             _actionButton(
-              onPressed: () {
+              onPressed: () async {
+                final confirmation = await showDialog<bool>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ConfirmDialog(
+                        child: Text(
+                          locals.invoiceRouteConfirmDeleteText,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    });
+                if (confirmation == null) return;
+                if (!confirmation) return;
                 providerInvoices.deleteInvoice(invoice).then((value) {
                   Navigator.of(context).pop();
                   sendSnack(

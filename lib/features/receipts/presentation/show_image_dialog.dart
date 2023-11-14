@@ -7,8 +7,8 @@ import '../../../widgets/dialog_components/dialog_titlebar.dart';
 /// Takes [title] for the dialog and [image] to be shown.
 ///
 /// {@category Receipts}
-class ShowJpgDialog extends StatelessWidget {
-  const ShowJpgDialog({
+class ShowImageDialog extends StatelessWidget {
+  const ShowImageDialog({
     super.key,
     required this.title,
     required this.image,

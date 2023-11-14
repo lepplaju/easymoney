@@ -61,7 +61,6 @@ class ProviderInvoices with ChangeNotifier {
     final date = DateTime.now();
     final dateOnly = '${date.day}.${date.month}.${date.year}';
     final receiptWidgets = <pw.Widget>[];
-    // TODO Add receipt minutes to invoice pdf
     int endSum = 0;
     for (var receiptMap in receiptAndFileList) {
       final Receipt receipt = receiptMap['receipt'];

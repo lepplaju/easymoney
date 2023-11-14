@@ -17,3 +17,12 @@ Future<String> getPath(String path) async {
   }
   return wholePath;
 }
+
+/// Checks if the file is of accepted type
+///
+/// Takes a list of [endings] that are allowed and checks if the [filename] is
+/// one of those.
+bool isAcceptedType(List<String> endings, String filename) {
+  final ending = filename.split('.').last;
+  return endings.contains(ending);
+}
