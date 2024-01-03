@@ -1,0 +1,25 @@
+name: Run flutter analyze and test
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
+  workflow_call:
+
+jobs:
+  flutter_analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+          with:
+            flutter-version: '3.x'
+            channel: 'stable'
+        - run: flutter --version
+        - name: Run flutter analyze
+          run: flutter analyze
+        - name: Run flutter test
+          run: flutter test -r github
