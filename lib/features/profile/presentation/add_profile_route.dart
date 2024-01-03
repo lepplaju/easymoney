@@ -114,8 +114,8 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => widget.allowReturn,
+    return PopScope(
+      canPop: widget.allowReturn,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
