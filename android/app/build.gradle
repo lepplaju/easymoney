@@ -75,6 +75,6 @@ android.applicationVariants.all { variant ->
     variant.outputs.all { output ->
         def builtType = variant.buildType.name
         def versionName = variant.versionName
-        outputFileName = "easymoney-${builtType}-v${versionName}.apk"
+        outputFileName = "easymoney-${builtType}-${versionName}.apk"
     }
 }

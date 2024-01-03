@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    if: ${{ !contains(join(github.event.commits.*.message,';'), '#skip') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

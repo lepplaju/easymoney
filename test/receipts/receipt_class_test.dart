@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:easymoney/features/receipts/domain/receipt.dart';
 
 void main() {
-  const initialDate = '2024-01-01 12:00:00.000';
+  const initialDate = '2024-01-01T12:00:00.000';
   const initialId = 1;
   const initialAmount = 0;
   const initialStore = 'Test Store';
@@ -37,7 +37,7 @@ void main() {
     test('Receipt() creates a Receipt', () {
       var receipt = createReceipt();
       expect(receipt.id, initialId);
-      expect(receipt.date.toString(), initialDate);
+      expect(receipt.date.toIso8601String(), initialDate);
       expect(receipt.amount, initialAmount);
       expect(receipt.store, initialStore);
       expect(receipt.description, initialDescription);
@@ -57,7 +57,7 @@ void main() {
         'minute': initialMinute,
       });
       expect(receipt.id, initialId);
-      expect(receipt.date.toString(), initialDate);
+      expect(receipt.date.toIso8601String(), initialDate);
       expect(receipt.amount, initialAmount);
       expect(receipt.store, initialStore);
       expect(receipt.description, initialDescription);
@@ -70,9 +70,9 @@ void main() {
   group('Receipt setters', () {
     test('date', () {
       var receipt = createReceipt();
-      expect(receipt.date.toString(), initialDate);
+      expect(receipt.date.toIso8601String(), initialDate);
       receipt.date = DateTime.parse('2024-01-02 12:00:00.000');
-      expect(receipt.date.toString(), '2024-01-02 12:00:00.000');
+      expect(receipt.date.toIso8601String(), '2024-01-02T12:00:00.000');
     });
     test('amount', () {
       var receipt = createReceipt();
@@ -134,6 +134,34 @@ void main() {
       expect(receipt.dateOnly, '31.12.2022');
       receipt.date = DateTime.parse('2024-01-01 23:45:10.000');
       expect(receipt.dateOnly, '1.1.2024');
+    });
+    test('Receipt.toString works', () {
+      var receipt = createReceipt();
+      expect(
+          receipt.toString(),
+          'Receipt{'
+          'id: $initialId, '
+          'date: $initialDate, '
+          'amount: $initialAmount, '
+          'store: "$initialStore", '
+          'description: "$initialDescription", '
+          'fileName: "$initialFileName", '
+          'minute: "$initialMinute", '
+          'profileId: "$initialProfileId"'
+          '}');
+    });
+    test('Receipt.toMap works', () {
+      var receipt = createReceipt();
+      expect(receipt.toMap(), {
+        'id': initialId,
+        'date': initialDate,
+        'amount': initialAmount,
+        'store': initialStore,
+        'description': initialDescription,
+        'fileName': initialFileName,
+        'minute': initialMinute,
+        'profileId': initialProfileId,
+      });
     });
   });
 }
