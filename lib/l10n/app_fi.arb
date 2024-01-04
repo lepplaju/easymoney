@@ -66,6 +66,7 @@
 	"sent": "Lähetetty",
 	"paid": "Maksettu",
 	"status": "Tila",
+	"addProfile": "Luo profiili",
 	"editProfileRouteSuccessMessage": "Profiili tallennettu!",
 	"editProfileRouteTitle": "Muokkaa profiilia",
 	"editProfileRouteConfirmDelete": "Haluatko varmasti poistaa tämän profiilin?"

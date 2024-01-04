@@ -150,3 +150,12 @@ text_fi: "Tila"
 description: "Status text"
 type: "text"
 placeholders: "{}"
+
+// Add Profile
+
+name: "addProfile"
+text_en: "Add Profile"
+text_fi: "Luo profiili"
+description: "Add profile text"
+type: "text"
+placeholders: "{}"

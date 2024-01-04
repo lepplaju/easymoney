@@ -34,19 +34,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    future = providerProfiles.getProfiles().then((value) {}).catchError((e) {
-      // FIXME Log
-      debugPrint(e.toString());
-      Navigator.of(context)
-          .push(
-            createRoute(
-              const AddProfileRoute(
-                allowReturn: false,
-              ),
-            ),
-          )
-          .then((value) => providerProfiles.getProfiles());
-    });
+    future = providerProfiles.getProfiles().then((_) {});
   }
 
   @override
@@ -74,11 +62,22 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             },
           ),
           actions: [
-            if (providerProfiles.profiles.isNotEmpty)
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: AppBarButtonProfiles(),
-              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: providerProfiles.profiles.isNotEmpty
+                  ? const AppBarButtonProfiles()
+                  : TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(createRoute(const AddProfileRoute()));
+                      },
+                      child: Text(
+                        locals.addProfile,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
+                    ),
+            ),
           ],
           bottom: TabBar(
             tabs: [

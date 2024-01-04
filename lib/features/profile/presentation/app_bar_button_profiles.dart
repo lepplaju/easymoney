@@ -86,29 +86,9 @@ class AppBarButtonProfiles extends StatelessWidget {
           if (value == 0) {
             Navigator.of(context)
                 .push(createRoute(const EditProfileRoute()))
-                .then((value) {
-              if (value.runtimeType == int) {
-                providerReceipts.fetchReceipts(profileId: value);
-              } else {
-                Navigator.of(context)
-                    .push(
-                      createRoute(
-                        const AddProfileRoute(
-                          allowReturn: false,
-                        ),
-                      ),
-                    )
-                    .then((value) => providerProfiles.getProfiles());
-              }
-            });
+                .then((value) {});
           } else if (value == 1) {
-            Navigator.of(context)
-                .push(createRoute(const AddProfileRoute()))
-                .then((value) {
-              if (value.runtimeType == int) {
-                providerReceipts.fetchReceipts(profileId: value);
-              }
-            });
+            Navigator.of(context).push(createRoute(const AddProfileRoute()));
           } else {
             providerProfiles.selectProfile(id: value!);
             providerReceipts.fetchReceipts(profileId: value);

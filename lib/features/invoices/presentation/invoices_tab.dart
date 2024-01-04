@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../application/provider_invoices.dart';
 import '../../profile/application/provider_profiles.dart';
 import './invoice_card.dart';
+import '../../../welcome_screen.dart';
 
 /// Tab for listing all of the invoices of the selected profile.
 ///
@@ -52,6 +53,9 @@ class _InvoicesTabState extends State<InvoicesTab> {
 
   @override
   Widget build(BuildContext context) {
+    if (providerProfiles.profiles.isEmpty) {
+      return const WelcomeScreen();
+    }
     return ListView.builder(
       itemBuilder: invoiceBuilder,
       itemCount: providerInvoices.invoices.length + 1,

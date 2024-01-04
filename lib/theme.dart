@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 /// {@nodoc}
 class EasyMoneyTheme {
   static final light = ThemeData(
+    useMaterial3: false,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
       primary: Colors.pink,

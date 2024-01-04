@@ -401,6 +401,12 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"addProfile": "Add Profile",
+	"@addProfile": {
+		"description": "Add profile text",
+		"type": "text",
+		"placeholders": {}
+	},
 	"editProfileRouteSuccessMessage": "Profile saved!",
 	"@editProfileRouteSuccessMessage": {
 		"description": "Text for snack message for successful saving of profile",

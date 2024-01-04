@@ -12,6 +12,7 @@ import '../../profile/application/provider_profiles.dart';
 import '../../snacks/snacks.dart';
 import '../../../utils/create_route.dart';
 import '../../../widgets/confirm_dialog.dart';
+import '../../../welcome_screen.dart';
 
 /// Tab for Receipts in the HomePage
 ///
@@ -63,6 +64,9 @@ class _ReceiptTabState extends State<ReceiptTab> {
 
   @override
   Widget build(BuildContext context) {
+    if (providerProfiles.profiles.isEmpty) {
+      return const WelcomeScreen();
+    }
     return Stack(
       children: [
         ListView.builder(
