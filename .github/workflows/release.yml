@@ -39,4 +39,4 @@ jobs:
         with:
           artifacts: "build/app/outputs/apk/release/*.apk"
           tag: ${{ steps.yq.outputs.result }}
-          bodyFile: "${{ steps.yq.outputs.result }}.md"
+          bodyFile: "changelogs/${{ steps.yq.outputs.result }}.md"
