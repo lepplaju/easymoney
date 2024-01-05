@@ -67,6 +67,7 @@
 	"paid": "Maksettu",
 	"status": "Tila",
 	"addProfile": "Luo profiili",
+	"welcome": "Tervetuloa!",
 	"editProfileRouteSuccessMessage": "Profiili tallennettu!",
 	"editProfileRouteTitle": "Muokkaa profiilia",
 	"editProfileRouteConfirmDelete": "Haluatko varmasti poistaa tämän profiilin?"

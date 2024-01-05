@@ -159,3 +159,12 @@ text_fi: "Luo profiili"
 description: "Add profile text"
 type: "text"
 placeholders: "{}"
+
+// Welcome
+
+name: "welcome"
+text_en: "Welcome!"
+text_fi: "Tervetuloa!"
+description: "Welcome text"
+type: "text"
+placeholders: "{}"

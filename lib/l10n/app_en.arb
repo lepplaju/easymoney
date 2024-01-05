@@ -407,6 +407,12 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"welcome": "Welcome!",
+	"@welcome": {
+		"description": "Welcome text",
+		"type": "text",
+		"placeholders": {}
+	},
 	"editProfileRouteSuccessMessage": "Profile saved!",
 	"@editProfileRouteSuccessMessage": {
 		"description": "Text for snack message for successful saving of profile",

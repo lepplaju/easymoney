@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'features/receipts/application/provider_receipts.dart';
 import 'features/invoices/presentation/invoices_tab.dart';
 import 'features/profile/application/provider_profiles.dart';
 import 'features/profile/presentation/add_profile_route.dart';
 import 'features/profile/presentation/app_bar_button_profiles.dart';
 import 'features/receipts/presentation/receipt_tab.dart';
 import 'info_route.dart';
+import 'welcome_screen.dart';
 
 import 'utils/create_route.dart';
 
@@ -27,22 +29,30 @@ class HomePage extends StatefulWidget {
 /// State for [HomePage]
 class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   late final ProviderProfiles providerProfiles;
+  late final ProviderReceipts providerReceipts;
   late final AppLocalizations locals;
 
   Future<void>? future;
+  int? loadedProfileId;
   var isInitialized = false;
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
-    future = providerProfiles.getProfiles().then((_) {});
+    future = providerProfiles.getProfiles();
   }
 
   @override
   void didChangeDependencies() {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
+      providerReceipts = Provider.of<ProviderReceipts>(context);
       locals = AppLocalizations.of(context)!;
       isInitialized = true;
+    }
+    if (loadedProfileId != providerProfiles.selectedProfile?.id) {
+      loadedProfileId = providerProfiles.selectedProfile?.id;
+      providerReceipts.fetchReceipts(
+          profileId: providerProfiles.selectedProfile?.id);
     }
     super.didChangeDependencies();
   }
@@ -50,7 +60,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: providerProfiles.profiles.isNotEmpty ? 2 : 1,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('EasyMoney'),
@@ -80,25 +90,33 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
             ),
           ],
           bottom: TabBar(
-            tabs: [
-              Tab(
-                text: locals.homePageReceiptsTabLabel,
-              ),
-              Tab(
-                text: locals.homePageInvoicesTabLabel,
-              ),
-            ],
+            tabs: providerProfiles.profiles.isNotEmpty
+                ? [
+                    Tab(
+                      text: locals.homePageReceiptsTabLabel,
+                    ),
+                    Tab(
+                      text: locals.homePageInvoicesTabLabel,
+                    ),
+                  ]
+                : [
+                    Tab(
+                      text: locals.welcome,
+                    )
+                  ],
           ),
         ),
         body: FutureBuilder(
             future: future,
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return const TabBarView(
-                  children: [
-                    ReceiptTab(),
-                    InvoicesTab(),
-                  ],
+                return TabBarView(
+                  children: providerProfiles.profiles.isNotEmpty
+                      ? [
+                          ReceiptTab(profile: providerProfiles.selectedProfile),
+                          const InvoicesTab(),
+                        ]
+                      : [const WelcomeScreen()],
                 );
               } else {
                 return const Center(

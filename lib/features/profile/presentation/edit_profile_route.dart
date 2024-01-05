@@ -225,6 +225,7 @@ class _EditProfileRouteState extends State<EditProfileRoute> {
                       if (!confirmation) return;
                       await providerProfiles
                           .deleteProfile(providerProfiles.selectedProfile!.id);
+
                       if (context.mounted) {
                         Navigator.of(context)
                             .pop(providerProfiles.selectedProfile?.id);
