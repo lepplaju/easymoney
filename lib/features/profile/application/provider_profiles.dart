@@ -111,4 +111,21 @@ class ProviderProfiles with ChangeNotifier {
     _selectedProfile = _profiles.isEmpty ? null : _profiles[0];
     notifyListeners();
   }
+
+  // Add a temporary profile
+  void addTempProfile() async {
+    final profile = Profile(
+      id: DateTime.now().millisecondsSinceEpoch,
+      profileName: 'temp',
+      firstName: 'temp',
+      lastName: 'temp',
+      iban: 'temp',
+      target: 'temp',
+    );
+    await _profileRepository.addProfile(profile: profile);
+    _profiles.add(profile);
+    _selectedProfile =
+        _profiles.firstWhere((element) => element.id == profile.id);
+    notifyListeners();
+  }
 }

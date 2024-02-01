@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
+import 'package:easymoney/first_log_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -116,7 +117,13 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                           ReceiptTab(profile: providerProfiles.selectedProfile),
                           const InvoicesTab(),
                         ]
-                      : [const WelcomeScreen()],
+                      : [
+                          const Column(children: [
+                            FirstLogScreen(),
+                            Padding(padding: EdgeInsets.all(20)),
+                            const WelcomeScreen(),
+                          ])
+                        ],
                 );
               } else {
                 return const Center(

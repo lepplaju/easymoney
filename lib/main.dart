@@ -25,10 +25,21 @@ class EasyMoney extends StatefulWidget {
 
   @override
   State<EasyMoney> createState() => _EasyMoneyState();
+
+  static _EasyMoneyState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_EasyMoneyState>();
 }
 
 /// State for [EasyMoney]
 class _EasyMoneyState extends State<EasyMoney> {
+  Locale _locale = const Locale("en", "");
+
+  void setLocale(Locale value) {
+    setState(() {
+      _locale = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -38,6 +49,7 @@ class _EasyMoneyState extends State<EasyMoney> {
         ChangeNotifierProvider(create: (context) => ProviderInvoices()),
       ],
       child: MaterialApp(
+        locale: _locale,
         // Removes the debug banner in debug mode
         debugShowCheckedModeBanner: false,
         theme: EasyMoneyTheme.light,

@@ -43,6 +43,24 @@ description: "First Name label for AddProfileRoute."
 type: "text"
 placeholders: "{}"
 
+// First name hintText
+
+name: "addProfileRouteProfileFirstNameHint"
+text_en: "John"
+text_fi: "Matti"
+description: "Hint for first name"
+type: "text"
+placeholders: "{}"
+
+// Last name hintText
+
+name: "addProfileRouteProfileLastNameHint"
+text_en: "Doe"
+text_fi: "Meikäläinen"
+description: "Hint for last name"
+type: "text"
+placeholders: "{}"
+
 // Last Name
 
 name: "addProfileRouteLastName"

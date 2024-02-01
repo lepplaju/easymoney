@@ -1,0 +1,18 @@
+// Choosing a language text
+
+name: "choooseLanguageText"
+text_en: "Choose your language"
+text_fi: "Valitse kieli"
+description: "Choose a language for the application"
+type: "text"
+placeholders: "{}"
+
+
+// Continue without making an account link text
+
+name: "continueWithoutAccount"
+text_en: "Continue without creating an account"
+text_fi: "Jatka ilman profiilin luomista"
+description: "Clickable text that allows bypassing account creation"
+type: "text"
+placeholders: "{}"
