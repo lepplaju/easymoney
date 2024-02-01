@@ -1,3 +1,4 @@
+import 'package:easymoney/utils/locations_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -127,7 +128,9 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   locals.addProfileRouteDescription,
@@ -147,7 +150,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                   controller: firstNameController,
                   decoration: InputDecoration(
                     label: Text(locals.addProfileRouteFirstName),
-                    hintText: 'Ben, Jake, Rose, Sophie...',
+                    hintText: locals.addProfileRouteProfileFirstNameHint,
                   ),
                   textCapitalization: TextCapitalization.sentences,
                   textInputAction: TextInputAction.next,
@@ -156,20 +159,12 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                   controller: lastNameController,
                   decoration: InputDecoration(
                     label: Text(locals.addProfileRouteLastName),
-                    hintText: 'Anderson, Patel, Smith...',
+                    hintText: locals.addProfileRouteProfileLastNameHint,
                   ),
                   textCapitalization: TextCapitalization.sentences,
                   textInputAction: TextInputAction.next,
                 ),
-                TextField(
-                  controller: targetController,
-                  decoration: InputDecoration(
-                    label: Text(locals.addProfileRouteReference),
-                    hintText: 'Korttelikylä, Asuva, Harju...',
-                  ),
-                  textCapitalization: TextCapitalization.sentences,
-                  textInputAction: TextInputAction.next,
-                ),
+                LocationsDropdown(),
                 TextField(
                   controller: ibanController,
                   decoration: InputDecoration(
