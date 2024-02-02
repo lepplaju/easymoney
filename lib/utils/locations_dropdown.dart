@@ -29,7 +29,8 @@ List<String> locations = [
 ];
 
 class LocationsDropdown extends StatefulWidget {
-  const LocationsDropdown({super.key});
+  final targetController;
+  const LocationsDropdown(this.targetController);
 
   @override
   State<LocationsDropdown> createState() => _DropdownButtonExampleState();
@@ -50,6 +51,7 @@ class _DropdownButtonExampleState extends State<LocationsDropdown> {
         // This is called when the user selects an item.
         setState(() {
           dropdownValue = value!;
+          widget.targetController.text = dropdownValue;
         });
       },
       items: locations.map<DropdownMenuItem<String>>((String value) {

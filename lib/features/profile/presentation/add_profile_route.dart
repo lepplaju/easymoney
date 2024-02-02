@@ -164,7 +164,7 @@ class _AddProfileRouteState extends State<AddProfileRoute> {
                   textCapitalization: TextCapitalization.sentences,
                   textInputAction: TextInputAction.next,
                 ),
-                LocationsDropdown(),
+                LocationsDropdown(targetController),
                 TextField(
                   controller: ibanController,
                   decoration: InputDecoration(
