@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   late final ProviderProfiles providerProfiles;
   late final ProviderReceipts providerReceipts;
-  late final AppLocalizations locals;
+  late AppLocalizations locals;
 
   Future<void>? future;
   int? loadedProfileId;
@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
     if (!isInitialized) {
       providerProfiles = Provider.of<ProviderProfiles>(context);
       providerReceipts = Provider.of<ProviderReceipts>(context);
-      locals = AppLocalizations.of(context)!;
       isInitialized = true;
     }
     if (loadedProfileId != providerProfiles.selectedProfile?.id) {
@@ -60,6 +59,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    locals = AppLocalizations.of(context)!;
+
     return DefaultTabController(
       length: providerProfiles.profiles.isNotEmpty ? 2 : 1,
       child: Scaffold(

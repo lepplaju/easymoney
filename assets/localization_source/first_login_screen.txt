@@ -16,3 +16,13 @@ text_fi: "Jatka ilman profiilin luomista"
 description: "Clickable text that allows bypassing account creation"
 type: "text"
 placeholders: "{}"
+
+
+// Welcome screen text
+
+name: "welcomeToEasyMoney"
+text_en: "Welcome to EasyMoney!"
+text_fi: "Tervetuloa käyttämään EasyMoneya!"
+description: "welcome screen text"
+type: "text"
+placeholders: "{}"

@@ -27,7 +27,7 @@ class _FirstLogScreenState extends State<FirstLogScreen> {
     final locals = AppLocalizations.of(context)!;
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text("Welcome to EasyMoney"),
+        Text(locals.welcomeToEasyMoney),
         Text(locals.choooseLanguageText), //Text("Choose your language: "),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
